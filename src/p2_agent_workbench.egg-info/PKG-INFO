@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: p2-agent-workbench
+Version: 0.1.0
+Summary: 独立开发的企业方案研究与交付多智能体工作流
+Requires-Python: >=3.11
+Requires-Dist: fastapi<1,>=0.115
+Requires-Dist: uvicorn[standard]<1,>=0.30
+Requires-Dist: pydantic<3,>=2.7
+Requires-Dist: langgraph<1,>=0.2
+Requires-Dist: httpx<1,>=0.27
+Provides-Extra: test
+Requires-Dist: pytest<9,>=8; extra == "test"
+Requires-Dist: pytest-asyncio<1,>=0.23; extra == "test"
+Requires-Dist: ruff<1,>=0.6; extra == "test"

@@ -1,0 +1,15 @@
+README.md
+pyproject.toml
+src/p2_agent/__init__.py
+src/p2_agent/main.py
+src/p2_agent/schemas.py
+src/p2_agent/agents/stubs.py
+src/p2_agent/graph/workflow.py
+src/p2_agent_workbench.egg-info/PKG-INFO
+src/p2_agent_workbench.egg-info/SOURCES.txt
+src/p2_agent_workbench.egg-info/dependency_links.txt
+src/p2_agent_workbench.egg-info/requires.txt
+src/p2_agent_workbench.egg-info/top_level.txt
+tests/test_api.py
+tests/test_schemas.py
+tests/test_workflow.py
