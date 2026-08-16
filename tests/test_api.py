@@ -10,13 +10,17 @@ def test_health():
     assert response.json()["status"] == "ok"
 
 
-def test_create_task_returns_completed_state():
+def test_create_task_returns_accepted_state_and_can_complete():
     with TestClient(app) as client:
         response = client.post("/tasks", json={"user_goal": "设计设备维护方案"})
-    assert response.status_code == 200
+    assert response.status_code == 202
     body = response.json()
-    assert body["status"] == "completed"
-    assert body["draft"].startswith("# 企业方案初稿")
+    assert body["status"] in {"queued", "running", "completed"}
+    with TestClient(app) as client:
+        done = client.post(f"/tasks/{body['task_id']}/resume")
+    assert done.status_code == 200
+    assert done.json()["status"] == "completed"
+    assert done.json()["draft"].startswith("# 企业方案初稿")
 
 
 def test_create_task_validates_blank_goal():
@@ -31,6 +35,15 @@ def test_task_can_be_fetched_after_creation():
         response = client.get(f"/tasks/{created['task_id']}")
     assert response.status_code == 200
     assert response.json()["task_id"] == created["task_id"]
+
+
+def test_task_events_are_queryable():
+    with TestClient(app) as client:
+        created = client.post("/tasks", json={"user_goal": "查看进度事件"}).json()
+        response = client.get(f"/tasks/{created['task_id']}/events")
+    assert response.status_code == 200
+    assert response.json()["events"]
+    assert response.json()["events"][0]["event"] == "queued"
 
 
 def test_unknown_task_returns_404():

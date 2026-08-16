@@ -76,7 +76,13 @@ class WorkflowState(BaseModel):
     review: Review | None = None
     retry_count: int = Field(default=0, ge=0, le=10)
     status: Literal[
-        "pending", "running", "need_human", "approved", "completed", "failed"
+        "pending",
+        "queued",
+        "running",
+        "need_human",
+        "approved",
+        "completed",
+        "failed",
     ] = "pending"
     errors: list[str] = Field(default_factory=list, max_length=50)
     trace: list[str] = Field(default_factory=list, max_length=100)
