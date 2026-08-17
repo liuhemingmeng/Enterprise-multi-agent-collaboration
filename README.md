@@ -4,9 +4,12 @@
 
 ## 当前阶段
 
-**Stage 7：前端、Docker、CI 与部署（生产化收口）**
+**Stage 9：可观测性 / Tracing + 护栏层 Guardrails（生产化收口）**
 
-阶段 1–6 已完成状态机、条件回退、持久化、异步 API、工具安全边界、100 条评测对照。阶段 7 在此之上补齐：单页工作台 UI（进度/人工审批/报告导出）、Docker 镜像、GitHub Actions CI（ruff + pytest，含 100 条评测回归）。
+阶段 1–7 已完成状态机、条件回退、持久化、异步 API、工具安全边界、100 条评测对照、前端/Docker/CI。阶段 8–9 在此之上补齐**生产级可信与可观测能力**：
+
+- **阶段 8 可观测性**：节点级 `Span`（起止/时延/成败/成本）采集，对标 OpenTelemetry；`GET /tasks/{id}/trace` 汇总 + `GET /tasks/{id}/stream` SSE 实时流；前端「执行追踪」面板与 EventSource 实时流。
+- **阶段 9 护栏层**：输入提示注入拦截（service 边界 critical 阻断）、产物 schema 校验、工具结果注入检测，与既有 `ToolRegistry` 白名单 / `CostBudget` 预算 / `ErrorArchive` 错误归档共同构成 P2 的「策略与护栏层」。
 
 先用本地 deterministic stub 代替 LLM 与 P1 API，跑通：
 
