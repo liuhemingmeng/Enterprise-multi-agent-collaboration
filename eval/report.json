@@ -1,0 +1,3963 @@
+{
+  "dataset_size": 100,
+  "single_agent": {
+    "n": 100,
+    "auto_completion_rate": 1.0,
+    "safe_termination_rate": 1.0,
+    "mean_citation_coverage": 0.3,
+    "mean_cost": 0.02,
+    "mean_duration_ms": 0.64,
+    "mean_evidence_count": 2.7,
+    "total_cited_evidence": 90,
+    "total_retrieved_evidence": 270
+  },
+  "multi_agent": {
+    "n": 100,
+    "auto_completion_rate": 0.8,
+    "safe_termination_rate": 1.0,
+    "mean_citation_coverage": 0.9,
+    "mean_cost": 0.04,
+    "mean_duration_ms": 120.13,
+    "mean_evidence_count": 3.6,
+    "total_cited_evidence": 360,
+    "total_retrieved_evidence": 360
+  },
+  "deltas": {
+    "auto_completion_rate": -0.2,
+    "safe_termination_rate": 0.0,
+    "mean_citation_coverage": 0.6,
+    "mean_cost": 0.02,
+    "mean_duration_ms": 119.49,
+    "mean_evidence_count": 0.9
+  },
+  "relative": {
+    "mean_citation_coverage": "+200.0%",
+    "mean_cost": "+100.0%",
+    "mean_duration_ms": "+18670.3%",
+    "mean_evidence_count": "+33.3%"
+  },
+  "by_category_multi_agent": {
+    "complex": {
+      "n": 30,
+      "auto_completion_rate": 1.0,
+      "safe_termination_rate": 1.0,
+      "mean_citation_coverage": 1.0,
+      "mean_cost": 0.04,
+      "mean_duration_ms": 119.78,
+      "mean_evidence_count": 4,
+      "total_cited_evidence": 120,
+      "total_retrieved_evidence": 120
+    },
+    "no_evidence": {
+      "n": 10,
+      "auto_completion_rate": 0.0,
+      "safe_termination_rate": 1.0,
+      "mean_citation_coverage": 0.0,
+      "mean_cost": 0.04,
+      "mean_duration_ms": 120.39,
+      "mean_evidence_count": 0,
+      "total_cited_evidence": 0,
+      "total_retrieved_evidence": 0
+    },
+    "normal": {
+      "n": 50,
+      "auto_completion_rate": 1.0,
+      "safe_termination_rate": 1.0,
+      "mean_citation_coverage": 1.0,
+      "mean_cost": 0.04,
+      "mean_duration_ms": 119.71,
+      "mean_evidence_count": 4,
+      "total_cited_evidence": 200,
+      "total_retrieved_evidence": 200
+    },
+    "revise": {
+      "n": 10,
+      "auto_completion_rate": 0.0,
+      "safe_termination_rate": 1.0,
+      "mean_citation_coverage": 1.0,
+      "mean_cost": 0.04,
+      "mean_duration_ms": 123.02,
+      "mean_evidence_count": 4,
+      "total_cited_evidence": 40,
+      "total_retrieved_evidence": 40
+    }
+  },
+  "by_category_single_agent": {
+    "complex": {
+      "n": 30,
+      "auto_completion_rate": 1.0,
+      "safe_termination_rate": 1.0,
+      "mean_citation_coverage": 0.3333,
+      "mean_cost": 0.02,
+      "mean_duration_ms": 0.64,
+      "mean_evidence_count": 3,
+      "total_cited_evidence": 30,
+      "total_retrieved_evidence": 90
+    },
+    "no_evidence": {
+      "n": 10,
+      "auto_completion_rate": 1.0,
+      "safe_termination_rate": 1.0,
+      "mean_citation_coverage": 0.0,
+      "mean_cost": 0.02,
+      "mean_duration_ms": 0.62,
+      "mean_evidence_count": 0,
+      "total_cited_evidence": 0,
+      "total_retrieved_evidence": 0
+    },
+    "normal": {
+      "n": 50,
+      "auto_completion_rate": 1.0,
+      "safe_termination_rate": 1.0,
+      "mean_citation_coverage": 0.3333,
+      "mean_cost": 0.02,
+      "mean_duration_ms": 0.65,
+      "mean_evidence_count": 3,
+      "total_cited_evidence": 50,
+      "total_retrieved_evidence": 150
+    },
+    "revise": {
+      "n": 10,
+      "auto_completion_rate": 1.0,
+      "safe_termination_rate": 1.0,
+      "mean_citation_coverage": 0.3333,
+      "mean_cost": 0.02,
+      "mean_duration_ms": 0.64,
+      "mean_evidence_count": 3,
+      "total_cited_evidence": 10,
+      "total_retrieved_evidence": 30
+    }
+  },
+  "outcomes": [
+    {
+      "task_id": "task-001",
+      "goal": "为制造业预测性维护场景设计企业实施方案",
+      "category": "normal",
+      "domain": "制造业预测性维护",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为制造业预测性维护场景设计企业实施方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-b61548-1, p.1] [ev-b61548-2, p.2] [ev-22187e-1, p.1] [ev-22187e-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-b61548-1",
+        "ev-b61548-2",
+        "ev-22187e-1",
+        "ev-22187e-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 145.69,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-002",
+      "goal": "面向中小制造企业的制造业预测性维护落地方案",
+      "category": "normal",
+      "domain": "制造业预测性维护",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n面向中小制造企业的制造业预测性维护落地方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-9cd94a-1, p.1] [ev-9cd94a-2, p.2] [ev-74afe8-1, p.1] [ev-74afe8-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-9cd94a-1",
+        "ev-9cd94a-2",
+        "ev-74afe8-1",
+        "ev-74afe8-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 101.23,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-003",
+      "goal": "为制造业预测性维护撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "制造业预测性维护",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为制造业预测性维护撰写可交付的客户方案初稿\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-3704ca-1, p.1] [ev-3704ca-2, p.2] [ev-1b022f-1, p.1] [ev-1b022f-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-3704ca-1",
+        "ev-3704ca-2",
+        "ev-1b022f-1",
+        "ev-1b022f-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 97.76,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-004",
+      "goal": "围绕制造业预测性维护做一份内部可行性分析",
+      "category": "normal",
+      "domain": "制造业预测性维护",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n围绕制造业预测性维护做一份内部可行性分析\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-457a90-1, p.1] [ev-457a90-2, p.2] [ev-3c02db-1, p.1] [ev-3c02db-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-457a90-1",
+        "ev-457a90-2",
+        "ev-3c02db-1",
+        "ev-3c02db-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 93.64,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-005",
+      "goal": "为制造业预测性维护项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "制造业预测性维护",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为制造业预测性维护项目制定三个月推进计划\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-f2e8bb-1, p.1] [ev-f2e8bb-2, p.2] [ev-2899a1-1, p.1] [ev-2899a1-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-f2e8bb-1",
+        "ev-f2e8bb-2",
+        "ev-2899a1-1",
+        "ev-2899a1-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 95.7,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-006",
+      "goal": "为制造业预测性维护客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "制造业预测性维护",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为制造业预测性维护客户设计包含成本测算与风险预案的详细方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-ba538e-1, p.1] [ev-ba538e-2, p.2] [ev-177d51-1, p.1] [ev-177d51-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-ba538e-1",
+        "ev-ba538e-2",
+        "ev-177d51-1",
+        "ev-177d51-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 100.79,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-007",
+      "goal": "面向集团客户的制造业预测性维护整体规划与实施路线图",
+      "category": "complex",
+      "domain": "制造业预测性维护",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n面向集团客户的制造业预测性维护整体规划与实施路线图\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-14e46b-1, p.1] [ev-14e46b-2, p.2] [ev-fb16fe-1, p.1] [ev-fb16fe-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-14e46b-1",
+        "ev-14e46b-2",
+        "ev-fb16fe-1",
+        "ev-fb16fe-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 97.06,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-008",
+      "goal": "为制造业预测性维护设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "制造业预测性维护",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为制造业预测性维护设计含 KPI 与验收标准的完整提案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-7f661c-1, p.1] [ev-7f661c-2, p.2] [ev-9d982d-1, p.1] [ev-9d982d-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-7f661c-1",
+        "ev-7f661c-2",
+        "ev-9d982d-1",
+        "ev-9d982d-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 94.2,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-009",
+      "goal": "需要修订的制造业预测性维护方案",
+      "category": "revise",
+      "domain": "制造业预测性维护",
+      "pipeline": "multi_agent",
+      "status": "need_human",
+      "draft": "# 企业方案初稿\n\n## 目标\n需要修订的制造业预测性维护方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-03515e-1, p.1] [ev-03515e-2, p.2] [ev-6a2df2-1, p.1] [ev-6a2df2-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-03515e-1",
+        "ev-03515e-2",
+        "ev-6a2df2-1",
+        "ev-6a2df2-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 104.23,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-010",
+      "goal": "__no_evidence__关于制造业预测性维护的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "制造业预测性维护",
+      "pipeline": "multi_agent",
+      "status": "need_human",
+      "draft": "# 企业方案初稿\n\n## 目标\n__no_evidence__关于制造业预测性维护的机密内部资料方案\n\n## 事实依据\n- 暂无充分事实 \n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 缺少可验证资料\n",
+      "evidence_count": 0,
+      "cited_evidence_ids": [],
+      "citation_coverage": 0.0,
+      "cost": 0.04,
+      "duration_ms": 97.32,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-011",
+      "goal": "为零售业库存优化场景设计企业实施方案",
+      "category": "normal",
+      "domain": "零售业库存优化",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为零售业库存优化场景设计企业实施方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-8ffca6-1, p.1] [ev-8ffca6-2, p.2] [ev-b2a057-1, p.1] [ev-b2a057-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-8ffca6-1",
+        "ev-8ffca6-2",
+        "ev-b2a057-1",
+        "ev-b2a057-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 138.07,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-012",
+      "goal": "面向中小制造企业的零售业库存优化落地方案",
+      "category": "normal",
+      "domain": "零售业库存优化",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n面向中小制造企业的零售业库存优化落地方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-17a934-1, p.1] [ev-17a934-2, p.2] [ev-5c584a-1, p.1] [ev-5c584a-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-17a934-1",
+        "ev-17a934-2",
+        "ev-5c584a-1",
+        "ev-5c584a-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 97.41,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-013",
+      "goal": "为零售业库存优化撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "零售业库存优化",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为零售业库存优化撰写可交付的客户方案初稿\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-99bec2-1, p.1] [ev-99bec2-2, p.2] [ev-cf6c75-1, p.1] [ev-cf6c75-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-99bec2-1",
+        "ev-99bec2-2",
+        "ev-cf6c75-1",
+        "ev-cf6c75-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 95.39,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-014",
+      "goal": "围绕零售业库存优化做一份内部可行性分析",
+      "category": "normal",
+      "domain": "零售业库存优化",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n围绕零售业库存优化做一份内部可行性分析\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-895c90-1, p.1] [ev-895c90-2, p.2] [ev-4a0ecd-1, p.1] [ev-4a0ecd-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-895c90-1",
+        "ev-895c90-2",
+        "ev-4a0ecd-1",
+        "ev-4a0ecd-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 120.51,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-015",
+      "goal": "为零售业库存优化项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "零售业库存优化",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为零售业库存优化项目制定三个月推进计划\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-76d88d-1, p.1] [ev-76d88d-2, p.2] [ev-458368-1, p.1] [ev-458368-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-76d88d-1",
+        "ev-76d88d-2",
+        "ev-458368-1",
+        "ev-458368-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 117.02,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-016",
+      "goal": "为零售业库存优化客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "零售业库存优化",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为零售业库存优化客户设计包含成本测算与风险预案的详细方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-856700-1, p.1] [ev-856700-2, p.2] [ev-5b1772-1, p.1] [ev-5b1772-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-856700-1",
+        "ev-856700-2",
+        "ev-5b1772-1",
+        "ev-5b1772-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 118.48,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-017",
+      "goal": "面向集团客户的零售业库存优化整体规划与实施路线图",
+      "category": "complex",
+      "domain": "零售业库存优化",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n面向集团客户的零售业库存优化整体规划与实施路线图\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-949b99-1, p.1] [ev-949b99-2, p.2] [ev-eaae90-1, p.1] [ev-eaae90-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-949b99-1",
+        "ev-949b99-2",
+        "ev-eaae90-1",
+        "ev-eaae90-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 118.41,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-018",
+      "goal": "为零售业库存优化设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "零售业库存优化",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为零售业库存优化设计含 KPI 与验收标准的完整提案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-acf3b3-1, p.1] [ev-acf3b3-2, p.2] [ev-d6fe9d-1, p.1] [ev-d6fe9d-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-acf3b3-1",
+        "ev-acf3b3-2",
+        "ev-d6fe9d-1",
+        "ev-d6fe9d-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 125.55,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-019",
+      "goal": "需要修订的零售业库存优化方案",
+      "category": "revise",
+      "domain": "零售业库存优化",
+      "pipeline": "multi_agent",
+      "status": "need_human",
+      "draft": "# 企业方案初稿\n\n## 目标\n需要修订的零售业库存优化方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-f703b6-1, p.1] [ev-f703b6-2, p.2] [ev-b90de6-1, p.1] [ev-b90de6-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-f703b6-1",
+        "ev-f703b6-2",
+        "ev-b90de6-1",
+        "ev-b90de6-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 122.72,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-020",
+      "goal": "__no_evidence__关于零售业库存优化的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "零售业库存优化",
+      "pipeline": "multi_agent",
+      "status": "need_human",
+      "draft": "# 企业方案初稿\n\n## 目标\n__no_evidence__关于零售业库存优化的机密内部资料方案\n\n## 事实依据\n- 暂无充分事实 \n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 缺少可验证资料\n",
+      "evidence_count": 0,
+      "cited_evidence_ids": [],
+      "citation_coverage": 0.0,
+      "cost": 0.04,
+      "duration_ms": 121.37,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-021",
+      "goal": "为金融风控建模场景设计企业实施方案",
+      "category": "normal",
+      "domain": "金融风控建模",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为金融风控建模场景设计企业实施方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-3acb9a-1, p.1] [ev-3acb9a-2, p.2] [ev-b2c137-1, p.1] [ev-b2c137-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-3acb9a-1",
+        "ev-3acb9a-2",
+        "ev-b2c137-1",
+        "ev-b2c137-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 124.9,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-022",
+      "goal": "面向中小制造企业的金融风控建模落地方案",
+      "category": "normal",
+      "domain": "金融风控建模",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n面向中小制造企业的金融风控建模落地方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-64dae6-1, p.1] [ev-64dae6-2, p.2] [ev-6d8a46-1, p.1] [ev-6d8a46-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-64dae6-1",
+        "ev-64dae6-2",
+        "ev-6d8a46-1",
+        "ev-6d8a46-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 123.03,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-023",
+      "goal": "为金融风控建模撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "金融风控建模",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为金融风控建模撰写可交付的客户方案初稿\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-26b615-1, p.1] [ev-26b615-2, p.2] [ev-6abe97-1, p.1] [ev-6abe97-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-26b615-1",
+        "ev-26b615-2",
+        "ev-6abe97-1",
+        "ev-6abe97-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 120.28,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-024",
+      "goal": "围绕金融风控建模做一份内部可行性分析",
+      "category": "normal",
+      "domain": "金融风控建模",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n围绕金融风控建模做一份内部可行性分析\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-4b955f-1, p.1] [ev-4b955f-2, p.2] [ev-df0ca7-1, p.1] [ev-df0ca7-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-4b955f-1",
+        "ev-4b955f-2",
+        "ev-df0ca7-1",
+        "ev-df0ca7-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 118.9,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-025",
+      "goal": "为金融风控建模项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "金融风控建模",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为金融风控建模项目制定三个月推进计划\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-13d521-1, p.1] [ev-13d521-2, p.2] [ev-3b7d2b-1, p.1] [ev-3b7d2b-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-13d521-1",
+        "ev-13d521-2",
+        "ev-3b7d2b-1",
+        "ev-3b7d2b-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 124.2,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-026",
+      "goal": "为金融风控建模客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "金融风控建模",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为金融风控建模客户设计包含成本测算与风险预案的详细方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-e04f05-1, p.1] [ev-e04f05-2, p.2] [ev-9df65f-1, p.1] [ev-9df65f-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-e04f05-1",
+        "ev-e04f05-2",
+        "ev-9df65f-1",
+        "ev-9df65f-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 124.51,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-027",
+      "goal": "面向集团客户的金融风控建模整体规划与实施路线图",
+      "category": "complex",
+      "domain": "金融风控建模",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n面向集团客户的金融风控建模整体规划与实施路线图\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-f5248b-1, p.1] [ev-f5248b-2, p.2] [ev-8648a7-1, p.1] [ev-8648a7-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-f5248b-1",
+        "ev-f5248b-2",
+        "ev-8648a7-1",
+        "ev-8648a7-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 119.05,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-028",
+      "goal": "为金融风控建模设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "金融风控建模",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为金融风控建模设计含 KPI 与验收标准的完整提案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-651404-1, p.1] [ev-651404-2, p.2] [ev-e6cdb5-1, p.1] [ev-e6cdb5-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-651404-1",
+        "ev-651404-2",
+        "ev-e6cdb5-1",
+        "ev-e6cdb5-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 127.52,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-029",
+      "goal": "需要修订的金融风控建模方案",
+      "category": "revise",
+      "domain": "金融风控建模",
+      "pipeline": "multi_agent",
+      "status": "need_human",
+      "draft": "# 企业方案初稿\n\n## 目标\n需要修订的金融风控建模方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-4260bc-1, p.1] [ev-4260bc-2, p.2] [ev-5d128c-1, p.1] [ev-5d128c-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-4260bc-1",
+        "ev-4260bc-2",
+        "ev-5d128c-1",
+        "ev-5d128c-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 130.17,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-030",
+      "goal": "__no_evidence__关于金融风控建模的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "金融风控建模",
+      "pipeline": "multi_agent",
+      "status": "need_human",
+      "draft": "# 企业方案初稿\n\n## 目标\n__no_evidence__关于金融风控建模的机密内部资料方案\n\n## 事实依据\n- 暂无充分事实 \n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 缺少可验证资料\n",
+      "evidence_count": 0,
+      "cited_evidence_ids": [],
+      "citation_coverage": 0.0,
+      "cost": 0.04,
+      "duration_ms": 127.05,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-031",
+      "goal": "为医疗影像辅助诊断场景设计企业实施方案",
+      "category": "normal",
+      "domain": "医疗影像辅助诊断",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为医疗影像辅助诊断场景设计企业实施方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-f526ed-1, p.1] [ev-f526ed-2, p.2] [ev-71cc47-1, p.1] [ev-71cc47-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-f526ed-1",
+        "ev-f526ed-2",
+        "ev-71cc47-1",
+        "ev-71cc47-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 126.03,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-032",
+      "goal": "面向中小制造企业的医疗影像辅助诊断落地方案",
+      "category": "normal",
+      "domain": "医疗影像辅助诊断",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n面向中小制造企业的医疗影像辅助诊断落地方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-b18b15-1, p.1] [ev-b18b15-2, p.2] [ev-c4d9c0-1, p.1] [ev-c4d9c0-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-b18b15-1",
+        "ev-b18b15-2",
+        "ev-c4d9c0-1",
+        "ev-c4d9c0-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 119.43,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-033",
+      "goal": "为医疗影像辅助诊断撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "医疗影像辅助诊断",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为医疗影像辅助诊断撰写可交付的客户方案初稿\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-97a307-1, p.1] [ev-97a307-2, p.2] [ev-ab509b-1, p.1] [ev-ab509b-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-97a307-1",
+        "ev-97a307-2",
+        "ev-ab509b-1",
+        "ev-ab509b-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 127.93,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-034",
+      "goal": "围绕医疗影像辅助诊断做一份内部可行性分析",
+      "category": "normal",
+      "domain": "医疗影像辅助诊断",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n围绕医疗影像辅助诊断做一份内部可行性分析\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-cb127c-1, p.1] [ev-cb127c-2, p.2] [ev-0d9bb2-1, p.1] [ev-0d9bb2-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-cb127c-1",
+        "ev-cb127c-2",
+        "ev-0d9bb2-1",
+        "ev-0d9bb2-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 116.32,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-035",
+      "goal": "为医疗影像辅助诊断项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "医疗影像辅助诊断",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为医疗影像辅助诊断项目制定三个月推进计划\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-0e2a58-1, p.1] [ev-0e2a58-2, p.2] [ev-3563be-1, p.1] [ev-3563be-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-0e2a58-1",
+        "ev-0e2a58-2",
+        "ev-3563be-1",
+        "ev-3563be-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 120.29,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-036",
+      "goal": "为医疗影像辅助诊断客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "医疗影像辅助诊断",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为医疗影像辅助诊断客户设计包含成本测算与风险预案的详细方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-99cfee-1, p.1] [ev-99cfee-2, p.2] [ev-1b3672-1, p.1] [ev-1b3672-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-99cfee-1",
+        "ev-99cfee-2",
+        "ev-1b3672-1",
+        "ev-1b3672-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 120.05,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-037",
+      "goal": "面向集团客户的医疗影像辅助诊断整体规划与实施路线图",
+      "category": "complex",
+      "domain": "医疗影像辅助诊断",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n面向集团客户的医疗影像辅助诊断整体规划与实施路线图\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-2b9638-1, p.1] [ev-2b9638-2, p.2] [ev-550d44-1, p.1] [ev-550d44-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-2b9638-1",
+        "ev-2b9638-2",
+        "ev-550d44-1",
+        "ev-550d44-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 127.14,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-038",
+      "goal": "为医疗影像辅助诊断设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "医疗影像辅助诊断",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为医疗影像辅助诊断设计含 KPI 与验收标准的完整提案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-434967-1, p.1] [ev-434967-2, p.2] [ev-553232-1, p.1] [ev-553232-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-434967-1",
+        "ev-434967-2",
+        "ev-553232-1",
+        "ev-553232-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 119.84,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-039",
+      "goal": "需要修订的医疗影像辅助诊断方案",
+      "category": "revise",
+      "domain": "医疗影像辅助诊断",
+      "pipeline": "multi_agent",
+      "status": "need_human",
+      "draft": "# 企业方案初稿\n\n## 目标\n需要修订的医疗影像辅助诊断方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-28f554-1, p.1] [ev-28f554-2, p.2] [ev-b38505-1, p.1] [ev-b38505-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-28f554-1",
+        "ev-28f554-2",
+        "ev-b38505-1",
+        "ev-b38505-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 124.18,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-040",
+      "goal": "__no_evidence__关于医疗影像辅助诊断的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "医疗影像辅助诊断",
+      "pipeline": "multi_agent",
+      "status": "need_human",
+      "draft": "# 企业方案初稿\n\n## 目标\n__no_evidence__关于医疗影像辅助诊断的机密内部资料方案\n\n## 事实依据\n- 暂无充分事实 \n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 缺少可验证资料\n",
+      "evidence_count": 0,
+      "cited_evidence_ids": [],
+      "citation_coverage": 0.0,
+      "cost": 0.04,
+      "duration_ms": 126.77,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-041",
+      "goal": "为物流路径规划场景设计企业实施方案",
+      "category": "normal",
+      "domain": "物流路径规划",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为物流路径规划场景设计企业实施方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-ece1d5-1, p.1] [ev-ece1d5-2, p.2] [ev-582a68-1, p.1] [ev-582a68-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-ece1d5-1",
+        "ev-ece1d5-2",
+        "ev-582a68-1",
+        "ev-582a68-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 122.84,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-042",
+      "goal": "面向中小制造企业的物流路径规划落地方案",
+      "category": "normal",
+      "domain": "物流路径规划",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n面向中小制造企业的物流路径规划落地方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-41645c-1, p.1] [ev-41645c-2, p.2] [ev-4bcddd-1, p.1] [ev-4bcddd-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-41645c-1",
+        "ev-41645c-2",
+        "ev-4bcddd-1",
+        "ev-4bcddd-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 119.57,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-043",
+      "goal": "为物流路径规划撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "物流路径规划",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为物流路径规划撰写可交付的客户方案初稿\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-7d6a6a-1, p.1] [ev-7d6a6a-2, p.2] [ev-50f857-1, p.1] [ev-50f857-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-7d6a6a-1",
+        "ev-7d6a6a-2",
+        "ev-50f857-1",
+        "ev-50f857-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 122.66,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-044",
+      "goal": "围绕物流路径规划做一份内部可行性分析",
+      "category": "normal",
+      "domain": "物流路径规划",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n围绕物流路径规划做一份内部可行性分析\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-cd3d31-1, p.1] [ev-cd3d31-2, p.2] [ev-4ef38b-1, p.1] [ev-4ef38b-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-cd3d31-1",
+        "ev-cd3d31-2",
+        "ev-4ef38b-1",
+        "ev-4ef38b-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 119.67,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-045",
+      "goal": "为物流路径规划项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "物流路径规划",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为物流路径规划项目制定三个月推进计划\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-9ee978-1, p.1] [ev-9ee978-2, p.2] [ev-36bafa-1, p.1] [ev-36bafa-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-9ee978-1",
+        "ev-9ee978-2",
+        "ev-36bafa-1",
+        "ev-36bafa-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 121.28,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-046",
+      "goal": "为物流路径规划客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "物流路径规划",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为物流路径规划客户设计包含成本测算与风险预案的详细方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-f35460-1, p.1] [ev-f35460-2, p.2] [ev-7ec321-1, p.1] [ev-7ec321-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-f35460-1",
+        "ev-f35460-2",
+        "ev-7ec321-1",
+        "ev-7ec321-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 120.04,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-047",
+      "goal": "面向集团客户的物流路径规划整体规划与实施路线图",
+      "category": "complex",
+      "domain": "物流路径规划",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n面向集团客户的物流路径规划整体规划与实施路线图\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-bc2af6-1, p.1] [ev-bc2af6-2, p.2] [ev-b09911-1, p.1] [ev-b09911-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-bc2af6-1",
+        "ev-bc2af6-2",
+        "ev-b09911-1",
+        "ev-b09911-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 121.75,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-048",
+      "goal": "为物流路径规划设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "物流路径规划",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为物流路径规划设计含 KPI 与验收标准的完整提案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-57fa62-1, p.1] [ev-57fa62-2, p.2] [ev-2748c4-1, p.1] [ev-2748c4-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-57fa62-1",
+        "ev-57fa62-2",
+        "ev-2748c4-1",
+        "ev-2748c4-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 117.44,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-049",
+      "goal": "需要修订的物流路径规划方案",
+      "category": "revise",
+      "domain": "物流路径规划",
+      "pipeline": "multi_agent",
+      "status": "need_human",
+      "draft": "# 企业方案初稿\n\n## 目标\n需要修订的物流路径规划方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-03e386-1, p.1] [ev-03e386-2, p.2] [ev-92a365-1, p.1] [ev-92a365-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-03e386-1",
+        "ev-03e386-2",
+        "ev-92a365-1",
+        "ev-92a365-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 124.26,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-050",
+      "goal": "__no_evidence__关于物流路径规划的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "物流路径规划",
+      "pipeline": "multi_agent",
+      "status": "need_human",
+      "draft": "# 企业方案初稿\n\n## 目标\n__no_evidence__关于物流路径规划的机密内部资料方案\n\n## 事实依据\n- 暂无充分事实 \n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 缺少可验证资料\n",
+      "evidence_count": 0,
+      "cited_evidence_ids": [],
+      "citation_coverage": 0.0,
+      "cost": 0.04,
+      "duration_ms": 124.49,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-051",
+      "goal": "为教育个性化推荐场景设计企业实施方案",
+      "category": "normal",
+      "domain": "教育个性化推荐",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为教育个性化推荐场景设计企业实施方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-074e7b-1, p.1] [ev-074e7b-2, p.2] [ev-086c8e-1, p.1] [ev-086c8e-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-074e7b-1",
+        "ev-074e7b-2",
+        "ev-086c8e-1",
+        "ev-086c8e-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 115.72,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-052",
+      "goal": "面向中小制造企业的教育个性化推荐落地方案",
+      "category": "normal",
+      "domain": "教育个性化推荐",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n面向中小制造企业的教育个性化推荐落地方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-1ef71e-1, p.1] [ev-1ef71e-2, p.2] [ev-f5b76b-1, p.1] [ev-f5b76b-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-1ef71e-1",
+        "ev-1ef71e-2",
+        "ev-f5b76b-1",
+        "ev-f5b76b-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 126.92,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-053",
+      "goal": "为教育个性化推荐撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "教育个性化推荐",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为教育个性化推荐撰写可交付的客户方案初稿\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-367da1-1, p.1] [ev-367da1-2, p.2] [ev-e7cf84-1, p.1] [ev-e7cf84-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-367da1-1",
+        "ev-367da1-2",
+        "ev-e7cf84-1",
+        "ev-e7cf84-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 125.51,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-054",
+      "goal": "围绕教育个性化推荐做一份内部可行性分析",
+      "category": "normal",
+      "domain": "教育个性化推荐",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n围绕教育个性化推荐做一份内部可行性分析\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-16d792-1, p.1] [ev-16d792-2, p.2] [ev-8c6536-1, p.1] [ev-8c6536-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-16d792-1",
+        "ev-16d792-2",
+        "ev-8c6536-1",
+        "ev-8c6536-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 119.8,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-055",
+      "goal": "为教育个性化推荐项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "教育个性化推荐",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为教育个性化推荐项目制定三个月推进计划\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-d990a4-1, p.1] [ev-d990a4-2, p.2] [ev-a26169-1, p.1] [ev-a26169-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-d990a4-1",
+        "ev-d990a4-2",
+        "ev-a26169-1",
+        "ev-a26169-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 124.73,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-056",
+      "goal": "为教育个性化推荐客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "教育个性化推荐",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为教育个性化推荐客户设计包含成本测算与风险预案的详细方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-a19d60-1, p.1] [ev-a19d60-2, p.2] [ev-874866-1, p.1] [ev-874866-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-a19d60-1",
+        "ev-a19d60-2",
+        "ev-874866-1",
+        "ev-874866-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 116.23,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-057",
+      "goal": "面向集团客户的教育个性化推荐整体规划与实施路线图",
+      "category": "complex",
+      "domain": "教育个性化推荐",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n面向集团客户的教育个性化推荐整体规划与实施路线图\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-6178a2-1, p.1] [ev-6178a2-2, p.2] [ev-7855a5-1, p.1] [ev-7855a5-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-6178a2-1",
+        "ev-6178a2-2",
+        "ev-7855a5-1",
+        "ev-7855a5-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 116.91,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-058",
+      "goal": "为教育个性化推荐设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "教育个性化推荐",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为教育个性化推荐设计含 KPI 与验收标准的完整提案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-8051a2-1, p.1] [ev-8051a2-2, p.2] [ev-036443-1, p.1] [ev-036443-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-8051a2-1",
+        "ev-8051a2-2",
+        "ev-036443-1",
+        "ev-036443-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 124.74,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-059",
+      "goal": "需要修订的教育个性化推荐方案",
+      "category": "revise",
+      "domain": "教育个性化推荐",
+      "pipeline": "multi_agent",
+      "status": "need_human",
+      "draft": "# 企业方案初稿\n\n## 目标\n需要修订的教育个性化推荐方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-aea4b7-1, p.1] [ev-aea4b7-2, p.2] [ev-5d0e08-1, p.1] [ev-5d0e08-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-aea4b7-1",
+        "ev-aea4b7-2",
+        "ev-5d0e08-1",
+        "ev-5d0e08-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 122.23,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-060",
+      "goal": "__no_evidence__关于教育个性化推荐的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "教育个性化推荐",
+      "pipeline": "multi_agent",
+      "status": "need_human",
+      "draft": "# 企业方案初稿\n\n## 目标\n__no_evidence__关于教育个性化推荐的机密内部资料方案\n\n## 事实依据\n- 暂无充分事实 \n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 缺少可验证资料\n",
+      "evidence_count": 0,
+      "cited_evidence_ids": [],
+      "citation_coverage": 0.0,
+      "cost": 0.04,
+      "duration_ms": 115.71,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-061",
+      "goal": "为能源负荷预测场景设计企业实施方案",
+      "category": "normal",
+      "domain": "能源负荷预测",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为能源负荷预测场景设计企业实施方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-f4ecad-1, p.1] [ev-f4ecad-2, p.2] [ev-80d711-1, p.1] [ev-80d711-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-f4ecad-1",
+        "ev-f4ecad-2",
+        "ev-80d711-1",
+        "ev-80d711-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 121.42,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-062",
+      "goal": "面向中小制造企业的能源负荷预测落地方案",
+      "category": "normal",
+      "domain": "能源负荷预测",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n面向中小制造企业的能源负荷预测落地方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-77febb-1, p.1] [ev-77febb-2, p.2] [ev-515891-1, p.1] [ev-515891-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-77febb-1",
+        "ev-77febb-2",
+        "ev-515891-1",
+        "ev-515891-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 119.88,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-063",
+      "goal": "为能源负荷预测撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "能源负荷预测",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为能源负荷预测撰写可交付的客户方案初稿\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-0bb701-1, p.1] [ev-0bb701-2, p.2] [ev-072454-1, p.1] [ev-072454-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-0bb701-1",
+        "ev-0bb701-2",
+        "ev-072454-1",
+        "ev-072454-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 125.5,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-064",
+      "goal": "围绕能源负荷预测做一份内部可行性分析",
+      "category": "normal",
+      "domain": "能源负荷预测",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n围绕能源负荷预测做一份内部可行性分析\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-e2ba47-1, p.1] [ev-e2ba47-2, p.2] [ev-638fb1-1, p.1] [ev-638fb1-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-e2ba47-1",
+        "ev-e2ba47-2",
+        "ev-638fb1-1",
+        "ev-638fb1-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 126.61,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-065",
+      "goal": "为能源负荷预测项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "能源负荷预测",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为能源负荷预测项目制定三个月推进计划\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-a5e925-1, p.1] [ev-a5e925-2, p.2] [ev-b4f213-1, p.1] [ev-b4f213-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-a5e925-1",
+        "ev-a5e925-2",
+        "ev-b4f213-1",
+        "ev-b4f213-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 121.06,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-066",
+      "goal": "为能源负荷预测客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "能源负荷预测",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为能源负荷预测客户设计包含成本测算与风险预案的详细方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-c7a567-1, p.1] [ev-c7a567-2, p.2] [ev-5b0ebe-1, p.1] [ev-5b0ebe-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-c7a567-1",
+        "ev-c7a567-2",
+        "ev-5b0ebe-1",
+        "ev-5b0ebe-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 121.09,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-067",
+      "goal": "面向集团客户的能源负荷预测整体规划与实施路线图",
+      "category": "complex",
+      "domain": "能源负荷预测",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n面向集团客户的能源负荷预测整体规划与实施路线图\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-400642-1, p.1] [ev-400642-2, p.2] [ev-7a1be9-1, p.1] [ev-7a1be9-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-400642-1",
+        "ev-400642-2",
+        "ev-7a1be9-1",
+        "ev-7a1be9-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 120.42,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-068",
+      "goal": "为能源负荷预测设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "能源负荷预测",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为能源负荷预测设计含 KPI 与验收标准的完整提案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-041f6b-1, p.1] [ev-041f6b-2, p.2] [ev-170c45-1, p.1] [ev-170c45-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-041f6b-1",
+        "ev-041f6b-2",
+        "ev-170c45-1",
+        "ev-170c45-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 122.1,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-069",
+      "goal": "需要修订的能源负荷预测方案",
+      "category": "revise",
+      "domain": "能源负荷预测",
+      "pipeline": "multi_agent",
+      "status": "need_human",
+      "draft": "# 企业方案初稿\n\n## 目标\n需要修订的能源负荷预测方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-2137c4-1, p.1] [ev-2137c4-2, p.2] [ev-d7d88d-1, p.1] [ev-d7d88d-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-2137c4-1",
+        "ev-2137c4-2",
+        "ev-d7d88d-1",
+        "ev-d7d88d-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 124.18,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-070",
+      "goal": "__no_evidence__关于能源负荷预测的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "能源负荷预测",
+      "pipeline": "multi_agent",
+      "status": "need_human",
+      "draft": "# 企业方案初稿\n\n## 目标\n__no_evidence__关于能源负荷预测的机密内部资料方案\n\n## 事实依据\n- 暂无充分事实 \n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 缺少可验证资料\n",
+      "evidence_count": 0,
+      "cited_evidence_ids": [],
+      "citation_coverage": 0.0,
+      "cost": 0.04,
+      "duration_ms": 122.56,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-071",
+      "goal": "为智能客服问答场景设计企业实施方案",
+      "category": "normal",
+      "domain": "智能客服问答",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为智能客服问答场景设计企业实施方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-d9553e-1, p.1] [ev-d9553e-2, p.2] [ev-6f1a03-1, p.1] [ev-6f1a03-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-d9553e-1",
+        "ev-d9553e-2",
+        "ev-6f1a03-1",
+        "ev-6f1a03-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 119.03,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-072",
+      "goal": "面向中小制造企业的智能客服问答落地方案",
+      "category": "normal",
+      "domain": "智能客服问答",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n面向中小制造企业的智能客服问答落地方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-4c47ae-1, p.1] [ev-4c47ae-2, p.2] [ev-cb15f9-1, p.1] [ev-cb15f9-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-4c47ae-1",
+        "ev-4c47ae-2",
+        "ev-cb15f9-1",
+        "ev-cb15f9-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 112.86,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-073",
+      "goal": "为智能客服问答撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "智能客服问答",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为智能客服问答撰写可交付的客户方案初稿\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-2790a9-1, p.1] [ev-2790a9-2, p.2] [ev-c19893-1, p.1] [ev-c19893-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-2790a9-1",
+        "ev-2790a9-2",
+        "ev-c19893-1",
+        "ev-c19893-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 119.65,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-074",
+      "goal": "围绕智能客服问答做一份内部可行性分析",
+      "category": "normal",
+      "domain": "智能客服问答",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n围绕智能客服问答做一份内部可行性分析\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-52db16-1, p.1] [ev-52db16-2, p.2] [ev-a25d91-1, p.1] [ev-a25d91-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-52db16-1",
+        "ev-52db16-2",
+        "ev-a25d91-1",
+        "ev-a25d91-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 117.67,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-075",
+      "goal": "为智能客服问答项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "智能客服问答",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为智能客服问答项目制定三个月推进计划\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-d0d32e-1, p.1] [ev-d0d32e-2, p.2] [ev-8ebfba-1, p.1] [ev-8ebfba-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-d0d32e-1",
+        "ev-d0d32e-2",
+        "ev-8ebfba-1",
+        "ev-8ebfba-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 126.15,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-076",
+      "goal": "为智能客服问答客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "智能客服问答",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为智能客服问答客户设计包含成本测算与风险预案的详细方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-e0f112-1, p.1] [ev-e0f112-2, p.2] [ev-eafa7b-1, p.1] [ev-eafa7b-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-e0f112-1",
+        "ev-e0f112-2",
+        "ev-eafa7b-1",
+        "ev-eafa7b-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 132.82,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-077",
+      "goal": "面向集团客户的智能客服问答整体规划与实施路线图",
+      "category": "complex",
+      "domain": "智能客服问答",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n面向集团客户的智能客服问答整体规划与实施路线图\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-07a404-1, p.1] [ev-07a404-2, p.2] [ev-b9731a-1, p.1] [ev-b9731a-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-07a404-1",
+        "ev-07a404-2",
+        "ev-b9731a-1",
+        "ev-b9731a-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 126.48,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-078",
+      "goal": "为智能客服问答设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "智能客服问答",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为智能客服问答设计含 KPI 与验收标准的完整提案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-7e6d09-1, p.1] [ev-7e6d09-2, p.2] [ev-ed3df6-1, p.1] [ev-ed3df6-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-7e6d09-1",
+        "ev-7e6d09-2",
+        "ev-ed3df6-1",
+        "ev-ed3df6-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 122.18,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-079",
+      "goal": "需要修订的智能客服问答方案",
+      "category": "revise",
+      "domain": "智能客服问答",
+      "pipeline": "multi_agent",
+      "status": "need_human",
+      "draft": "# 企业方案初稿\n\n## 目标\n需要修订的智能客服问答方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-230b02-1, p.1] [ev-230b02-2, p.2] [ev-434337-1, p.1] [ev-434337-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-230b02-1",
+        "ev-230b02-2",
+        "ev-434337-1",
+        "ev-434337-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 132.84,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-080",
+      "goal": "__no_evidence__关于智能客服问答的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "智能客服问答",
+      "pipeline": "multi_agent",
+      "status": "need_human",
+      "draft": "# 企业方案初稿\n\n## 目标\n__no_evidence__关于智能客服问答的机密内部资料方案\n\n## 事实依据\n- 暂无充分事实 \n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 缺少可验证资料\n",
+      "evidence_count": 0,
+      "cited_evidence_ids": [],
+      "citation_coverage": 0.0,
+      "cost": 0.04,
+      "duration_ms": 127.41,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-081",
+      "goal": "为供应链中断预警场景设计企业实施方案",
+      "category": "normal",
+      "domain": "供应链中断预警",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为供应链中断预警场景设计企业实施方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-13fb9f-1, p.1] [ev-13fb9f-2, p.2] [ev-aeb2c4-1, p.1] [ev-aeb2c4-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-13fb9f-1",
+        "ev-13fb9f-2",
+        "ev-aeb2c4-1",
+        "ev-aeb2c4-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 147.03,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-082",
+      "goal": "面向中小制造企业的供应链中断预警落地方案",
+      "category": "normal",
+      "domain": "供应链中断预警",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n面向中小制造企业的供应链中断预警落地方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-4254f8-1, p.1] [ev-4254f8-2, p.2] [ev-f39c9f-1, p.1] [ev-f39c9f-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-4254f8-1",
+        "ev-4254f8-2",
+        "ev-f39c9f-1",
+        "ev-f39c9f-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 128.8,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-083",
+      "goal": "为供应链中断预警撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "供应链中断预警",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为供应链中断预警撰写可交付的客户方案初稿\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-3491be-1, p.1] [ev-3491be-2, p.2] [ev-c865d8-1, p.1] [ev-c865d8-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-3491be-1",
+        "ev-3491be-2",
+        "ev-c865d8-1",
+        "ev-c865d8-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 123.07,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-084",
+      "goal": "围绕供应链中断预警做一份内部可行性分析",
+      "category": "normal",
+      "domain": "供应链中断预警",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n围绕供应链中断预警做一份内部可行性分析\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-305f53-1, p.1] [ev-305f53-2, p.2] [ev-b270d1-1, p.1] [ev-b270d1-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-305f53-1",
+        "ev-305f53-2",
+        "ev-b270d1-1",
+        "ev-b270d1-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 119.31,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-085",
+      "goal": "为供应链中断预警项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "供应链中断预警",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为供应链中断预警项目制定三个月推进计划\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-bece4e-1, p.1] [ev-bece4e-2, p.2] [ev-ad438d-1, p.1] [ev-ad438d-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-bece4e-1",
+        "ev-bece4e-2",
+        "ev-ad438d-1",
+        "ev-ad438d-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 122.85,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-086",
+      "goal": "为供应链中断预警客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "供应链中断预警",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为供应链中断预警客户设计包含成本测算与风险预案的详细方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-e2daa9-1, p.1] [ev-e2daa9-2, p.2] [ev-2450b9-1, p.1] [ev-2450b9-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-e2daa9-1",
+        "ev-e2daa9-2",
+        "ev-2450b9-1",
+        "ev-2450b9-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 126.86,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-087",
+      "goal": "面向集团客户的供应链中断预警整体规划与实施路线图",
+      "category": "complex",
+      "domain": "供应链中断预警",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n面向集团客户的供应链中断预警整体规划与实施路线图\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-4fa062-1, p.1] [ev-4fa062-2, p.2] [ev-b6355f-1, p.1] [ev-b6355f-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-4fa062-1",
+        "ev-4fa062-2",
+        "ev-b6355f-1",
+        "ev-b6355f-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 125.1,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-088",
+      "goal": "为供应链中断预警设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "供应链中断预警",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为供应链中断预警设计含 KPI 与验收标准的完整提案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-ea307e-1, p.1] [ev-ea307e-2, p.2] [ev-dab8d9-1, p.1] [ev-dab8d9-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-ea307e-1",
+        "ev-ea307e-2",
+        "ev-dab8d9-1",
+        "ev-dab8d9-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 129.84,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-089",
+      "goal": "需要修订的供应链中断预警方案",
+      "category": "revise",
+      "domain": "供应链中断预警",
+      "pipeline": "multi_agent",
+      "status": "need_human",
+      "draft": "# 企业方案初稿\n\n## 目标\n需要修订的供应链中断预警方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-705a57-1, p.1] [ev-705a57-2, p.2] [ev-167a79-1, p.1] [ev-167a79-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-705a57-1",
+        "ev-705a57-2",
+        "ev-167a79-1",
+        "ev-167a79-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 123.31,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-090",
+      "goal": "__no_evidence__关于供应链中断预警的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "供应链中断预警",
+      "pipeline": "multi_agent",
+      "status": "need_human",
+      "draft": "# 企业方案初稿\n\n## 目标\n__no_evidence__关于供应链中断预警的机密内部资料方案\n\n## 事实依据\n- 暂无充分事实 \n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 缺少可验证资料\n",
+      "evidence_count": 0,
+      "cited_evidence_ids": [],
+      "citation_coverage": 0.0,
+      "cost": 0.04,
+      "duration_ms": 123.53,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-091",
+      "goal": "为智能招聘筛选场景设计企业实施方案",
+      "category": "normal",
+      "domain": "智能招聘筛选",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为智能招聘筛选场景设计企业实施方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-bf0f08-1, p.1] [ev-bf0f08-2, p.2] [ev-c82c2b-1, p.1] [ev-c82c2b-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-bf0f08-1",
+        "ev-bf0f08-2",
+        "ev-c82c2b-1",
+        "ev-c82c2b-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 118.91,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-092",
+      "goal": "面向中小制造企业的智能招聘筛选落地方案",
+      "category": "normal",
+      "domain": "智能招聘筛选",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n面向中小制造企业的智能招聘筛选落地方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-e0a349-1, p.1] [ev-e0a349-2, p.2] [ev-19bce2-1, p.1] [ev-19bce2-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-e0a349-1",
+        "ev-e0a349-2",
+        "ev-19bce2-1",
+        "ev-19bce2-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 118.85,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-093",
+      "goal": "为智能招聘筛选撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "智能招聘筛选",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为智能招聘筛选撰写可交付的客户方案初稿\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-ea493e-1, p.1] [ev-ea493e-2, p.2] [ev-2bde19-1, p.1] [ev-2bde19-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-ea493e-1",
+        "ev-ea493e-2",
+        "ev-2bde19-1",
+        "ev-2bde19-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 117.14,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-094",
+      "goal": "围绕智能招聘筛选做一份内部可行性分析",
+      "category": "normal",
+      "domain": "智能招聘筛选",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n围绕智能招聘筛选做一份内部可行性分析\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-293f33-1, p.1] [ev-293f33-2, p.2] [ev-0c4e38-1, p.1] [ev-0c4e38-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-293f33-1",
+        "ev-293f33-2",
+        "ev-0c4e38-1",
+        "ev-0c4e38-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 117.4,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-095",
+      "goal": "为智能招聘筛选项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "智能招聘筛选",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为智能招聘筛选项目制定三个月推进计划\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-a22f93-1, p.1] [ev-a22f93-2, p.2] [ev-94912c-1, p.1] [ev-94912c-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-a22f93-1",
+        "ev-a22f93-2",
+        "ev-94912c-1",
+        "ev-94912c-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 119.94,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-096",
+      "goal": "为智能招聘筛选客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "智能招聘筛选",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为智能招聘筛选客户设计包含成本测算与风险预案的详细方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-3c7cf4-1, p.1] [ev-3c7cf4-2, p.2] [ev-ab072a-1, p.1] [ev-ab072a-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-3c7cf4-1",
+        "ev-3c7cf4-2",
+        "ev-ab072a-1",
+        "ev-ab072a-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 122.13,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-097",
+      "goal": "面向集团客户的智能招聘筛选整体规划与实施路线图",
+      "category": "complex",
+      "domain": "智能招聘筛选",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n面向集团客户的智能招聘筛选整体规划与实施路线图\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-c82d78-1, p.1] [ev-c82d78-2, p.2] [ev-072753-1, p.1] [ev-072753-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-c82d78-1",
+        "ev-c82d78-2",
+        "ev-072753-1",
+        "ev-072753-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 116.58,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-098",
+      "goal": "为智能招聘筛选设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "智能招聘筛选",
+      "pipeline": "multi_agent",
+      "status": "completed",
+      "draft": "# 企业方案初稿\n\n## 目标\n为智能招聘筛选设计含 KPI 与验收标准的完整提案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-e49a24-1, p.1] [ev-e49a24-2, p.2] [ev-e5b3f7-1, p.1] [ev-e5b3f7-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-e49a24-1",
+        "ev-e49a24-2",
+        "ev-e5b3f7-1",
+        "ev-e5b3f7-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 118.24,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-099",
+      "goal": "需要修订的智能招聘筛选方案",
+      "category": "revise",
+      "domain": "智能招聘筛选",
+      "pipeline": "multi_agent",
+      "status": "need_human",
+      "draft": "# 企业方案初稿\n\n## 目标\n需要修订的智能招聘筛选方案\n\n## 事实依据\n- 资料显示方案应覆盖状态监测、异常预警和维护决策 [ev-783d3f-1, p.1] [ev-783d3f-2, p.2] [ev-2bafd7-1, p.1] [ev-2bafd7-2, p.2]\n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 模拟资料不能替代客户现场验证; 客户现有设备数据接口是否可用\n",
+      "evidence_count": 4,
+      "cited_evidence_ids": [
+        "ev-783d3f-1",
+        "ev-783d3f-2",
+        "ev-2bafd7-1",
+        "ev-2bafd7-2"
+      ],
+      "citation_coverage": 1.0,
+      "cost": 0.04,
+      "duration_ms": 122.04,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-100",
+      "goal": "__no_evidence__关于智能招聘筛选的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "智能招聘筛选",
+      "pipeline": "multi_agent",
+      "status": "need_human",
+      "draft": "# 企业方案初稿\n\n## 目标\n__no_evidence__关于智能招聘筛选的机密内部资料方案\n\n## 事实依据\n- 暂无充分事实 \n\n## 实施建议\n先建设设备状态监测、异常预警和维护决策闭环，再通过现场数据验证收益。\n\n## 风险与待确认\n- 缺少可验证资料\n",
+      "evidence_count": 0,
+      "cited_evidence_ids": [],
+      "citation_coverage": 0.0,
+      "cost": 0.04,
+      "duration_ms": 117.67,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-001",
+      "goal": "为制造业预测性维护场景设计企业实施方案",
+      "category": "normal",
+      "domain": "制造业预测性维护",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为制造业预测性维护场景设计企业实施方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为制造业预测性维护场景设计企业实施方案 [ev-b61548-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-b61548-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.52,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-002",
+      "goal": "面向中小制造企业的制造业预测性维护落地方案",
+      "category": "normal",
+      "domain": "制造业预测性维护",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n面向中小制造企业的制造业预测性维护落地方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：面向中小制造企业的制造业预测性维护落地方案 [ev-9cd94a-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-9cd94a-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.54,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-003",
+      "goal": "为制造业预测性维护撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "制造业预测性维护",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为制造业预测性维护撰写可交付的客户方案初稿\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为制造业预测性维护撰写可交付的客户方案初稿 [ev-3704ca-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-3704ca-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.51,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-004",
+      "goal": "围绕制造业预测性维护做一份内部可行性分析",
+      "category": "normal",
+      "domain": "制造业预测性维护",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n围绕制造业预测性维护做一份内部可行性分析\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：围绕制造业预测性维护做一份内部可行性分析 [ev-457a90-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-457a90-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.51,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-005",
+      "goal": "为制造业预测性维护项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "制造业预测性维护",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为制造业预测性维护项目制定三个月推进计划\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为制造业预测性维护项目制定三个月推进计划 [ev-f2e8bb-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-f2e8bb-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.5,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-006",
+      "goal": "为制造业预测性维护客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "制造业预测性维护",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为制造业预测性维护客户设计包含成本测算与风险预案的详细方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为制造业预测性维护客户设计包含成本测算与风险预案的详细方案 [ev-ba538e-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-ba538e-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.51,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-007",
+      "goal": "面向集团客户的制造业预测性维护整体规划与实施路线图",
+      "category": "complex",
+      "domain": "制造业预测性维护",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n面向集团客户的制造业预测性维护整体规划与实施路线图\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：面向集团客户的制造业预测性维护整体规划与实施路线图 [ev-14e46b-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-14e46b-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.56,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-008",
+      "goal": "为制造业预测性维护设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "制造业预测性维护",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为制造业预测性维护设计含 KPI 与验收标准的完整提案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为制造业预测性维护设计含 KPI 与验收标准的完整提案 [ev-7f661c-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-7f661c-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.53,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-009",
+      "goal": "需要修订的制造业预测性维护方案",
+      "category": "revise",
+      "domain": "制造业预测性维护",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n需要修订的制造业预测性维护方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：需要修订的制造业预测性维护方案 [ev-03515e-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-03515e-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.85,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-010",
+      "goal": "__no_evidence__关于制造业预测性维护的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "制造业预测性维护",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n__no_evidence__关于制造业预测性维护的机密内部资料方案\n\n## 事实依据\n- 暂无可验证资料 \n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 0,
+      "cited_evidence_ids": [],
+      "citation_coverage": 0.0,
+      "cost": 0.02,
+      "duration_ms": 0.47,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-011",
+      "goal": "为零售业库存优化场景设计企业实施方案",
+      "category": "normal",
+      "domain": "零售业库存优化",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为零售业库存优化场景设计企业实施方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为零售业库存优化场景设计企业实施方案 [ev-8ffca6-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-8ffca6-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.5,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-012",
+      "goal": "面向中小制造企业的零售业库存优化落地方案",
+      "category": "normal",
+      "domain": "零售业库存优化",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n面向中小制造企业的零售业库存优化落地方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：面向中小制造企业的零售业库存优化落地方案 [ev-17a934-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-17a934-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.52,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-013",
+      "goal": "为零售业库存优化撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "零售业库存优化",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为零售业库存优化撰写可交付的客户方案初稿\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为零售业库存优化撰写可交付的客户方案初稿 [ev-99bec2-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-99bec2-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.65,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-014",
+      "goal": "围绕零售业库存优化做一份内部可行性分析",
+      "category": "normal",
+      "domain": "零售业库存优化",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n围绕零售业库存优化做一份内部可行性分析\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：围绕零售业库存优化做一份内部可行性分析 [ev-895c90-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-895c90-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.6,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-015",
+      "goal": "为零售业库存优化项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "零售业库存优化",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为零售业库存优化项目制定三个月推进计划\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为零售业库存优化项目制定三个月推进计划 [ev-76d88d-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-76d88d-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.57,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-016",
+      "goal": "为零售业库存优化客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "零售业库存优化",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为零售业库存优化客户设计包含成本测算与风险预案的详细方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为零售业库存优化客户设计包含成本测算与风险预案的详细方案 [ev-856700-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-856700-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.62,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-017",
+      "goal": "面向集团客户的零售业库存优化整体规划与实施路线图",
+      "category": "complex",
+      "domain": "零售业库存优化",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n面向集团客户的零售业库存优化整体规划与实施路线图\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：面向集团客户的零售业库存优化整体规划与实施路线图 [ev-949b99-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-949b99-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.62,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-018",
+      "goal": "为零售业库存优化设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "零售业库存优化",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为零售业库存优化设计含 KPI 与验收标准的完整提案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为零售业库存优化设计含 KPI 与验收标准的完整提案 [ev-acf3b3-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-acf3b3-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.59,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-019",
+      "goal": "需要修订的零售业库存优化方案",
+      "category": "revise",
+      "domain": "零售业库存优化",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n需要修订的零售业库存优化方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：需要修订的零售业库存优化方案 [ev-f703b6-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-f703b6-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.6,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-020",
+      "goal": "__no_evidence__关于零售业库存优化的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "零售业库存优化",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n__no_evidence__关于零售业库存优化的机密内部资料方案\n\n## 事实依据\n- 暂无可验证资料 \n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 0,
+      "cited_evidence_ids": [],
+      "citation_coverage": 0.0,
+      "cost": 0.02,
+      "duration_ms": 0.53,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-021",
+      "goal": "为金融风控建模场景设计企业实施方案",
+      "category": "normal",
+      "domain": "金融风控建模",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为金融风控建模场景设计企业实施方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为金融风控建模场景设计企业实施方案 [ev-3acb9a-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-3acb9a-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.62,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-022",
+      "goal": "面向中小制造企业的金融风控建模落地方案",
+      "category": "normal",
+      "domain": "金融风控建模",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n面向中小制造企业的金融风控建模落地方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：面向中小制造企业的金融风控建模落地方案 [ev-64dae6-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-64dae6-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.65,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-023",
+      "goal": "为金融风控建模撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "金融风控建模",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为金融风控建模撰写可交付的客户方案初稿\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为金融风控建模撰写可交付的客户方案初稿 [ev-26b615-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-26b615-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.6,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-024",
+      "goal": "围绕金融风控建模做一份内部可行性分析",
+      "category": "normal",
+      "domain": "金融风控建模",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n围绕金融风控建模做一份内部可行性分析\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：围绕金融风控建模做一份内部可行性分析 [ev-4b955f-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-4b955f-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.6,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-025",
+      "goal": "为金融风控建模项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "金融风控建模",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为金融风控建模项目制定三个月推进计划\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为金融风控建模项目制定三个月推进计划 [ev-13d521-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-13d521-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 1.14,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-026",
+      "goal": "为金融风控建模客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "金融风控建模",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为金融风控建模客户设计包含成本测算与风险预案的详细方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为金融风控建模客户设计包含成本测算与风险预案的详细方案 [ev-e04f05-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-e04f05-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.62,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-027",
+      "goal": "面向集团客户的金融风控建模整体规划与实施路线图",
+      "category": "complex",
+      "domain": "金融风控建模",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n面向集团客户的金融风控建模整体规划与实施路线图\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：面向集团客户的金融风控建模整体规划与实施路线图 [ev-f5248b-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-f5248b-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.6,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-028",
+      "goal": "为金融风控建模设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "金融风控建模",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为金融风控建模设计含 KPI 与验收标准的完整提案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为金融风控建模设计含 KPI 与验收标准的完整提案 [ev-651404-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-651404-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.58,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-029",
+      "goal": "需要修订的金融风控建模方案",
+      "category": "revise",
+      "domain": "金融风控建模",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n需要修订的金融风控建模方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：需要修订的金融风控建模方案 [ev-4260bc-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-4260bc-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.6,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-030",
+      "goal": "__no_evidence__关于金融风控建模的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "金融风控建模",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n__no_evidence__关于金融风控建模的机密内部资料方案\n\n## 事实依据\n- 暂无可验证资料 \n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 0,
+      "cited_evidence_ids": [],
+      "citation_coverage": 0.0,
+      "cost": 0.02,
+      "duration_ms": 0.55,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-031",
+      "goal": "为医疗影像辅助诊断场景设计企业实施方案",
+      "category": "normal",
+      "domain": "医疗影像辅助诊断",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为医疗影像辅助诊断场景设计企业实施方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为医疗影像辅助诊断场景设计企业实施方案 [ev-f526ed-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-f526ed-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.77,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-032",
+      "goal": "面向中小制造企业的医疗影像辅助诊断落地方案",
+      "category": "normal",
+      "domain": "医疗影像辅助诊断",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n面向中小制造企业的医疗影像辅助诊断落地方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：面向中小制造企业的医疗影像辅助诊断落地方案 [ev-b18b15-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-b18b15-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.6,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-033",
+      "goal": "为医疗影像辅助诊断撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "医疗影像辅助诊断",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为医疗影像辅助诊断撰写可交付的客户方案初稿\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为医疗影像辅助诊断撰写可交付的客户方案初稿 [ev-97a307-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-97a307-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.53,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-034",
+      "goal": "围绕医疗影像辅助诊断做一份内部可行性分析",
+      "category": "normal",
+      "domain": "医疗影像辅助诊断",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n围绕医疗影像辅助诊断做一份内部可行性分析\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：围绕医疗影像辅助诊断做一份内部可行性分析 [ev-cb127c-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-cb127c-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.61,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-035",
+      "goal": "为医疗影像辅助诊断项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "医疗影像辅助诊断",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为医疗影像辅助诊断项目制定三个月推进计划\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为医疗影像辅助诊断项目制定三个月推进计划 [ev-0e2a58-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-0e2a58-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.6,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-036",
+      "goal": "为医疗影像辅助诊断客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "医疗影像辅助诊断",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为医疗影像辅助诊断客户设计包含成本测算与风险预案的详细方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为医疗影像辅助诊断客户设计包含成本测算与风险预案的详细方案 [ev-99cfee-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-99cfee-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.62,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-037",
+      "goal": "面向集团客户的医疗影像辅助诊断整体规划与实施路线图",
+      "category": "complex",
+      "domain": "医疗影像辅助诊断",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n面向集团客户的医疗影像辅助诊断整体规划与实施路线图\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：面向集团客户的医疗影像辅助诊断整体规划与实施路线图 [ev-2b9638-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-2b9638-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.86,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-038",
+      "goal": "为医疗影像辅助诊断设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "医疗影像辅助诊断",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为医疗影像辅助诊断设计含 KPI 与验收标准的完整提案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为医疗影像辅助诊断设计含 KPI 与验收标准的完整提案 [ev-434967-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-434967-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.95,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-039",
+      "goal": "需要修订的医疗影像辅助诊断方案",
+      "category": "revise",
+      "domain": "医疗影像辅助诊断",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n需要修订的医疗影像辅助诊断方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：需要修订的医疗影像辅助诊断方案 [ev-28f554-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-28f554-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.53,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-040",
+      "goal": "__no_evidence__关于医疗影像辅助诊断的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "医疗影像辅助诊断",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n__no_evidence__关于医疗影像辅助诊断的机密内部资料方案\n\n## 事实依据\n- 暂无可验证资料 \n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 0,
+      "cited_evidence_ids": [],
+      "citation_coverage": 0.0,
+      "cost": 0.02,
+      "duration_ms": 0.59,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-041",
+      "goal": "为物流路径规划场景设计企业实施方案",
+      "category": "normal",
+      "domain": "物流路径规划",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为物流路径规划场景设计企业实施方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为物流路径规划场景设计企业实施方案 [ev-ece1d5-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-ece1d5-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.63,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-042",
+      "goal": "面向中小制造企业的物流路径规划落地方案",
+      "category": "normal",
+      "domain": "物流路径规划",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n面向中小制造企业的物流路径规划落地方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：面向中小制造企业的物流路径规划落地方案 [ev-41645c-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-41645c-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.58,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-043",
+      "goal": "为物流路径规划撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "物流路径规划",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为物流路径规划撰写可交付的客户方案初稿\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为物流路径规划撰写可交付的客户方案初稿 [ev-7d6a6a-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-7d6a6a-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.66,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-044",
+      "goal": "围绕物流路径规划做一份内部可行性分析",
+      "category": "normal",
+      "domain": "物流路径规划",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n围绕物流路径规划做一份内部可行性分析\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：围绕物流路径规划做一份内部可行性分析 [ev-cd3d31-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-cd3d31-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.61,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-045",
+      "goal": "为物流路径规划项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "物流路径规划",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为物流路径规划项目制定三个月推进计划\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为物流路径规划项目制定三个月推进计划 [ev-9ee978-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-9ee978-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.59,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-046",
+      "goal": "为物流路径规划客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "物流路径规划",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为物流路径规划客户设计包含成本测算与风险预案的详细方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为物流路径规划客户设计包含成本测算与风险预案的详细方案 [ev-f35460-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-f35460-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.72,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-047",
+      "goal": "面向集团客户的物流路径规划整体规划与实施路线图",
+      "category": "complex",
+      "domain": "物流路径规划",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n面向集团客户的物流路径规划整体规划与实施路线图\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：面向集团客户的物流路径规划整体规划与实施路线图 [ev-bc2af6-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-bc2af6-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.58,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-048",
+      "goal": "为物流路径规划设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "物流路径规划",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为物流路径规划设计含 KPI 与验收标准的完整提案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为物流路径规划设计含 KPI 与验收标准的完整提案 [ev-57fa62-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-57fa62-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.61,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-049",
+      "goal": "需要修订的物流路径规划方案",
+      "category": "revise",
+      "domain": "物流路径规划",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n需要修订的物流路径规划方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：需要修订的物流路径规划方案 [ev-03e386-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-03e386-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.59,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-050",
+      "goal": "__no_evidence__关于物流路径规划的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "物流路径规划",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n__no_evidence__关于物流路径规划的机密内部资料方案\n\n## 事实依据\n- 暂无可验证资料 \n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 0,
+      "cited_evidence_ids": [],
+      "citation_coverage": 0.0,
+      "cost": 0.02,
+      "duration_ms": 0.55,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-051",
+      "goal": "为教育个性化推荐场景设计企业实施方案",
+      "category": "normal",
+      "domain": "教育个性化推荐",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为教育个性化推荐场景设计企业实施方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为教育个性化推荐场景设计企业实施方案 [ev-074e7b-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-074e7b-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.74,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-052",
+      "goal": "面向中小制造企业的教育个性化推荐落地方案",
+      "category": "normal",
+      "domain": "教育个性化推荐",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n面向中小制造企业的教育个性化推荐落地方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：面向中小制造企业的教育个性化推荐落地方案 [ev-1ef71e-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-1ef71e-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.7,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-053",
+      "goal": "为教育个性化推荐撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "教育个性化推荐",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为教育个性化推荐撰写可交付的客户方案初稿\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为教育个性化推荐撰写可交付的客户方案初稿 [ev-367da1-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-367da1-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.59,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-054",
+      "goal": "围绕教育个性化推荐做一份内部可行性分析",
+      "category": "normal",
+      "domain": "教育个性化推荐",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n围绕教育个性化推荐做一份内部可行性分析\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：围绕教育个性化推荐做一份内部可行性分析 [ev-16d792-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-16d792-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.59,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-055",
+      "goal": "为教育个性化推荐项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "教育个性化推荐",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为教育个性化推荐项目制定三个月推进计划\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为教育个性化推荐项目制定三个月推进计划 [ev-d990a4-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-d990a4-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.64,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-056",
+      "goal": "为教育个性化推荐客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "教育个性化推荐",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为教育个性化推荐客户设计包含成本测算与风险预案的详细方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为教育个性化推荐客户设计包含成本测算与风险预案的详细方案 [ev-a19d60-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-a19d60-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.59,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-057",
+      "goal": "面向集团客户的教育个性化推荐整体规划与实施路线图",
+      "category": "complex",
+      "domain": "教育个性化推荐",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n面向集团客户的教育个性化推荐整体规划与实施路线图\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：面向集团客户的教育个性化推荐整体规划与实施路线图 [ev-6178a2-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-6178a2-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.6,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-058",
+      "goal": "为教育个性化推荐设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "教育个性化推荐",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为教育个性化推荐设计含 KPI 与验收标准的完整提案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为教育个性化推荐设计含 KPI 与验收标准的完整提案 [ev-8051a2-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-8051a2-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.91,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-059",
+      "goal": "需要修订的教育个性化推荐方案",
+      "category": "revise",
+      "domain": "教育个性化推荐",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n需要修订的教育个性化推荐方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：需要修订的教育个性化推荐方案 [ev-aea4b7-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-aea4b7-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.56,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-060",
+      "goal": "__no_evidence__关于教育个性化推荐的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "教育个性化推荐",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n__no_evidence__关于教育个性化推荐的机密内部资料方案\n\n## 事实依据\n- 暂无可验证资料 \n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 0,
+      "cited_evidence_ids": [],
+      "citation_coverage": 0.0,
+      "cost": 0.02,
+      "duration_ms": 0.76,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-061",
+      "goal": "为能源负荷预测场景设计企业实施方案",
+      "category": "normal",
+      "domain": "能源负荷预测",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为能源负荷预测场景设计企业实施方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为能源负荷预测场景设计企业实施方案 [ev-f4ecad-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-f4ecad-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.62,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-062",
+      "goal": "面向中小制造企业的能源负荷预测落地方案",
+      "category": "normal",
+      "domain": "能源负荷预测",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n面向中小制造企业的能源负荷预测落地方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：面向中小制造企业的能源负荷预测落地方案 [ev-77febb-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-77febb-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.6,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-063",
+      "goal": "为能源负荷预测撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "能源负荷预测",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为能源负荷预测撰写可交付的客户方案初稿\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为能源负荷预测撰写可交付的客户方案初稿 [ev-0bb701-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-0bb701-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.59,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-064",
+      "goal": "围绕能源负荷预测做一份内部可行性分析",
+      "category": "normal",
+      "domain": "能源负荷预测",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n围绕能源负荷预测做一份内部可行性分析\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：围绕能源负荷预测做一份内部可行性分析 [ev-e2ba47-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-e2ba47-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.6,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-065",
+      "goal": "为能源负荷预测项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "能源负荷预测",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为能源负荷预测项目制定三个月推进计划\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为能源负荷预测项目制定三个月推进计划 [ev-a5e925-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-a5e925-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.6,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-066",
+      "goal": "为能源负荷预测客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "能源负荷预测",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为能源负荷预测客户设计包含成本测算与风险预案的详细方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为能源负荷预测客户设计包含成本测算与风险预案的详细方案 [ev-c7a567-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-c7a567-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.67,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-067",
+      "goal": "面向集团客户的能源负荷预测整体规划与实施路线图",
+      "category": "complex",
+      "domain": "能源负荷预测",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n面向集团客户的能源负荷预测整体规划与实施路线图\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：面向集团客户的能源负荷预测整体规划与实施路线图 [ev-400642-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-400642-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.62,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-068",
+      "goal": "为能源负荷预测设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "能源负荷预测",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为能源负荷预测设计含 KPI 与验收标准的完整提案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为能源负荷预测设计含 KPI 与验收标准的完整提案 [ev-041f6b-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-041f6b-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.64,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-069",
+      "goal": "需要修订的能源负荷预测方案",
+      "category": "revise",
+      "domain": "能源负荷预测",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n需要修订的能源负荷预测方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：需要修订的能源负荷预测方案 [ev-2137c4-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-2137c4-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.74,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-070",
+      "goal": "__no_evidence__关于能源负荷预测的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "能源负荷预测",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n__no_evidence__关于能源负荷预测的机密内部资料方案\n\n## 事实依据\n- 暂无可验证资料 \n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 0,
+      "cited_evidence_ids": [],
+      "citation_coverage": 0.0,
+      "cost": 0.02,
+      "duration_ms": 0.64,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-071",
+      "goal": "为智能客服问答场景设计企业实施方案",
+      "category": "normal",
+      "domain": "智能客服问答",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为智能客服问答场景设计企业实施方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为智能客服问答场景设计企业实施方案 [ev-d9553e-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-d9553e-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.6,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-072",
+      "goal": "面向中小制造企业的智能客服问答落地方案",
+      "category": "normal",
+      "domain": "智能客服问答",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n面向中小制造企业的智能客服问答落地方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：面向中小制造企业的智能客服问答落地方案 [ev-4c47ae-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-4c47ae-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.59,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-073",
+      "goal": "为智能客服问答撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "智能客服问答",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为智能客服问答撰写可交付的客户方案初稿\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为智能客服问答撰写可交付的客户方案初稿 [ev-2790a9-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-2790a9-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.59,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-074",
+      "goal": "围绕智能客服问答做一份内部可行性分析",
+      "category": "normal",
+      "domain": "智能客服问答",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n围绕智能客服问答做一份内部可行性分析\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：围绕智能客服问答做一份内部可行性分析 [ev-52db16-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-52db16-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.68,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-075",
+      "goal": "为智能客服问答项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "智能客服问答",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为智能客服问答项目制定三个月推进计划\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为智能客服问答项目制定三个月推进计划 [ev-d0d32e-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-d0d32e-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 1.99,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-076",
+      "goal": "为智能客服问答客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "智能客服问答",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为智能客服问答客户设计包含成本测算与风险预案的详细方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为智能客服问答客户设计包含成本测算与风险预案的详细方案 [ev-e0f112-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-e0f112-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.7,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-077",
+      "goal": "面向集团客户的智能客服问答整体规划与实施路线图",
+      "category": "complex",
+      "domain": "智能客服问答",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n面向集团客户的智能客服问答整体规划与实施路线图\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：面向集团客户的智能客服问答整体规划与实施路线图 [ev-07a404-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-07a404-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.59,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-078",
+      "goal": "为智能客服问答设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "智能客服问答",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为智能客服问答设计含 KPI 与验收标准的完整提案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为智能客服问答设计含 KPI 与验收标准的完整提案 [ev-7e6d09-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-7e6d09-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.62,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-079",
+      "goal": "需要修订的智能客服问答方案",
+      "category": "revise",
+      "domain": "智能客服问答",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n需要修订的智能客服问答方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：需要修订的智能客服问答方案 [ev-230b02-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-230b02-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.67,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-080",
+      "goal": "__no_evidence__关于智能客服问答的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "智能客服问答",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n__no_evidence__关于智能客服问答的机密内部资料方案\n\n## 事实依据\n- 暂无可验证资料 \n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 0,
+      "cited_evidence_ids": [],
+      "citation_coverage": 0.0,
+      "cost": 0.02,
+      "duration_ms": 0.57,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-081",
+      "goal": "为供应链中断预警场景设计企业实施方案",
+      "category": "normal",
+      "domain": "供应链中断预警",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为供应链中断预警场景设计企业实施方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为供应链中断预警场景设计企业实施方案 [ev-13fb9f-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-13fb9f-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.62,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-082",
+      "goal": "面向中小制造企业的供应链中断预警落地方案",
+      "category": "normal",
+      "domain": "供应链中断预警",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n面向中小制造企业的供应链中断预警落地方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：面向中小制造企业的供应链中断预警落地方案 [ev-4254f8-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-4254f8-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.79,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-083",
+      "goal": "为供应链中断预警撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "供应链中断预警",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为供应链中断预警撰写可交付的客户方案初稿\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为供应链中断预警撰写可交付的客户方案初稿 [ev-3491be-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-3491be-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.61,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-084",
+      "goal": "围绕供应链中断预警做一份内部可行性分析",
+      "category": "normal",
+      "domain": "供应链中断预警",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n围绕供应链中断预警做一份内部可行性分析\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：围绕供应链中断预警做一份内部可行性分析 [ev-305f53-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-305f53-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.61,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-085",
+      "goal": "为供应链中断预警项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "供应链中断预警",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为供应链中断预警项目制定三个月推进计划\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为供应链中断预警项目制定三个月推进计划 [ev-bece4e-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-bece4e-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.67,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-086",
+      "goal": "为供应链中断预警客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "供应链中断预警",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为供应链中断预警客户设计包含成本测算与风险预案的详细方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为供应链中断预警客户设计包含成本测算与风险预案的详细方案 [ev-e2daa9-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-e2daa9-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.61,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-087",
+      "goal": "面向集团客户的供应链中断预警整体规划与实施路线图",
+      "category": "complex",
+      "domain": "供应链中断预警",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n面向集团客户的供应链中断预警整体规划与实施路线图\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：面向集团客户的供应链中断预警整体规划与实施路线图 [ev-4fa062-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-4fa062-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.62,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-088",
+      "goal": "为供应链中断预警设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "供应链中断预警",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为供应链中断预警设计含 KPI 与验收标准的完整提案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为供应链中断预警设计含 KPI 与验收标准的完整提案 [ev-ea307e-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-ea307e-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.59,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-089",
+      "goal": "需要修订的供应链中断预警方案",
+      "category": "revise",
+      "domain": "供应链中断预警",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n需要修订的供应链中断预警方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：需要修订的供应链中断预警方案 [ev-705a57-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-705a57-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.69,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-090",
+      "goal": "__no_evidence__关于供应链中断预警的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "供应链中断预警",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n__no_evidence__关于供应链中断预警的机密内部资料方案\n\n## 事实依据\n- 暂无可验证资料 \n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 0,
+      "cited_evidence_ids": [],
+      "citation_coverage": 0.0,
+      "cost": 0.02,
+      "duration_ms": 1.0,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-091",
+      "goal": "为智能招聘筛选场景设计企业实施方案",
+      "category": "normal",
+      "domain": "智能招聘筛选",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为智能招聘筛选场景设计企业实施方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为智能招聘筛选场景设计企业实施方案 [ev-bf0f08-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-bf0f08-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.62,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-092",
+      "goal": "面向中小制造企业的智能招聘筛选落地方案",
+      "category": "normal",
+      "domain": "智能招聘筛选",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n面向中小制造企业的智能招聘筛选落地方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：面向中小制造企业的智能招聘筛选落地方案 [ev-e0a349-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-e0a349-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.57,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-093",
+      "goal": "为智能招聘筛选撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "智能招聘筛选",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为智能招聘筛选撰写可交付的客户方案初稿\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为智能招聘筛选撰写可交付的客户方案初稿 [ev-ea493e-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-ea493e-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.63,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-094",
+      "goal": "围绕智能招聘筛选做一份内部可行性分析",
+      "category": "normal",
+      "domain": "智能招聘筛选",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n围绕智能招聘筛选做一份内部可行性分析\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：围绕智能招聘筛选做一份内部可行性分析 [ev-293f33-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-293f33-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.6,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-095",
+      "goal": "为智能招聘筛选项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "智能招聘筛选",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为智能招聘筛选项目制定三个月推进计划\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为智能招聘筛选项目制定三个月推进计划 [ev-a22f93-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-a22f93-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.63,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-096",
+      "goal": "为智能招聘筛选客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "智能招聘筛选",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为智能招聘筛选客户设计包含成本测算与风险预案的详细方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为智能招聘筛选客户设计包含成本测算与风险预案的详细方案 [ev-3c7cf4-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-3c7cf4-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.59,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-097",
+      "goal": "面向集团客户的智能招聘筛选整体规划与实施路线图",
+      "category": "complex",
+      "domain": "智能招聘筛选",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n面向集团客户的智能招聘筛选整体规划与实施路线图\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：面向集团客户的智能招聘筛选整体规划与实施路线图 [ev-c82d78-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-c82d78-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.55,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-098",
+      "goal": "为智能招聘筛选设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "智能招聘筛选",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n为智能招聘筛选设计含 KPI 与验收标准的完整提案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：为智能招聘筛选设计含 KPI 与验收标准的完整提案 [ev-e49a24-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-e49a24-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.64,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-099",
+      "goal": "需要修订的智能招聘筛选方案",
+      "category": "revise",
+      "domain": "智能招聘筛选",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n需要修订的智能招聘筛选方案\n\n## 事实依据\n- 证据片段 1：预测性维护可围绕设备状态监测、异常预警和维护决策设计。查询词：需要修订的智能招聘筛选方案 [ev-783d3f-1, p.1]\n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 3,
+      "cited_evidence_ids": [
+        "ev-783d3f-1"
+      ],
+      "citation_coverage": 0.3333333333333333,
+      "cost": 0.02,
+      "duration_ms": 0.58,
+      "reached_terminal": true,
+      "error": null
+    },
+    {
+      "task_id": "task-100",
+      "goal": "__no_evidence__关于智能招聘筛选的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "智能招聘筛选",
+      "pipeline": "single_agent",
+      "status": "completed",
+      "draft": "# 企业方案（单Agent直接生成）\n\n## 目标\n__no_evidence__关于智能招聘筛选的机密内部资料方案\n\n## 事实依据\n- 暂无可验证资料 \n\n## 实施建议\n建议尽快落地，先小范围试点后再逐步推广，注意控制投入节奏。\n\n## 风险\n注意此类项目常见的落地风险，必要时由人工复核关键假设。\n",
+      "evidence_count": 0,
+      "cited_evidence_ids": [],
+      "citation_coverage": 0.0,
+      "cost": 0.02,
+      "duration_ms": 0.5,
+      "reached_terminal": true,
+      "error": null
+    }
+  ]
+}

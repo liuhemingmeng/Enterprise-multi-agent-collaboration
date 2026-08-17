@@ -86,6 +86,7 @@ class WorkflowState(BaseModel):
     ] = "pending"
     errors: list[str] = Field(default_factory=list, max_length=50)
     trace: list[str] = Field(default_factory=list, max_length=100)
+    empty_queries: list[str] = Field(default_factory=list, max_length=50)
 
     def public_dict(self) -> dict:
         return self.model_dump(mode="json")

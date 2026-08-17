@@ -65,10 +65,32 @@ def revise_node(state: WorkflowState) -> dict:
 
 
 def insufficient_node(state: WorkflowState) -> dict:
+    """Fallback after the reviewer finds evidence insufficient.
+
+    If every retrieval query has already returned empty, re-running the same
+    retrieval cannot help — short-circuit straight to human review instead of
+    burning more budget on identical queries.  Otherwise bump the retry counter
+    and let the graph re-enter the retriever.
+    """
+    if state.plan is not None:
+        all_queries = [
+            query
+            for subtask in state.plan.subtasks
+            for query in subtask.retrieval_queries
+        ]
+        known_empty = set(state.empty_queries)
+        if all_queries and all(q in known_empty for q in all_queries):
+            return {"status": "need_human", "trace": [*state.trace, "human_queue"]}
     return {
         "retry_count": state.retry_count + 1,
         "trace": [*state.trace, "insufficient_fallback"],
     }
+
+
+def route_after_insufficient(state: WorkflowState) -> Literal["retriever", "human_queue"]:
+    if state.status == "need_human":
+        return "human_queue"
+    return "retriever"
 
 
 def human_queue_node(state: WorkflowState) -> dict:
@@ -143,7 +165,11 @@ def build_workflow(registry: ToolRegistry | None = None):
         },
     )
     builder.add_edge("revise", "writer")
-    builder.add_edge("insufficient", "retriever")
+    builder.add_conditional_edges(
+        "insufficient",
+        route_after_insufficient,
+        {"retriever": "retriever", "human_queue": "human_queue"},
+    )
     builder.add_edge("human_approval", "export")
     builder.add_edge("export", END)
     builder.add_edge("human_queue", END)

@@ -1,0 +1,606 @@
+{
+  "size": 100,
+  "description": "确定性合成评测集：10 个业务域 × 10 条任务（5 normal / 3 complex / 1 revise / 1 no_evidence）",
+  "tasks": [
+    {
+      "task_id": "task-001",
+      "goal": "为制造业预测性维护场景设计企业实施方案",
+      "category": "normal",
+      "domain": "制造业预测性维护"
+    },
+    {
+      "task_id": "task-002",
+      "goal": "面向中小制造企业的制造业预测性维护落地方案",
+      "category": "normal",
+      "domain": "制造业预测性维护"
+    },
+    {
+      "task_id": "task-003",
+      "goal": "为制造业预测性维护撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "制造业预测性维护"
+    },
+    {
+      "task_id": "task-004",
+      "goal": "围绕制造业预测性维护做一份内部可行性分析",
+      "category": "normal",
+      "domain": "制造业预测性维护"
+    },
+    {
+      "task_id": "task-005",
+      "goal": "为制造业预测性维护项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "制造业预测性维护"
+    },
+    {
+      "task_id": "task-006",
+      "goal": "为制造业预测性维护客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "制造业预测性维护"
+    },
+    {
+      "task_id": "task-007",
+      "goal": "面向集团客户的制造业预测性维护整体规划与实施路线图",
+      "category": "complex",
+      "domain": "制造业预测性维护"
+    },
+    {
+      "task_id": "task-008",
+      "goal": "为制造业预测性维护设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "制造业预测性维护"
+    },
+    {
+      "task_id": "task-009",
+      "goal": "需要修订的制造业预测性维护方案",
+      "category": "revise",
+      "domain": "制造业预测性维护"
+    },
+    {
+      "task_id": "task-010",
+      "goal": "__no_evidence__关于制造业预测性维护的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "制造业预测性维护"
+    },
+    {
+      "task_id": "task-011",
+      "goal": "为零售业库存优化场景设计企业实施方案",
+      "category": "normal",
+      "domain": "零售业库存优化"
+    },
+    {
+      "task_id": "task-012",
+      "goal": "面向中小制造企业的零售业库存优化落地方案",
+      "category": "normal",
+      "domain": "零售业库存优化"
+    },
+    {
+      "task_id": "task-013",
+      "goal": "为零售业库存优化撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "零售业库存优化"
+    },
+    {
+      "task_id": "task-014",
+      "goal": "围绕零售业库存优化做一份内部可行性分析",
+      "category": "normal",
+      "domain": "零售业库存优化"
+    },
+    {
+      "task_id": "task-015",
+      "goal": "为零售业库存优化项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "零售业库存优化"
+    },
+    {
+      "task_id": "task-016",
+      "goal": "为零售业库存优化客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "零售业库存优化"
+    },
+    {
+      "task_id": "task-017",
+      "goal": "面向集团客户的零售业库存优化整体规划与实施路线图",
+      "category": "complex",
+      "domain": "零售业库存优化"
+    },
+    {
+      "task_id": "task-018",
+      "goal": "为零售业库存优化设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "零售业库存优化"
+    },
+    {
+      "task_id": "task-019",
+      "goal": "需要修订的零售业库存优化方案",
+      "category": "revise",
+      "domain": "零售业库存优化"
+    },
+    {
+      "task_id": "task-020",
+      "goal": "__no_evidence__关于零售业库存优化的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "零售业库存优化"
+    },
+    {
+      "task_id": "task-021",
+      "goal": "为金融风控建模场景设计企业实施方案",
+      "category": "normal",
+      "domain": "金融风控建模"
+    },
+    {
+      "task_id": "task-022",
+      "goal": "面向中小制造企业的金融风控建模落地方案",
+      "category": "normal",
+      "domain": "金融风控建模"
+    },
+    {
+      "task_id": "task-023",
+      "goal": "为金融风控建模撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "金融风控建模"
+    },
+    {
+      "task_id": "task-024",
+      "goal": "围绕金融风控建模做一份内部可行性分析",
+      "category": "normal",
+      "domain": "金融风控建模"
+    },
+    {
+      "task_id": "task-025",
+      "goal": "为金融风控建模项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "金融风控建模"
+    },
+    {
+      "task_id": "task-026",
+      "goal": "为金融风控建模客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "金融风控建模"
+    },
+    {
+      "task_id": "task-027",
+      "goal": "面向集团客户的金融风控建模整体规划与实施路线图",
+      "category": "complex",
+      "domain": "金融风控建模"
+    },
+    {
+      "task_id": "task-028",
+      "goal": "为金融风控建模设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "金融风控建模"
+    },
+    {
+      "task_id": "task-029",
+      "goal": "需要修订的金融风控建模方案",
+      "category": "revise",
+      "domain": "金融风控建模"
+    },
+    {
+      "task_id": "task-030",
+      "goal": "__no_evidence__关于金融风控建模的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "金融风控建模"
+    },
+    {
+      "task_id": "task-031",
+      "goal": "为医疗影像辅助诊断场景设计企业实施方案",
+      "category": "normal",
+      "domain": "医疗影像辅助诊断"
+    },
+    {
+      "task_id": "task-032",
+      "goal": "面向中小制造企业的医疗影像辅助诊断落地方案",
+      "category": "normal",
+      "domain": "医疗影像辅助诊断"
+    },
+    {
+      "task_id": "task-033",
+      "goal": "为医疗影像辅助诊断撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "医疗影像辅助诊断"
+    },
+    {
+      "task_id": "task-034",
+      "goal": "围绕医疗影像辅助诊断做一份内部可行性分析",
+      "category": "normal",
+      "domain": "医疗影像辅助诊断"
+    },
+    {
+      "task_id": "task-035",
+      "goal": "为医疗影像辅助诊断项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "医疗影像辅助诊断"
+    },
+    {
+      "task_id": "task-036",
+      "goal": "为医疗影像辅助诊断客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "医疗影像辅助诊断"
+    },
+    {
+      "task_id": "task-037",
+      "goal": "面向集团客户的医疗影像辅助诊断整体规划与实施路线图",
+      "category": "complex",
+      "domain": "医疗影像辅助诊断"
+    },
+    {
+      "task_id": "task-038",
+      "goal": "为医疗影像辅助诊断设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "医疗影像辅助诊断"
+    },
+    {
+      "task_id": "task-039",
+      "goal": "需要修订的医疗影像辅助诊断方案",
+      "category": "revise",
+      "domain": "医疗影像辅助诊断"
+    },
+    {
+      "task_id": "task-040",
+      "goal": "__no_evidence__关于医疗影像辅助诊断的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "医疗影像辅助诊断"
+    },
+    {
+      "task_id": "task-041",
+      "goal": "为物流路径规划场景设计企业实施方案",
+      "category": "normal",
+      "domain": "物流路径规划"
+    },
+    {
+      "task_id": "task-042",
+      "goal": "面向中小制造企业的物流路径规划落地方案",
+      "category": "normal",
+      "domain": "物流路径规划"
+    },
+    {
+      "task_id": "task-043",
+      "goal": "为物流路径规划撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "物流路径规划"
+    },
+    {
+      "task_id": "task-044",
+      "goal": "围绕物流路径规划做一份内部可行性分析",
+      "category": "normal",
+      "domain": "物流路径规划"
+    },
+    {
+      "task_id": "task-045",
+      "goal": "为物流路径规划项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "物流路径规划"
+    },
+    {
+      "task_id": "task-046",
+      "goal": "为物流路径规划客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "物流路径规划"
+    },
+    {
+      "task_id": "task-047",
+      "goal": "面向集团客户的物流路径规划整体规划与实施路线图",
+      "category": "complex",
+      "domain": "物流路径规划"
+    },
+    {
+      "task_id": "task-048",
+      "goal": "为物流路径规划设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "物流路径规划"
+    },
+    {
+      "task_id": "task-049",
+      "goal": "需要修订的物流路径规划方案",
+      "category": "revise",
+      "domain": "物流路径规划"
+    },
+    {
+      "task_id": "task-050",
+      "goal": "__no_evidence__关于物流路径规划的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "物流路径规划"
+    },
+    {
+      "task_id": "task-051",
+      "goal": "为教育个性化推荐场景设计企业实施方案",
+      "category": "normal",
+      "domain": "教育个性化推荐"
+    },
+    {
+      "task_id": "task-052",
+      "goal": "面向中小制造企业的教育个性化推荐落地方案",
+      "category": "normal",
+      "domain": "教育个性化推荐"
+    },
+    {
+      "task_id": "task-053",
+      "goal": "为教育个性化推荐撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "教育个性化推荐"
+    },
+    {
+      "task_id": "task-054",
+      "goal": "围绕教育个性化推荐做一份内部可行性分析",
+      "category": "normal",
+      "domain": "教育个性化推荐"
+    },
+    {
+      "task_id": "task-055",
+      "goal": "为教育个性化推荐项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "教育个性化推荐"
+    },
+    {
+      "task_id": "task-056",
+      "goal": "为教育个性化推荐客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "教育个性化推荐"
+    },
+    {
+      "task_id": "task-057",
+      "goal": "面向集团客户的教育个性化推荐整体规划与实施路线图",
+      "category": "complex",
+      "domain": "教育个性化推荐"
+    },
+    {
+      "task_id": "task-058",
+      "goal": "为教育个性化推荐设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "教育个性化推荐"
+    },
+    {
+      "task_id": "task-059",
+      "goal": "需要修订的教育个性化推荐方案",
+      "category": "revise",
+      "domain": "教育个性化推荐"
+    },
+    {
+      "task_id": "task-060",
+      "goal": "__no_evidence__关于教育个性化推荐的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "教育个性化推荐"
+    },
+    {
+      "task_id": "task-061",
+      "goal": "为能源负荷预测场景设计企业实施方案",
+      "category": "normal",
+      "domain": "能源负荷预测"
+    },
+    {
+      "task_id": "task-062",
+      "goal": "面向中小制造企业的能源负荷预测落地方案",
+      "category": "normal",
+      "domain": "能源负荷预测"
+    },
+    {
+      "task_id": "task-063",
+      "goal": "为能源负荷预测撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "能源负荷预测"
+    },
+    {
+      "task_id": "task-064",
+      "goal": "围绕能源负荷预测做一份内部可行性分析",
+      "category": "normal",
+      "domain": "能源负荷预测"
+    },
+    {
+      "task_id": "task-065",
+      "goal": "为能源负荷预测项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "能源负荷预测"
+    },
+    {
+      "task_id": "task-066",
+      "goal": "为能源负荷预测客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "能源负荷预测"
+    },
+    {
+      "task_id": "task-067",
+      "goal": "面向集团客户的能源负荷预测整体规划与实施路线图",
+      "category": "complex",
+      "domain": "能源负荷预测"
+    },
+    {
+      "task_id": "task-068",
+      "goal": "为能源负荷预测设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "能源负荷预测"
+    },
+    {
+      "task_id": "task-069",
+      "goal": "需要修订的能源负荷预测方案",
+      "category": "revise",
+      "domain": "能源负荷预测"
+    },
+    {
+      "task_id": "task-070",
+      "goal": "__no_evidence__关于能源负荷预测的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "能源负荷预测"
+    },
+    {
+      "task_id": "task-071",
+      "goal": "为智能客服问答场景设计企业实施方案",
+      "category": "normal",
+      "domain": "智能客服问答"
+    },
+    {
+      "task_id": "task-072",
+      "goal": "面向中小制造企业的智能客服问答落地方案",
+      "category": "normal",
+      "domain": "智能客服问答"
+    },
+    {
+      "task_id": "task-073",
+      "goal": "为智能客服问答撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "智能客服问答"
+    },
+    {
+      "task_id": "task-074",
+      "goal": "围绕智能客服问答做一份内部可行性分析",
+      "category": "normal",
+      "domain": "智能客服问答"
+    },
+    {
+      "task_id": "task-075",
+      "goal": "为智能客服问答项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "智能客服问答"
+    },
+    {
+      "task_id": "task-076",
+      "goal": "为智能客服问答客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "智能客服问答"
+    },
+    {
+      "task_id": "task-077",
+      "goal": "面向集团客户的智能客服问答整体规划与实施路线图",
+      "category": "complex",
+      "domain": "智能客服问答"
+    },
+    {
+      "task_id": "task-078",
+      "goal": "为智能客服问答设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "智能客服问答"
+    },
+    {
+      "task_id": "task-079",
+      "goal": "需要修订的智能客服问答方案",
+      "category": "revise",
+      "domain": "智能客服问答"
+    },
+    {
+      "task_id": "task-080",
+      "goal": "__no_evidence__关于智能客服问答的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "智能客服问答"
+    },
+    {
+      "task_id": "task-081",
+      "goal": "为供应链中断预警场景设计企业实施方案",
+      "category": "normal",
+      "domain": "供应链中断预警"
+    },
+    {
+      "task_id": "task-082",
+      "goal": "面向中小制造企业的供应链中断预警落地方案",
+      "category": "normal",
+      "domain": "供应链中断预警"
+    },
+    {
+      "task_id": "task-083",
+      "goal": "为供应链中断预警撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "供应链中断预警"
+    },
+    {
+      "task_id": "task-084",
+      "goal": "围绕供应链中断预警做一份内部可行性分析",
+      "category": "normal",
+      "domain": "供应链中断预警"
+    },
+    {
+      "task_id": "task-085",
+      "goal": "为供应链中断预警项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "供应链中断预警"
+    },
+    {
+      "task_id": "task-086",
+      "goal": "为供应链中断预警客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "供应链中断预警"
+    },
+    {
+      "task_id": "task-087",
+      "goal": "面向集团客户的供应链中断预警整体规划与实施路线图",
+      "category": "complex",
+      "domain": "供应链中断预警"
+    },
+    {
+      "task_id": "task-088",
+      "goal": "为供应链中断预警设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "供应链中断预警"
+    },
+    {
+      "task_id": "task-089",
+      "goal": "需要修订的供应链中断预警方案",
+      "category": "revise",
+      "domain": "供应链中断预警"
+    },
+    {
+      "task_id": "task-090",
+      "goal": "__no_evidence__关于供应链中断预警的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "供应链中断预警"
+    },
+    {
+      "task_id": "task-091",
+      "goal": "为智能招聘筛选场景设计企业实施方案",
+      "category": "normal",
+      "domain": "智能招聘筛选"
+    },
+    {
+      "task_id": "task-092",
+      "goal": "面向中小制造企业的智能招聘筛选落地方案",
+      "category": "normal",
+      "domain": "智能招聘筛选"
+    },
+    {
+      "task_id": "task-093",
+      "goal": "为智能招聘筛选撰写可交付的客户方案初稿",
+      "category": "normal",
+      "domain": "智能招聘筛选"
+    },
+    {
+      "task_id": "task-094",
+      "goal": "围绕智能招聘筛选做一份内部可行性分析",
+      "category": "normal",
+      "domain": "智能招聘筛选"
+    },
+    {
+      "task_id": "task-095",
+      "goal": "为智能招聘筛选项目制定三个月推进计划",
+      "category": "normal",
+      "domain": "智能招聘筛选"
+    },
+    {
+      "task_id": "task-096",
+      "goal": "为智能招聘筛选客户设计包含成本测算与风险预案的详细方案",
+      "category": "complex",
+      "domain": "智能招聘筛选"
+    },
+    {
+      "task_id": "task-097",
+      "goal": "面向集团客户的智能招聘筛选整体规划与实施路线图",
+      "category": "complex",
+      "domain": "智能招聘筛选"
+    },
+    {
+      "task_id": "task-098",
+      "goal": "为智能招聘筛选设计含 KPI 与验收标准的完整提案",
+      "category": "complex",
+      "domain": "智能招聘筛选"
+    },
+    {
+      "task_id": "task-099",
+      "goal": "需要修订的智能招聘筛选方案",
+      "category": "revise",
+      "domain": "智能招聘筛选"
+    },
+    {
+      "task_id": "task-100",
+      "goal": "__no_evidence__关于智能招聘筛选的机密内部资料方案",
+      "category": "no_evidence",
+      "domain": "智能招聘筛选"
+    }
+  ]
+}

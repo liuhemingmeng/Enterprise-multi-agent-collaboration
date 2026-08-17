@@ -31,6 +31,11 @@ class CostBudget:
         with self._lock:
             return max(self.max_cost - self._spent.get(task_id, 0.0), 0.0)
 
+    def spent(self, task_id: str = "default") -> float:
+        """Total charged for a task so far (used by the evaluation harness)."""
+        with self._lock:
+            return self._spent.get(task_id, 0.0)
+
 
 class ToolRegistry:
     """Whitelist-enforcing tool catalogue.

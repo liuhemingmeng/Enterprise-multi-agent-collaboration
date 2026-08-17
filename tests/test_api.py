@@ -50,3 +50,24 @@ def test_unknown_task_returns_404():
     with TestClient(app) as client:
         response = client.get("/tasks/not-found")
     assert response.status_code == 404
+
+
+def test_eval_dataset_endpoint_reports_100_tasks():
+    with TestClient(app) as client:
+        response = client.get("/eval/dataset")
+    assert response.status_code == 200
+    assert response.json()["size"] >= 100
+    assert response.json()["sample"]
+
+
+def test_eval_run_endpoint_returns_comparison_report():
+    with TestClient(app) as client:
+        response = client.post("/eval/run")
+    assert response.status_code == 200
+    body = response.json()
+    assert body["dataset_size"] >= 100
+    assert "multi_agent" in body and "single_agent" in body
+    # multi-agent must beat single-agent on citation coverage
+    ma_cov = body["multi_agent"]["mean_citation_coverage"]
+    sa_cov = body["single_agent"]["mean_citation_coverage"]
+    assert ma_cov > sa_cov

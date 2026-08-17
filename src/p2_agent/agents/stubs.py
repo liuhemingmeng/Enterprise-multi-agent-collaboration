@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import hashlib
+
 from p2_agent.schemas import Analysis, Evidence, Plan, Review, Subtask, WorkflowState
 from p2_agent.tools.schemas import ToolCall
 
@@ -12,10 +14,15 @@ class DeterministicKnowledgeBase:
             raise ValueError("query cannot be blank")
         if "__no_evidence__" in query:
             return []
+        # A stable short slug keeps evidence ids distinct per query so that the
+        # multi-agent retriever (which issues several queries) collects different
+        # evidence than a single broad search. Without this, every query returned
+        # the same ev-1/ev-2 ids and de-duplication collapsed the advantage.
+        slug = hashlib.md5(query.strip().encode("utf-8")).hexdigest()[:6]
         top_k = min(max(top_k, 1), 10)
         return [
             Evidence(
-                evidence_id=f"ev-{index}",
+                evidence_id=f"ev-{slug}-{index}",
                 doc_id="stub-doc-001",
                 doc_name="公开制造业预测性维护白皮书（模拟）",
                 chunk_id=f"chunk-{index}",
@@ -69,6 +76,7 @@ def retriever_node(
         raise ValueError("plan is required before retrieval")
 
     evidence: list[Evidence] = []
+    empty_queries: list[str] = []
     if registry is not None:
         for subtask in state.plan.subtasks:
             for query in subtask.retrieval_queries:
@@ -80,14 +88,25 @@ def retriever_node(
                 result = registry.call(call, task_id=str(state.task_id))
                 if result.success and result.data:
                     evidence.extend(result.data)
+                else:
+                    empty_queries.append(query)
     else:
         local_kb = kb or DeterministicKnowledgeBase()
         for subtask in state.plan.subtasks:
             for query in subtask.retrieval_queries:
-                evidence.extend(local_kb.search(query, top_k=2))
+                found = local_kb.search(query, top_k=2)
+                if found:
+                    evidence.extend(found)
+                else:
+                    empty_queries.append(query)
 
     unique = {item.evidence_id: item for item in evidence}
-    return {"evidence": list(unique.values()), "trace": [*state.trace, "retriever"]}
+    merged_empty = [*state.empty_queries, *empty_queries]
+    return {
+        "evidence": list(unique.values()),
+        "empty_queries": merged_empty,
+        "trace": [*state.trace, "retriever"],
+    }
 
 
 def analyst_node(state: WorkflowState) -> dict:

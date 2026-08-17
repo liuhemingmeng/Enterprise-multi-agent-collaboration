@@ -52,6 +52,20 @@ def test_route_from_completed_state_does_not_restart_work():
     assert state.status == "completed"
 
 
+def test_insufficient_evidence_does_not_requery_empty_queries():
+    """The eval exposed that empty queries used to be re-run every retry round.
+
+    After recording empty queries in state, an all-empty plan must go to human
+    after a single retrieval round instead of burning budget on identical calls.
+    """
+    state = run_task("__no_evidence__关于制造业预测性维护的机密内部资料方案")
+    assert state.status == "need_human"
+    # exactly one retrieval round, not MAX_RETRY rounds
+    assert state.trace.count("retriever") == 1
+    assert state.retry_count == 0
+    assert state.trace[-1] == "human_queue"
+
+
 def test_workflow_is_compiled_and_accepts_typed_state():
     result = build_workflow().invoke(WorkflowState(user_goal="测试目标"))
     assert result["status"] == "completed"

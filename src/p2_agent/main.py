@@ -2,6 +2,8 @@ from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel, Field
 
 from p2_agent.async_service import AsyncWorkflowService
+from p2_agent.eval.dataset import build_evaluation_set, save_dataset
+from p2_agent.eval.runner import run_comparison
 
 service = AsyncWorkflowService()
 
@@ -80,3 +82,33 @@ def list_tool_errors(
     if archive is None:
         return {"errors": []}
     return {"errors": archive.list_errors(tool_name=tool_name, limit=limit)}
+
+
+@app.get("/eval/dataset")
+def get_eval_dataset() -> dict:
+    """Return the deterministic evaluation set (size + a small sample)."""
+    tasks = build_evaluation_set()
+    return {
+        "size": len(tasks),
+        "sample": [t.to_dict() for t in tasks[:3]],
+    }
+
+
+@app.post("/eval/run")
+def run_eval() -> dict:
+    """Run single-agent vs multi-agent comparison over the evaluation set.
+
+    With deterministic stubs this is fast; it runs synchronously and returns
+    the full comparison report (metrics, deltas, per-category breakdown).
+    """
+    report = run_comparison()
+    return report
+
+
+@app.post("/eval/dataset/save")
+def save_eval_dataset() -> dict:
+    """Persist the evaluation set to eval/tasks_sample.json."""
+    from pathlib import Path
+
+    path = save_dataset(Path("eval/tasks_sample.json"))
+    return {"path": str(path), "size": len(build_evaluation_set())}
