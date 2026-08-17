@@ -86,6 +86,11 @@
         <span class="hint" id="hint"></span>
       </div>
 
+      <div class="section">
+        <h3>🔴 实时流（SSE）</h3>
+        <div id="streamBox" class="hint">提交任务后实时显示进度…</div>
+      </div>
+
       <div id="taskView"></div>
     </div>
 
@@ -107,6 +112,7 @@
         后端 API：<br />
         <code>POST /tasks</code> · <code>GET /tasks/{id}</code><br />
         <code>POST /tasks/{id}/human-decision</code><br />
+        <code>GET /tasks/{id}/trace</code> · <code>/stream</code> · <code>/guardrails</code><br />
         <code>GET /tools</code> · <code>GET /tools/errors</code><br />
         <code>POST /eval/run</code>
       </div>
@@ -139,6 +145,7 @@ async function submitTask() {
     });
     renderState(state);
     startPolling(state.task_id);
+    startStream(state.task_id);
   } catch (e) {
     setHint("提交失败：" + e.message);
   } finally {
@@ -221,7 +228,12 @@ function renderState(s) {
     html += `<div class="section"><button class="ghost" onclick="exportReport(${JSON.stringify(s).replace(/"/g,'&quot;')})">📥 导出报告（Markdown）</button></div>`;
   }
 
+  html += `<div class="section"><h3>执行追踪（Tracing）</h3><div id="traceHolder" class="hint">加载中…</div></div>`;
+  html += `<div class="section"><h3>护栏检查（Guardrails）</h3><div id="guardHolder" class="hint">加载中…</div></div>`;
+
   loadEvents(s.task_id);
+  loadTrace(s.task_id);
+  loadGuardrails(s.task_id);
   v.innerHTML = html;
 }
 
@@ -233,7 +245,7 @@ async function decide(id, decision) {
       body: JSON.stringify({ decision }),
     });
     renderState(s);
-    if (decision === "revise") startPolling(id);
+    if (decision === "revise") { startPolling(id); startStream(id); }
   } catch (e) { setHint("操作失败：" + e.message); }
 }
 
@@ -280,6 +292,76 @@ function exportReport(s) {
   a.download = `p2-report-${s.task_id}.md`;
   a.click();
   URL.revokeObjectURL(a.href);
+}
+
+async function loadTrace(id) {
+  try {
+    const r = await api(`/tasks/${id}/trace`);
+    const holder = document.getElementById("traceHolder");
+    if (!holder) return;
+    const sum = r.summary || {};
+    let html = `<div class="hint">总时长 ${Number(sum.total_duration_ms || 0).toFixed(1)}ms · 总成本 ¥${Number(sum.total_cost_usd || 0).toFixed(3)} · spans ${sum.span_count || 0}</div>`;
+    if (!r.spans || !r.spans.length) {
+      html += `<div class="empty">暂无 span（任务可能尚未运行）</div>`;
+    } else {
+      for (const s of r.spans) {
+        const ok = s.status === "ok";
+        html += `<div class="evi" style="border-left:3px solid ${ok ? "var(--ok)" : "var(--bad)"}">
+          <b>${esc(s.node)}</b> <span class="meta">${esc(s.status)} · ${Number(s.duration_ms).toFixed(1)}ms</span>
+          ${s.error ? `<div class="meta" style="color:var(--bad)">${esc(s.error).slice(0, 140)}</div>` : ""}
+        </div>`;
+      }
+    }
+    holder.innerHTML = html;
+  } catch (e) { /* ignore */ }
+}
+
+async function loadGuardrails(id) {
+  try {
+    const r = await api(`/tasks/${id}/guardrails`);
+    const holder = document.getElementById("guardHolder");
+    if (!holder) return;
+    const f = r.findings || [];
+    if (!f.length) {
+      holder.innerHTML = `<div class="hint">未触发护栏告警 ✓</div>`;
+      return;
+    }
+    const color = (sev) => sev === "critical" ? "var(--bad)" : (sev === "warning" ? "var(--warn)" : "var(--muted)");
+    holder.innerHTML = f.map(x =>
+      `<div class="evi" style="border-left:3px solid ${color(x.severity)}">
+        <b>[${esc(x.severity)}] ${esc(x.rule)}</b> <span class="meta">(${esc(x.field)})</span>
+        <div class="meta">${esc(x.message)}</div>
+      </div>`
+    ).join("");
+  } catch (e) { /* ignore */ }
+}
+
+let _es = null;
+function startStream(id) {
+  const box = document.getElementById("streamBox");
+  if (box) box.innerHTML = "";
+  if (_es) { try { _es.close(); } catch (e) {} }
+  try {
+    _es = new EventSource(API + "/tasks/" + id + "/stream");
+    _es.onmessage = (ev) => {
+      let p; try { p = JSON.parse(ev.data); } catch (e) { return; }
+      if (!box) return;
+      if (p.type === "event") {
+        const e = p.data;
+        box.insertAdjacentHTML("afterbegin", `<div class="ev ${e.status || e.event}"><span class="t">${esc(e.timestamp)}</span> · ${esc(e.event)}</div>`);
+      } else if (p.type === "span") {
+        const s = p.data;
+        box.insertAdjacentHTML("afterbegin", `<div class="ev"><span class="t">trace</span> · <b>${esc(s.node)}</b> ${esc(s.status)} ${Number(s.duration_ms).toFixed(1)}ms</div>`);
+      } else if (p.type === "guardrail") {
+        const g = p.data;
+        box.insertAdjacentHTML("afterbegin", `<div class="ev"><span class="t">guard</span> · [${esc(g.severity)}] ${esc(g.rule)}</div>`);
+      } else if (p.type === "done") {
+        box.insertAdjacentHTML("afterbegin", `<div class="ev ${p.status}"><span class="t">done</span> · ${esc(p.status)}</div>`);
+        try { _es.close(); } catch (e) {}
+      }
+    };
+    _es.onerror = () => { try { _es.close(); } catch (e) {} };
+  } catch (e) { /* ignore */ }
 }
 
 async function loadSide() {

@@ -1,13 +1,17 @@
+import asyncio
+import json
 from pathlib import Path
 from typing import Literal
 
 from fastapi import FastAPI, HTTPException, Query
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, StreamingResponse
 from pydantic import BaseModel, Field
 
 from p2_agent.async_service import AsyncWorkflowService
 from p2_agent.eval.dataset import build_evaluation_set, save_dataset
 from p2_agent.eval.runner import run_comparison
+from p2_agent.guardrails import guardrail_store
+from p2_agent.tracing import tracing_store
 
 service = AsyncWorkflowService()
 
@@ -144,3 +148,65 @@ def insight_ui() -> HTMLResponse:
     """Serve the single-page workbench UI."""
     html = _FRONTEND_HTML.read_text(encoding="utf-8")
     return HTMLResponse(html)
+
+
+@app.get("/tasks/{task_id}/trace")
+def get_trace(task_id: str) -> dict:
+    """Return the execution trace (per-node spans) and a cost/time summary."""
+    if service.get(task_id) is None:
+        raise HTTPException(status_code=404, detail="task not found")
+    return {
+        "task_id": task_id,
+        "spans": [s.model_dump() for s in tracing_store.list(task_id)],
+        "summary": tracing_store.summary(task_id),
+    }
+
+
+@app.get("/tasks/{task_id}/guardrails")
+def get_guardrails(task_id: str) -> dict:
+    """Return guardrail findings recorded for a task."""
+    if service.get(task_id) is None:
+        raise HTTPException(status_code=404, detail="task not found")
+    return {
+        "task_id": task_id,
+        "findings": [f.model_dump() for f in guardrail_store.list(task_id)],
+    }
+
+
+def _sse(payload: dict) -> str:
+    return f"data: {json.dumps(payload, ensure_ascii=False)}\n\n"
+
+
+@app.get("/tasks/{task_id}/stream")
+async def stream_task(task_id: str):
+    """Server-Sent-Events stream of progress, spans and guardrail findings.
+
+    Pushes incremental updates every 0.5s until the task reaches a terminal
+    state (completed / failed / need_human), then emits a final ``done`` event.
+    """
+    if service.get(task_id) is None:
+        raise HTTPException(status_code=404, detail="task not found")
+
+    async def event_generator():
+        sent_events = sent_spans = sent_guard = 0
+        for _ in range(300):  # ~150s ceiling
+            state = service.get(task_id)
+            if state is None:
+                yield _sse({"type": "not_found"})
+                return
+            events = service.events_for(task_id)
+            spans = tracing_store.list(task_id)
+            guards = guardrail_store.list(task_id)
+            for e in events[sent_events:]:
+                yield _sse({"type": "event", "data": e})
+            for s in spans[sent_spans:]:
+                yield _sse({"type": "span", "data": s.model_dump()})
+            for g in guards[sent_guard:]:
+                yield _sse({"type": "guardrail", "data": g.model_dump()})
+            sent_events, sent_spans, sent_guard = len(events), len(spans), len(guards)
+            if state.status in {"completed", "failed", "need_human"}:
+                yield _sse({"type": "done", "status": state.status})
+                return
+            await asyncio.sleep(0.5)
+
+    return StreamingResponse(event_generator(), media_type="text/event-stream")

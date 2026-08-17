@@ -24,11 +24,34 @@ class AsyncWorkflowService:
     def submit(
         self, user_goal: str, require_human_approval: bool = False
     ) -> WorkflowState:
+        from p2_agent.guardrails import (
+            Severity,
+            check_input,
+            guardrail_store,
+        )
+
         state = WorkflowState(
             user_goal=user_goal,
             status="queued",
             require_human_approval=require_human_approval,
         )
+        findings = check_input(user_goal)
+        critical = [f for f in findings if f.severity == Severity.critical]
+        if critical:
+            for f in findings:
+                f.task_id = str(state.task_id)
+                guardrail_store.add(f)
+            failed = state.model_copy(
+                update={"status": "failed", "errors": [f.message for f in critical]}
+            )
+            self.store.save(failed)
+            self.events.append(
+                state.task_id,
+                "blocked",
+                status="failed",
+                reason="prompt_injection",
+            )
+            return failed
         self.store.save(state)
         self.events.append(state.task_id, "queued", status="queued")
         future = self.executor.submit(self._run, state)

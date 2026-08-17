@@ -131,6 +131,9 @@ class ToolRegistry:
                 data = future.result(timeout=tool.timeout_seconds)
             elapsed = (time.monotonic() - start) * 1000
             self.budget.charge(tool.cost_per_call, task_id)
+            from p2_agent.tracing import tracing_store
+
+            tracing_store.record_tool_cost(task_id, tool.cost_per_call)
             return ToolResult(
                 call_id=call.call_id,
                 tool_name=tool_name,

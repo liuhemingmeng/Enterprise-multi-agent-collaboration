@@ -12,10 +12,31 @@ from p2_agent.agents.stubs import (
     reviewer_node,
     writer_node,
 )
+from p2_agent.guardrails import run_node_guardrails
 from p2_agent.schemas import WorkflowState
 from p2_agent.tools.registry import ToolRegistry
+from p2_agent.tracing import instrumented
 
 MAX_RETRY = 3
+
+
+def guarded(node_name: str, fn):
+    """Wrap a graph node with tracing + detection-only guardrails.
+
+    ``instrumented`` records a span (success and failure paths); afterward we
+    run node-level guardrails (plan/draft/review shape, tool-result injection)
+    which only *record* findings — they never mutate the workflow state.  The
+    only blocking guardrail is the input check at the service boundary.
+    """
+
+    base = instrumented(node_name, fn)
+
+    def wrapper(state):
+        out = base(state)
+        run_node_guardrails(node_name, state, out if isinstance(out, dict) else {})
+        return out
+
+    return wrapper
 
 
 def route_from_checkpoint(state: WorkflowState) -> str:
@@ -130,24 +151,26 @@ def build_workflow(registry: ToolRegistry | None = None):
     """
     if registry is not None:
         builder = StateGraph(WorkflowState)
-        builder.add_node("planner", planner_node)
+        builder.add_node("planner", guarded("planner", planner_node))
         builder.add_node(
             "retriever",
-            lambda state: retriever_node(state, registry=registry),
+            guarded("retriever", lambda state: retriever_node(state, registry=registry)),
         )
     else:
         kb = DeterministicKnowledgeBase()
         builder = StateGraph(WorkflowState)
-        builder.add_node("planner", planner_node)
-        builder.add_node("retriever", lambda state: retriever_node(state, kb=kb))
-    builder.add_node("analyst", analyst_node)
-    builder.add_node("writer", writer_node)
-    builder.add_node("reviewer", reviewer_node)
-    builder.add_node("revise", revise_node)
-    builder.add_node("insufficient", insufficient_node)
-    builder.add_node("human_queue", human_queue_node)
-    builder.add_node("human_approval", approval_node)
-    builder.add_node("export", export_node)
+        builder.add_node("planner", guarded("planner", planner_node))
+        builder.add_node(
+            "retriever", guarded("retriever", lambda state: retriever_node(state, kb=kb))
+        )
+    builder.add_node("analyst", guarded("analyst", analyst_node))
+    builder.add_node("writer", guarded("writer", writer_node))
+    builder.add_node("reviewer", guarded("reviewer", reviewer_node))
+    builder.add_node("revise", guarded("revise", revise_node))
+    builder.add_node("insufficient", guarded("insufficient", insufficient_node))
+    builder.add_node("human_queue", guarded("human_queue", human_queue_node))
+    builder.add_node("human_approval", guarded("human_approval", approval_node))
+    builder.add_node("export", guarded("export", export_node))
 
     builder.add_conditional_edges(
         START,

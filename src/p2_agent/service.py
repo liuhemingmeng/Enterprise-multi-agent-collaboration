@@ -35,7 +35,24 @@ class WorkflowService:
         self.graph = build_workflow(self.registry)
 
     def create_and_run(self, user_goal: str) -> WorkflowState:
+        from p2_agent.guardrails import (
+            Severity,
+            check_input,
+            guardrail_store,
+        )
+
         state = WorkflowState(user_goal=user_goal)
+        findings = check_input(user_goal)
+        critical = [f for f in findings if f.severity == Severity.critical]
+        if critical:
+            for f in findings:
+                f.task_id = str(state.task_id)
+                guardrail_store.add(f)
+            failed = state.model_copy(
+                update={"status": "failed", "errors": [f.message for f in critical]}
+            )
+            self.store.save(failed)
+            return failed
         self.store.save(state)
         return self._run_and_save(state)
 
