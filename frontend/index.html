@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>企业方案多智能体工作流 · 工作台</title>
+  <style>
+    :root {
+      --bg: #f5f7fa; --panel: #ffffff; --border: #e3e8ef; --text: #1f2933;
+      --muted: #66707a; --brand: #2563eb; --brand-soft: #eff4ff;
+      --ok: #16a34a; --warn: #d97706; --bad: #dc2626; --chip: #eef2f7;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", Segoe UI, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.5;
+    }
+    header {
+      background: var(--panel); border-bottom: 1px solid var(--border);
+      padding: 14px 24px; display: flex; align-items: center; gap: 12px;
+    }
+    header h1 { font-size: 17px; margin: 0; }
+    header .sub { color: var(--muted); font-size: 13px; }
+    .wrap { display: grid; grid-template-columns: 1fr 320px; gap: 18px; padding: 18px 24px; max-width: 1280px; margin: 0 auto; }
+    .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
+    .panel h2 { font-size: 14px; margin: 0 0 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+    textarea { width: 100%; min-height: 64px; padding: 10px; border: 1px solid var(--border); border-radius: 8px; font: inherit; resize: vertical; }
+    .row { display: flex; gap: 10px; align-items: center; margin-top: 10px; flex-wrap: wrap; }
+    label.chk { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
+    button {
+      background: var(--brand); color: #fff; border: 0; border-radius: 8px; padding: 9px 16px;
+      font: inherit; cursor: pointer; font-size: 14px;
+    }
+    button.ghost { background: var(--chip); color: var(--text); }
+    button.ok { background: var(--ok); }
+    button.warn { background: var(--warn); }
+    button:disabled { opacity: .5; cursor: not-allowed; }
+    .badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+    .badge.pending, .badge.queued { background: var(--chip); color: var(--muted); }
+    .badge.running { background: var(--brand-soft); color: var(--brand); }
+    .badge.need_human { background: #fff7ed; color: var(--warn); }
+    .badge.completed { background: #ecfdf5; color: var(--ok); }
+    .badge.failed { background: #fef2f2; color: var(--bad); }
+    .timeline { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+    .timeline li { background: var(--chip); border-radius: 6px; padding: 4px 10px; font-size: 12px; color: var(--muted); }
+    .section { margin-top: 16px; }
+    .section h3 { font-size: 13px; margin: 0 0 6px; color: var(--brand); }
+    pre { background: #0f172a; color: #e2e8f0; padding: 12px; border-radius: 8px; overflow: auto; font-size: 12.5px; max-height: 360px; white-space: pre-wrap; }
+    .ev { border-left: 3px solid var(--border); padding: 6px 10px; margin: 4px 0; font-size: 13px; background: #fbfcfe; }
+    .ev .t { color: var(--muted); font-size: 11px; }
+    .ev.approved { border-color: var(--ok); }
+    .ev.need_human { border-color: var(--warn); }
+    .ev.failed { border-color: var(--bad); }
+    .ev.completed { border-color: var(--ok); }
+    ul.tight { margin: 4px 0; padding-left: 18px; font-size: 13px; }
+    .evi { border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; margin: 6px 0; font-size: 12.5px; }
+    .evi .meta { color: var(--muted); font-size: 11px; }
+    .bar { height: 6px; background: var(--chip); border-radius: 4px; overflow: hidden; margin-top: 8px; }
+    .bar > i { display: block; height: 100%; background: var(--brand); }
+    .hint { font-size: 12px; color: var(--muted); margin-top: 8px; }
+    .approval { border: 1px solid #fcd9a4; background: #fffbeb; border-radius: 10px; padding: 14px; margin-top: 14px; }
+    .approval h3 { color: var(--warn); margin-top: 0; }
+    .side .box { margin-bottom: 14px; font-size: 13px; }
+    .side code { background: var(--chip); padding: 1px 5px; border-radius: 4px; }
+    .tool { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed var(--border); }
+    .empty { color: var(--muted); font-style: italic; }
+    a { color: var(--brand); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>企业方案多智能体工作流</h1>
+    <span class="sub">Planner → Retriever → Analyst → Writer → Reviewer → 人工确认 → 导出</span>
+  </header>
+
+  <div class="wrap">
+    <div class="panel" id="main">
+      <h2>新建任务</h2>
+      <textarea id="goal" placeholder="例如：为某制造企业设计一套零碳园区方案，重点突出投资回报与合规路径"></textarea>
+      <div class="row">
+        <label class="chk"><input type="checkbox" id="needHuman" checked /> 需要人工确认（在评审通过后暂停，等待你批准导出）</label>
+      </div>
+      <div class="row">
+        <button id="submitBtn" onclick="submitTask()">提交并运行</button>
+        <button class="ghost" id="evalBtn" onclick="runEval()">跑一次评测对照（单 vs 多 Agent）</button>
+        <span class="hint" id="hint"></span>
+      </div>
+
+      <div id="taskView"></div>
+    </div>
+
+    <div class="panel side">
+      <h2>系统侧栏</h2>
+      <div class="box">
+        <strong>工具白名单</strong>
+        <div id="tools"><span class="empty">加载中…</span></div>
+      </div>
+      <div class="box">
+        <strong>工具错误归档</strong>
+        <div id="errors"><span class="empty">无</span></div>
+      </div>
+      <div class="box">
+        <strong>评测</strong>
+        <div id="evalSummary" class="hint">点上方"跑评测"查看 100 条对照结论</div>
+      </div>
+      <div class="box hint">
+        后端 API：<br />
+        <code>POST /tasks</code> · <code>GET /tasks/{id}</code><br />
+        <code>POST /tasks/{id}/human-decision</code><br />
+        <code>GET /tools</code> · <code>GET /tools/errors</code><br />
+        <code>POST /eval/run</code>
+      </div>
+    </div>
+  </div>
+
+<script>
+const API = "";
+let pollTimer = null;
+
+async function api(path, opts) {
+  const res = await fetch(API + path, opts);
+  if (!res.ok) throw new Error(`${res.status} ${await res.text()}`);
+  return res.json();
+}
+
+function setHint(t) { document.getElementById("hint").textContent = t || ""; }
+
+async function submitTask() {
+  const goal = document.getElementById("goal").value.trim();
+  if (!goal) { setHint("请先填写目标"); return; }
+  const need = document.getElementById("needHuman").checked;
+  document.getElementById("submitBtn").disabled = true;
+  setHint("已提交，后台运行中…");
+  try {
+    const state = await api("/tasks", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ user_goal: goal, require_human_approval: need }),
+    });
+    renderState(state);
+    startPolling(state.task_id);
+  } catch (e) {
+    setHint("提交失败：" + e.message);
+  } finally {
+    document.getElementById("submitBtn").disabled = false;
+  }
+}
+
+function startPolling(id) {
+  if (pollTimer) clearInterval(pollTimer);
+  pollTimer = setInterval(async () => {
+    try {
+      const state = await api(`/tasks/${id}`);
+      renderState(state);
+      if (["completed", "failed"].includes(state.status)) clearInterval(pollTimer);
+    } catch (e) { /* ignore transient */ }
+  }, 1500);
+}
+
+function esc(s) {
+  return String(s ?? "").replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+}
+
+function renderState(s) {
+  const v = document.getElementById("taskView");
+  if (!s) { v.innerHTML = ""; return; }
+  const steps = (s.trace || []).concat(s.status === "need_human" ? ["⏸ 等待人工"] : []);
+  let html = `
+    <div class="section">
+      <h3>状态</h3>
+      <span class="badge ${s.status}">${esc(s.status)}</span>
+      <span class="hint"> task_id: ${esc(s.task_id)} · retry ${s.retry_count ?? 0}</span>
+      <div class="timeline">${steps.map(t => `<li>${esc(t)}</li>`).join("")}</div>
+    </div>`;
+
+  if (s.plan) {
+    html += `<div class="section"><h3>计划（Planner）</h3><ul class="tight">`;
+    for (const st of s.plan.subtasks) {
+      html += `<li><b>${esc(st.title)}</b>${st.retrieval_queries?.length ? " — 检索词：" + esc(st.retrieval_queries.join("、")) : ""}</li>`;
+    }
+    html += `</ul></div>`;
+  }
+
+  if (s.evidence && s.evidence.length) {
+    html += `<div class="section"><h3>证据（Retriever · ${s.evidence.length} 条）</h3>`;
+    for (const e of s.evidence.slice(0, 12)) {
+      html += `<div class="evi"><div>${esc(e.text).slice(0, 160)}…</div>
+        <div class="meta">来源：${esc(e.doc_name)} · 页 ${e.page} · 相关度 ${Number(e.score).toFixed(2)}</div></div>`;
+    }
+    html += `</div>`;
+  }
+
+  if (s.analysis) {
+    const a = s.analysis;
+    html += `<div class="section"><h3>分析（Analyst）</h3>`;
+    if (a.facts?.length) html += `<b>事实</b><ul class="tight">${a.facts.map(f => `<li>${esc(f)}</li>`).join("")}</ul>`;
+    if (a.risks?.length) html += `<b>风险</b><ul class="tight">${a.risks.map(r => `<li>${esc(r)}</li>`).join("")}</ul>`;
+    if (a.open_questions?.length) html += `<b>待确认</b><ul class="tight">${a.open_questions.map(q => `<li>${esc(q)}</li>`).join("")}</ul>`;
+    html += `</div>`;
+  }
+
+  if (s.draft) {
+    html += `<div class="section"><h3>方案初稿（Writer）</h3><pre>${esc(s.draft)}</pre></div>`;
+  }
+
+  if (s.review) {
+    html += `<div class="section"><h3>评审（Reviewer）</h3>
+      <span class="badge ${s.review.decision}">${esc(s.review.decision)}</span>
+      <ul class="tight">${s.review.reasons.map(r => `<li>${esc(r)}</li>`).join("")}</ul></div>`;
+  }
+
+  if (s.status === "need_human") {
+    html += `<div class="approval"><h3>⏸ 等待人工确认</h3>
+      <p class="hint">评审已通过，方案初稿已生成。请确认无误后批准导出，或退回修改。</p>
+      <div class="row">
+        <button class="ok" onclick="decide('${s.task_id}','approve')">✅ 批准并导出</button>
+        <button class="warn" onclick="decide('${s.task_id}','revise')">↩️ 退回修改</button>
+        <button class="ghost" onclick="exportReport(${JSON.stringify(s).replace(/"/g,'&quot;')})">📥 导出报告</button>
+      </div></div>`;
+  } else if (s.status === "completed") {
+    html += `<div class="section"><button class="ghost" onclick="exportReport(${JSON.stringify(s).replace(/"/g,'&quot;')})">📥 导出报告（Markdown）</button></div>`;
+  }
+
+  loadEvents(s.task_id);
+  v.innerHTML = html;
+}
+
+async function decide(id, decision) {
+  try {
+    const s = await api(`/tasks/${id}/human-decision`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ decision }),
+    });
+    renderState(s);
+    if (decision === "revise") startPolling(id);
+  } catch (e) { setHint("操作失败：" + e.message); }
+}
+
+async function loadEvents(id) {
+  try {
+    const { events } = await api(`/tasks/${id}/events`);
+    let box = document.getElementById("evBox");
+    if (!box) {
+      const v = document.getElementById("taskView");
+      v.insertAdjacentHTML("beforeend", `<div class="section"><h3>进度事件</h3><div id="evBox"></div></div>`);
+      box = document.getElementById("evBox");
+    }
+    box.innerHTML = events.slice(-12).reverse().map(e => {
+      const cls = e.status || e.event;
+      return `<div class="ev ${cls}"><span class="t">${esc(e.timestamp)}</span> · ${esc(e.event)}</div>`;
+    }).join("");
+  } catch (e) { /* ignore */ }
+}
+
+function exportReport(s) {
+  const lines = [];
+  lines.push(`# 企业方案工作流报告`);
+  lines.push(`- task_id: ${s.task_id}`);
+  lines.push(`- 目标: ${s.user_goal}`);
+  lines.push(`- 状态: ${s.status}`);
+  if (s.plan) {
+    lines.push(`\n## 计划`);
+    for (const st of s.plan.subtasks) lines.push(`- ${st.title}${st.retrieval_queries?.length ? "（检索：" + st.retrieval_queries.join("、") + "）" : ""}`);
+  }
+  if (s.evidence?.length) {
+    lines.push(`\n## 引用证据（${s.evidence.length}）`);
+    for (const e of s.evidence) lines.push(`- [${e.doc_name} p${e.page} · 相关度 ${Number(e.score).toFixed(2)}] ${e.text}`);
+  }
+  if (s.analysis) {
+    lines.push(`\n## 分析`);
+    if (s.analysis.facts?.length) lines.push(`- 事实: ${s.analysis.facts.join("；")}`);
+    if (s.analysis.risks?.length) lines.push(`- 风险: ${s.analysis.risks.join("；")}`);
+  }
+  if (s.draft) lines.push(`\n## 方案初稿\n${s.draft}`);
+  if (s.review) lines.push(`\n## 评审\n- 决定: ${s.review.decision}\n- 理由: ${s.review.reasons.join("；")}`);
+  const blob = new Blob([lines.join("\n")], { type: "text/markdown" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `p2-report-${s.task_id}.md`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+async function loadSide() {
+  try {
+    const t = await api("/tools");
+    document.getElementById("tools").innerHTML = t.tools.map(x =>
+      `<div class="tool"><span>${esc(x.name)}</span><span class="hint">${x.timeout_seconds}s · ¥${x.cost_per_call}</span></div>`
+    ).join("") + `<div class="hint">预算上限 ¥${t.budget_max}</div>`;
+  } catch (e) { /* ignore */ }
+  try {
+    const e = await api("/tools/errors");
+    const list = e.errors || [];
+    document.getElementById("errors").innerHTML = list.length
+      ? list.slice(0, 8).map(x => `<div class="evi"><div>${esc(x.tool)} · ${esc(x.error_type)}</div><div class="meta">${esc(x.message || "").slice(0,80)}</div></div>`).join("")
+      : `<span class="empty">无</span>`;
+  } catch (e) { /* ignore */ }
+}
+
+async function runEval() {
+  setHint("评测运行中（100 条对照，约数秒）…");
+  try {
+    const r = await api("/eval/run", { method: "POST" });
+    const ma = r.multi_agent, sa = r.single_agent;
+    document.getElementById("evalSummary").innerHTML =
+      `数据集 ${r.dataset_size} 条<br/>
+       引用覆盖率：多Agent <b>${ma.mean_citation_coverage.toFixed(2)}</b> vs 单Agent ${sa.mean_citation_coverage.toFixed(2)}<br/>
+       成本：¥${ma.mean_cost.toFixed(3)} vs ¥${sa.mean_cost.toFixed(3)}<br/>
+       自动完成率：${ma.auto_complete_rate.toFixed(2)} vs ${sa.auto_complete_rate.toFixed(2)}`;
+    setHint("评测完成 ✓");
+  } catch (e) { setHint("评测失败：" + e.message); }
+}
+
+loadSide();
+</script>
+</body>
+</html>

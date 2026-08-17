@@ -87,6 +87,8 @@ class WorkflowState(BaseModel):
     errors: list[str] = Field(default_factory=list, max_length=50)
     trace: list[str] = Field(default_factory=list, max_length=100)
     empty_queries: list[str] = Field(default_factory=list, max_length=50)
+    require_human_approval: bool = False
+    human_decision: Literal["", "approve", "revise"] = ""
 
     def public_dict(self) -> dict:
         return self.model_dump(mode="json")

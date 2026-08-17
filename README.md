@@ -4,7 +4,9 @@
 
 ## 当前阶段
 
-**Stage 6：评测与对照实验**
+**Stage 7：前端、Docker、CI 与部署（生产化收口）**
+
+阶段 1–6 已完成状态机、条件回退、持久化、异步 API、工具安全边界、100 条评测对照。阶段 7 在此之上补齐：单页工作台 UI（进度/人工审批/报告导出）、Docker 镜像、GitHub Actions CI（ruff + pytest，含 100 条评测回归）。
 
 先用本地 deterministic stub 代替 LLM 与 P1 API，跑通：
 
@@ -43,4 +45,19 @@ python -m venv .venv
 # Windows: .venv\\Scripts\\activate
 pip install -e ".[test]"
 pytest
+```
+
+启动 API 与服务台 UI：
+
+```bash
+uvicorn p2_agent.main:app --host 0.0.0.0 --port 8000
+# 浏览器打开 http://127.0.0.1:8000/insight
+```
+
+容器化与 CI：
+
+```bash
+docker build -t p2-agent-workbench .
+docker run -p 8000:8000 p2-agent-workbench
+# CI：push/PR 到 main 自动跑 ruff + pytest（含 100 条评测回归）
 ```

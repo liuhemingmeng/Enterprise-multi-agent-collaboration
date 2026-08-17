@@ -1,4 +1,8 @@
+from pathlib import Path
+from typing import Literal
+
 from fastapi import FastAPI, HTTPException, Query
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
 
 from p2_agent.async_service import AsyncWorkflowService
@@ -12,6 +16,7 @@ app = FastAPI(title="P2 Agent Workbench", version="0.1.0")
 
 class TaskRequest(BaseModel):
     user_goal: str = Field(min_length=1, max_length=2000)
+    require_human_approval: bool = False
 
 
 @app.get("/health")
@@ -22,7 +27,7 @@ def health() -> dict[str, str]:
 @app.post("/tasks", status_code=202)
 def create_task(request: TaskRequest) -> dict:
     try:
-        state = service.submit(request.user_goal)
+        state = service.submit(request.user_goal, request.require_human_approval)
     except ValueError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
     return state.public_dict()
@@ -112,3 +117,30 @@ def save_eval_dataset() -> dict:
 
     path = save_dataset(Path("eval/tasks_sample.json"))
     return {"path": str(path), "size": len(build_evaluation_set())}
+
+
+_FRONTEND_HTML = (
+    Path(__file__).resolve().parent.parent.parent / "frontend" / "index.html"
+)
+
+
+class HumanDecisionRequest(BaseModel):
+    decision: Literal["approve", "revise"]
+
+
+@app.post("/tasks/{task_id}/human-decision")
+def decide_task(task_id: str, body: HumanDecisionRequest) -> dict:
+    """Apply a human decision on a task paused at ``need_human``."""
+    try:
+        state = service.human_decision(task_id, body.decision)
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    return state.public_dict()
+
+
+@app.get("/insight")
+@app.get("/")
+def insight_ui() -> HTMLResponse:
+    """Serve the single-page workbench UI."""
+    html = _FRONTEND_HTML.read_text(encoding="utf-8")
+    return HTMLResponse(html)

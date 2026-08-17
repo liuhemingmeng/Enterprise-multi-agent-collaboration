@@ -21,8 +21,14 @@ class AsyncWorkflowService:
         self._futures: dict[str, Future[WorkflowState]] = {}
         self._lock = Lock()
 
-    def submit(self, user_goal: str) -> WorkflowState:
-        state = WorkflowState(user_goal=user_goal, status="queued")
+    def submit(
+        self, user_goal: str, require_human_approval: bool = False
+    ) -> WorkflowState:
+        state = WorkflowState(
+            user_goal=user_goal,
+            status="queued",
+            require_human_approval=require_human_approval,
+        )
         self.store.save(state)
         self.events.append(state.task_id, "queued", status="queued")
         future = self.executor.submit(self._run, state)
@@ -52,6 +58,9 @@ class AsyncWorkflowService:
 
     def events_for(self, task_id: UUID | str) -> list[dict]:
         return self.events.list(task_id)
+
+    def human_decision(self, task_id: UUID | str, decision: str) -> WorkflowState:
+        return self.workflow.human_decision(task_id, decision)
 
     def wait(self, task_id: UUID | str) -> WorkflowState:
         with self._lock:

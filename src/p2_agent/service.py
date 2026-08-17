@@ -50,6 +50,20 @@ class WorkflowService:
     def get(self, task_id: UUID | str) -> WorkflowState | None:
         return self.store.get(task_id)
 
+    def human_decision(self, task_id: UUID | str, decision: str) -> WorkflowState:
+        """Apply a human decision on a task paused at ``need_human``.
+
+        ``approve`` resumes the export path; ``revise`` sends the draft back to
+        the writer.  No-op when the task is not waiting for human input.
+        """
+        state = self.store.get(task_id)
+        if state is None:
+            raise KeyError(f"task not found: {task_id}")
+        if state.status != "need_human":
+            return state
+        updated = state.model_copy(update={"human_decision": decision})
+        return self._run_and_save(updated)
+
     def _run_and_save(self, state: WorkflowState) -> WorkflowState:
         try:
             if route_from_checkpoint(state) == "__end__":

@@ -20,7 +20,13 @@ MAX_RETRY = 3
 
 def route_from_checkpoint(state: WorkflowState) -> str:
     """Choose the next graph node from the last durable node snapshot."""
-    if state.status in {"completed", "failed", "need_human"}:
+    if state.status in {"completed", "failed"}:
+        return "__end__"
+    if state.status == "need_human":
+        if state.human_decision == "approve":
+            return "human_approval"
+        if state.human_decision == "revise":
+            return "revise"
         return "__end__"
     last = state.trace[-1] if state.trace else ""
     if last == "reviewer":
@@ -51,6 +57,8 @@ def route_after_review(
     if state.review is None:
         return "human"
     if state.retry_count >= MAX_RETRY:
+        return "human"
+    if state.review.decision == "approved" and state.require_human_approval:
         return "human"
     return {
         "approved": "approved",
@@ -94,11 +102,19 @@ def route_after_insufficient(state: WorkflowState) -> Literal["retriever", "huma
 
 
 def human_queue_node(state: WorkflowState) -> dict:
-    return {"status": "need_human", "trace": [*state.trace, "human_queue"]}
+    return {
+        "status": "need_human",
+        "human_decision": "",
+        "trace": [*state.trace, "human_queue"],
+    }
 
 
 def approval_node(state: WorkflowState) -> dict:
-    return {"status": "approved", "trace": [*state.trace, "human_approval"]}
+    return {
+        "status": "approved",
+        "human_decision": "",
+        "trace": [*state.trace, "human_approval"],
+    }
 
 
 def export_node(state: WorkflowState) -> dict:

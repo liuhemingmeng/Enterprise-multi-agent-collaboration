@@ -71,3 +71,43 @@ def test_eval_run_endpoint_returns_comparison_report():
     ma_cov = body["multi_agent"]["mean_citation_coverage"]
     sa_cov = body["single_agent"]["mean_citation_coverage"]
     assert ma_cov > sa_cov
+
+
+def test_human_approval_flow_pauses_then_completes():
+    import time
+
+    with TestClient(app) as client:
+        created = client.post(
+            "/tasks",
+            json={"user_goal": "需要人工确认的设备维护方案", "require_human_approval": True},
+        ).json()
+        task_id = created["task_id"]
+        # wait until the workflow pauses for human input
+        state = None
+        for _ in range(100):
+            state = client.get(f"/tasks/{task_id}").json()
+            if state["status"] in {"need_human", "completed", "failed"}:
+                break
+            time.sleep(0.1)
+        assert state["status"] == "need_human"
+        # human approves -> export -> completed
+        decided = client.post(
+            f"/tasks/{task_id}/human-decision", json={"decision": "approve"}
+        ).json()
+        assert decided["status"] == "completed"
+        assert decided["draft"].startswith("# 企业方案初稿")
+
+
+def test_human_decision_on_unknown_task_returns_404():
+    with TestClient(app) as client:
+        response = client.post(
+            "/tasks/does-not-exist/human-decision", json={"decision": "approve"}
+        )
+    assert response.status_code == 404
+
+
+def test_frontend_ui_is_served():
+    with TestClient(app) as client:
+        response = client.get("/insight")
+    assert response.status_code == 200
+    assert "企业方案多智能体工作流" in response.text
