@@ -13,6 +13,7 @@ from p2_agent.agents.stubs import (
     writer_node,
 )
 from p2_agent.schemas import WorkflowState
+from p2_agent.tools.registry import ToolRegistry
 
 MAX_RETRY = 3
 
@@ -82,11 +83,25 @@ def export_node(state: WorkflowState) -> dict:
     return {"status": "completed", "trace": [*state.trace, "export"]}
 
 
-def build_workflow():
-    kb = DeterministicKnowledgeBase()
-    builder = StateGraph(WorkflowState)
-    builder.add_node("planner", planner_node)
-    builder.add_node("retriever", lambda state: retriever_node(state, kb))
+def build_workflow(registry: ToolRegistry | None = None):
+    """Build the compiled LangGraph workflow.
+
+    If ``registry`` is provided, the retriever node routes searches through
+    the tool whitelist.  If ``None`` (backward-compatible for stages 1–4),
+    falls back to direct KB access.
+    """
+    if registry is not None:
+        builder = StateGraph(WorkflowState)
+        builder.add_node("planner", planner_node)
+        builder.add_node(
+            "retriever",
+            lambda state: retriever_node(state, registry=registry),
+        )
+    else:
+        kb = DeterministicKnowledgeBase()
+        builder = StateGraph(WorkflowState)
+        builder.add_node("planner", planner_node)
+        builder.add_node("retriever", lambda state: retriever_node(state, kb=kb))
     builder.add_node("analyst", analyst_node)
     builder.add_node("writer", writer_node)
     builder.add_node("reviewer", reviewer_node)

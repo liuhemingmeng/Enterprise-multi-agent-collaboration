@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from p2_agent.schemas import Analysis, Evidence, Plan, Review, Subtask, WorkflowState
+from p2_agent.tools.schemas import ToolCall
 
 
 class DeterministicKnowledgeBase:
@@ -52,13 +53,39 @@ def planner_node(state: WorkflowState) -> dict:
     return {"plan": plan, "status": "running", "trace": [*state.trace, "planner"]}
 
 
-def retriever_node(state: WorkflowState, kb: DeterministicKnowledgeBase) -> dict:
+def retriever_node(
+    state: WorkflowState,
+    kb: DeterministicKnowledgeBase | None = None,
+    registry=None,
+) -> dict:
+    """Retrieve evidence through the tool registry (whitelist + budget + timeout).
+
+    If ``registry`` is provided, every search goes through ``registry.call()``
+    which enforces whitelist, parameter validation, timeout and cost budget.
+    If ``registry`` is ``None`` (backward-compatible path for stages 1–4),
+    fall back to direct KB access.
+    """
     if state.plan is None:
         raise ValueError("plan is required before retrieval")
+
     evidence: list[Evidence] = []
-    for subtask in state.plan.subtasks:
-        for query in subtask.retrieval_queries:
-            evidence.extend(kb.search(query, top_k=2))
+    if registry is not None:
+        for subtask in state.plan.subtasks:
+            for query in subtask.retrieval_queries:
+                call = ToolCall(
+                    tool_name="kb_search",
+                    params={"query": query, "top_k": 2},
+                    caller="retriever",
+                )
+                result = registry.call(call, task_id=str(state.task_id))
+                if result.success and result.data:
+                    evidence.extend(result.data)
+    else:
+        local_kb = kb or DeterministicKnowledgeBase()
+        for subtask in state.plan.subtasks:
+            for query in subtask.retrieval_queries:
+                evidence.extend(local_kb.search(query, top_k=2))
+
     unique = {item.evidence_id: item for item in evidence}
     return {"evidence": list(unique.values()), "trace": [*state.trace, "retriever"]}
 

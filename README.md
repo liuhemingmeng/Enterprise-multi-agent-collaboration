@@ -4,13 +4,13 @@
 
 ## 当前阶段
 
-**Stage 3：持久化与可恢复执行（SQLite 开发版）**
+**Stage 5：工具白名单与安全边界**
 
 先用本地 deterministic stub 代替 LLM 与 P1 API，跑通：
 
 `提交任务 -> Planner -> Retriever -> Analyst -> Writer -> Reviewer -> Human Approval -> Export`
 
-当前已经增加 SQLite 快照与任务恢复接口；SQLite 是开发阶段的应用层状态存储，不等同于生产级 LangGraph PostgreSQL checkpointer。所有外部依赖都通过端口（protocol）注入，后续可以替换为真实模型、P1 HTTP 客户端、PostgreSQL checkpointer、Redis worker。
+当前已增加工具注册表（白名单）、参数校验、超时防护、成本预算和错误归档；Retriever 的搜索请求必须经过工具注册表检查后才能执行。所有外部依赖都通过端口（protocol）注入，后续可以替换为真实模型、P1 HTTP 客户端、PostgreSQL checkpointer、Redis worker。
 
 ## 分步路线
 
