@@ -1,8 +1,21 @@
+# Secrets & local env
+.env
+.env.*
+!.env.example
+
+# Python
 __pycache__/
 *.py[cod]
-.pytest_cache/
-.ruff_cache/
-*.egg-info/
 .venv/
-data/*.sqlite3
-.env
+venv/
+*.egg-info/
+
+# Data & run artifacts
+data/
+eval/runs/
+*.sqlite3
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/

@@ -13,6 +13,7 @@ from p2_agent.agents.stubs import (
     writer_node,
 )
 from p2_agent.guardrails import run_node_guardrails
+from p2_agent.llm import LLMClient
 from p2_agent.schemas import WorkflowState
 from p2_agent.tools.registry import ToolRegistry
 from p2_agent.tracing import instrumented
@@ -142,16 +143,22 @@ def export_node(state: WorkflowState) -> dict:
     return {"status": "completed", "trace": [*state.trace, "export"]}
 
 
-def build_workflow(registry: ToolRegistry | None = None):
+def build_workflow(
+    registry: ToolRegistry | None = None,
+    llm: LLMClient | None = None,
+):
     """Build the compiled LangGraph workflow.
 
-    If ``registry`` is provided, the retriever node routes searches through
-    the tool whitelist.  If ``None`` (backward-compatible for stages 1–4),
-    falls back to direct KB access.
+    * ``registry`` — when provided, the retriever routes searches through the
+      tool whitelist.  When ``None`` (backward-compatible for stages 1–4),
+      falls back to direct KB access.
+    * ``llm`` — when provided, the generative agents (planner / analyst /
+      writer / reviewer) call a real LLM; otherwise they use deterministic
+      stubs.  Passing ``None`` keeps CI / tests fully offline and reproducible.
     """
     if registry is not None:
         builder = StateGraph(WorkflowState)
-        builder.add_node("planner", guarded("planner", planner_node))
+        builder.add_node("planner", guarded("planner", lambda s: planner_node(s, llm=llm)))
         builder.add_node(
             "retriever",
             guarded("retriever", lambda state: retriever_node(state, registry=registry)),
@@ -159,13 +166,13 @@ def build_workflow(registry: ToolRegistry | None = None):
     else:
         kb = DeterministicKnowledgeBase()
         builder = StateGraph(WorkflowState)
-        builder.add_node("planner", guarded("planner", planner_node))
+        builder.add_node("planner", guarded("planner", lambda s: planner_node(s, llm=llm)))
         builder.add_node(
             "retriever", guarded("retriever", lambda state: retriever_node(state, kb=kb))
         )
-    builder.add_node("analyst", guarded("analyst", analyst_node))
-    builder.add_node("writer", guarded("writer", writer_node))
-    builder.add_node("reviewer", guarded("reviewer", reviewer_node))
+    builder.add_node("analyst", guarded("analyst", lambda s: analyst_node(s, llm=llm)))
+    builder.add_node("writer", guarded("writer", lambda s: writer_node(s, llm=llm)))
+    builder.add_node("reviewer", guarded("reviewer", lambda s: reviewer_node(s, llm=llm)))
     builder.add_node("revise", guarded("revise", revise_node))
     builder.add_node("insufficient", guarded("insufficient", insufficient_node))
     builder.add_node("human_queue", guarded("human_queue", human_queue_node))

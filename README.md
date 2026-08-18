@@ -4,12 +4,16 @@
 
 ## 当前阶段
 
-**Stage 9：可观测性 / Tracing + 护栏层 Guardrails（生产化收口）**
+**Stage 10：真实外部服务接入（P1 检索 API + 真实 LLM API）**
 
-阶段 1–7 已完成状态机、条件回退、持久化、异步 API、工具安全边界、100 条评测对照、前端/Docker/CI。阶段 8–9 在此之上补齐**生产级可信与可观测能力**：
+阶段 1–9 已完成状态机、条件回退、持久化、异步 API、工具安全边界、100 条评测对照、前端/Docker/CI、可观测性 Tracing/SSE、护栏层 Guardrails。阶段 10 把"确定性桩"换成真实外部服务，让系统真正产出可审核的企业方案：
 
-- **阶段 8 可观测性**：节点级 `Span`（起止/时延/成败/成本）采集，对标 OpenTelemetry；`GET /tasks/{id}/trace` 汇总 + `GET /tasks/{id}/stream` SSE 实时流；前端「执行追踪」面板与 EventSource 实时流。
-- **阶段 9 护栏层**：输入提示注入拦截（service 边界 critical 阻断）、产物 schema 校验、工具结果注入检测，与既有 `ToolRegistry` 白名单 / `CostBudget` 预算 / `ErrorArchive` 错误归档共同构成 P2 的「策略与护栏层」。
+- **P1 检索客户端**：`P1RetrievalClient` 调 P1 `/corpus/search`，含 429 退避重试、409/422 处理、score 阈值过滤、字段映射；经 `P1SearchTool` 接进既有工具白名单 / 预算 / 追踪。
+- **真实 LLM 适配器**：`LLMClient`（OpenAI 兼容）驱动 Planner/Analyst/Writer/Reviewer；解析失败自动回退确定性桩，工作流不崩溃。
+- **双开关设计**：`RAG_API_KEY` / `LLM_API_KEY` 缺失时自动回退桩，**CI 评测与单元测试零费用、可复现**。
+- `GET /config` 汇报两套服务启用状态（不泄露密钥）。
+
+配置见 `.env.example`（复制为 `.env` 填入）：P1 检索需 `RAG_API_KEY`；真实 LLM 需 `LLM_BASE_URL`+`LLM_API_KEY`+`LLM_MODEL`（DeepSeek / 通义 / 智谱 / OpenAI 任选）。
 
 先用本地 deterministic stub 代替 LLM 与 P1 API，跑通：
 

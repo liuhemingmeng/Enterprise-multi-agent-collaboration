@@ -11,6 +11,13 @@ from p2_agent.async_service import AsyncWorkflowService
 from p2_agent.eval.dataset import build_evaluation_set, save_dataset
 from p2_agent.eval.runner import run_comparison
 from p2_agent.guardrails import guardrail_store
+from p2_agent.settings import (
+    LLM_BASE_URL,
+    LLM_ENABLED,
+    LLM_MODEL,
+    P1_ENABLED,
+    P1_RAG_BASE_URL,
+)
 from p2_agent.tracing import tracing_store
 
 service = AsyncWorkflowService()
@@ -26,6 +33,24 @@ class TaskRequest(BaseModel):
 @app.get("/health")
 def health() -> dict[str, str]:
     return {"status": "ok", "service": "p2-agent-workbench"}
+
+
+@app.get("/config")
+def config() -> dict:
+    """Report which external services are active (never exposes secrets)."""
+    return {
+        "p1_retrieval": {
+            "enabled": P1_ENABLED,
+            "base_url": P1_RAG_BASE_URL if P1_ENABLED else None,
+            "note": "检索/引用来自 P1 RAG API；禁用时回退确定性桩。",
+        },
+        "llm": {
+            "enabled": LLM_ENABLED,
+            "base_url": LLM_BASE_URL if LLM_ENABLED else None,
+            "model": LLM_MODEL if LLM_ENABLED else None,
+            "note": "生成型智能体（规划/分析/撰写/评审）使用真实 LLM；禁用时回退确定性桩。",
+        },
+    }
 
 
 @app.post("/tasks", status_code=202)
