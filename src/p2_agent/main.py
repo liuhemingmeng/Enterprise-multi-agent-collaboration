@@ -3,11 +3,12 @@ import json
 from pathlib import Path
 from typing import Literal
 
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import Depends, FastAPI, HTTPException, Query
 from fastapi.responses import HTMLResponse, StreamingResponse
 from pydantic import BaseModel, Field
 
 from p2_agent.async_service import AsyncWorkflowService
+from p2_agent.auth import _proxy_verify, verify_api_key
 from p2_agent.eval.dataset import build_evaluation_set, save_dataset
 from p2_agent.eval.runner import run_comparison
 from p2_agent.guardrails import guardrail_store
@@ -22,7 +23,11 @@ from p2_agent.tracing import tracing_store
 
 service = AsyncWorkflowService()
 
-app = FastAPI(title="P2 Agent Workbench", version="0.1.0")
+app = FastAPI(
+    title="P2 Agent Workbench",
+    version="0.1.0",
+    dependencies=[Depends(verify_api_key)],
+)
 
 
 class TaskRequest(BaseModel):
@@ -33,6 +38,20 @@ class TaskRequest(BaseModel):
 @app.get("/health")
 def health() -> dict[str, str]:
     return {"status": "ok", "service": "p2-agent-workbench"}
+
+
+class VerifyKeyRequest(BaseModel):
+    api_key: str = Field(min_length=1, max_length=256)
+
+
+@app.post("/verify-key")
+def verify_key(body: VerifyKeyRequest) -> dict:
+    """Check whether an X-API-Key is accepted by P1 (shared key authority).
+
+    Public endpoint used by the entry portal to validate the key once,
+    before the user picks which service to open.
+    """
+    return {"valid": _proxy_verify(body.api_key)}
 
 
 @app.get("/config")
@@ -148,9 +167,9 @@ def save_eval_dataset() -> dict:
     return {"path": str(path), "size": len(build_evaluation_set())}
 
 
-_FRONTEND_HTML = (
-    Path(__file__).resolve().parent.parent.parent / "frontend" / "index.html"
-)
+_FRONTEND_DIR = Path(__file__).resolve().parent.parent.parent / "frontend"
+_PORTAL_HTML = _FRONTEND_DIR / "portal.html"
+_FRONTEND_HTML = _FRONTEND_DIR / "index.html"
 
 
 class HumanDecisionRequest(BaseModel):
@@ -167,10 +186,17 @@ def decide_task(task_id: str, body: HumanDecisionRequest) -> dict:
     return state.public_dict()
 
 
-@app.get("/insight")
 @app.get("/")
-def insight_ui() -> HTMLResponse:
-    """Serve the single-page workbench UI."""
+def portal_ui() -> HTMLResponse:
+    """Entry portal: enter the shared X-API-Key, then pick P1 or P2."""
+    html = _PORTAL_HTML.read_text(encoding="utf-8")
+    return HTMLResponse(html)
+
+
+@app.get("/workbench")
+@app.get("/insight")
+def workbench_ui() -> HTMLResponse:
+    """Serve the single-page multi-agent workbench UI."""
     html = _FRONTEND_HTML.read_text(encoding="utf-8")
     return HTMLResponse(html)
 

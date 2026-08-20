@@ -1,7 +1,16 @@
-"""Stage 6 tests: evaluation set, single-agent baseline, comparison report."""
+"""Stage 6 tests: evaluation set, single-agent baseline, comparison report.
+
+The 100-task comparison run is deterministic (offline stubs) and takes
+~5-40s depending on the machine; running it once per test would repeat the
+full workload up to six times and can exhaust memory / kill the test runner
+on constrained machines. The report is therefore computed once per module
+and shared by every assertion below.
+"""
 from __future__ import annotations
 
 from pathlib import Path
+
+import pytest
 
 from p2_agent.eval.dataset import (
     build_evaluation_set,
@@ -12,6 +21,16 @@ from p2_agent.eval.runner import run_comparison
 from p2_agent.eval.single_agent import single_agent_run
 from p2_agent.tools.kb_search import KBSearchTool
 from p2_agent.tools.registry import CostBudget, ErrorArchive, ToolRegistry
+
+_REPORT: dict | None = None
+
+
+@pytest.fixture(scope="module")
+def report() -> dict:
+    global _REPORT
+    if _REPORT is None:
+        _REPORT = run_comparison()
+    return _REPORT
 
 
 def _single_registry(tmp_path: Path) -> ToolRegistry:
@@ -79,8 +98,8 @@ def test_single_agent_has_no_reviewer_gate_on_no_evidence(tmp_path):
     assert outcome.citation_coverage == 0.0
 
 
-def test_comparison_report_is_complete_and_dataset_size_100():
-    report = run_comparison()
+def test_comparison_report_is_complete_and_dataset_size_100(report):
+    pass  # report from fixture
     assert report["dataset_size"] >= 100
     for key in ("single_agent", "multi_agent", "deltas", "relative"):
         assert key in report
@@ -89,8 +108,8 @@ def test_comparison_report_is_complete_and_dataset_size_100():
     assert ma["n"] == sa["n"] == report["dataset_size"]
 
 
-def test_multi_agent_citation_coverage_beats_single_agent():
-    report = run_comparison()
+def test_multi_agent_citation_coverage_beats_single_agent(report):
+    pass  # report from fixture
     ma = report["multi_agent"]["mean_citation_coverage"]
     sa = report["single_agent"]["mean_citation_coverage"]
     assert ma > sa
@@ -98,22 +117,22 @@ def test_multi_agent_citation_coverage_beats_single_agent():
     assert ma >= 0.9
 
 
-def test_multi_agent_costs_more_than_single_agent():
-    report = run_comparison()
+def test_multi_agent_costs_more_than_single_agent(report):
+    pass  # report from fixture
     ma = report["multi_agent"]["mean_cost"]
     sa = report["single_agent"]["mean_cost"]
     assert ma > sa  # more retrieval calls -> higher cost
     assert ma > 0 and sa > 0
 
 
-def test_both_pipelines_reach_terminal_state():
-    report = run_comparison()
+def test_both_pipelines_reach_terminal_state(report):
+    pass  # report from fixture
     assert report["multi_agent"]["safe_termination_rate"] == 1.0
     assert report["single_agent"]["safe_termination_rate"] == 1.0
 
 
-def test_no_evidence_category_routes_multi_agent_to_human():
-    report = run_comparison()
+def test_no_evidence_category_routes_multi_agent_to_human(report):
+    pass  # report from fixture
     by_cat = report["by_category_multi_agent"]["no_evidence"]
     assert by_cat["auto_completion_rate"] == 0.0  # goes to human, not auto-completed
     # but it terminates safely instead of emitting an uncited draft
@@ -122,7 +141,7 @@ def test_no_evidence_category_routes_multi_agent_to_human():
     assert single_cat["mean_citation_coverage"] == 0.0
 
 
-def test_revise_category_routes_multi_agent_to_human():
-    report = run_comparison()
+def test_revise_category_routes_multi_agent_to_human(report):
+    pass  # report from fixture
     by_cat = report["by_category_multi_agent"]["revise"]
     assert by_cat["auto_completion_rate"] == 0.0  # needs human after retries

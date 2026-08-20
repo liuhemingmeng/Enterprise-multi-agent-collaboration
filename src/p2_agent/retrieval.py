@@ -4,6 +4,7 @@ import time
 
 import httpx
 
+from p2_agent.auth import get_current_key
 from p2_agent.schemas import Evidence
 from p2_agent.settings import (
     P1_RAG_BASE_URL,
@@ -69,7 +70,12 @@ class P1RetrievalClient:
     def search(self, query: str, top_k: int | None = None) -> list[Evidence]:
         k = min(top_k or self.limit, 10)
         url = f"{self.base_url}/corpus/search"
-        headers = {"X-API-Key": self.api_key} if self.api_key else {}
+        # Prefer the most recently *verified* key (see auth.get_current_key):
+        # P1 rotates RAG_API_KEY without notifying P2, so the copy in our .env
+        # (bound into self.api_key at construction) can go stale; the live key
+        # lets every task keep retrieving after a rotation.
+        key = get_current_key() or self.api_key or RAG_API_KEY
+        headers = {"X-API-Key": key} if key else {}
         params = {"query": query, "limit": k}
 
         last_exc: Exception | None = None
