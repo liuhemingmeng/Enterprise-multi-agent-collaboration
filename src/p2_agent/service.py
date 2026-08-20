@@ -103,17 +103,21 @@ class WorkflowService:
         try:
             if route_from_checkpoint(state) == "__end__":
                 return state
-            result = self.graph.invoke(state)
-            final = (
-                result
-                if isinstance(result, WorkflowState)
-                else WorkflowState.model_validate(result)
-            )
+            # Stream node-by-node and persist after each step so the frontend
+            # can poll live progress (current node, accumulating evidence/draft)
+            # instead of staring at a static "running" spinner for ~2 minutes.
+            final_state: WorkflowState = state
+            for chunk in self.graph.stream(state, stream_mode="values"):
+                final_state = (
+                    chunk
+                    if isinstance(chunk, WorkflowState)
+                    else WorkflowState.model_validate(chunk)
+                )
+                self.store.save(final_state)
         except Exception as exc:
             failed = state.model_copy(
                 update={"status": "failed", "errors": [*state.errors, str(exc)]}
             )
             self.store.save(failed)
             raise
-        self.store.save(final)
-        return final
+        return final_state

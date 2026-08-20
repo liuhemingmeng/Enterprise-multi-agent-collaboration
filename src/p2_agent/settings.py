@@ -46,7 +46,8 @@ LLM_BASE_URL: str = _get("LLM_BASE_URL", "") or ""
 LLM_API_KEY: str = _get("LLM_API_KEY", "") or ""
 LLM_MODEL: str = _get("LLM_MODEL", "") or ""
 LLM_TEMPERATURE: float = float(_get("LLM_TEMPERATURE", "0.3") or "0.3")
-LLM_TIMEOUT: float = float(_get("LLM_TIMEOUT", "30") or "30")
+LLM_TIMEOUT: float = float(_get("LLM_TIMEOUT", "120") or "120")
+LLM_MAX_TOKENS: int | None = int(_get("LLM_MAX_TOKENS", "1024") or 1024)
 
 # --- Derived switches -------------------------------------------------------
 P1_ENABLED: bool = bool(RAG_API_KEY)

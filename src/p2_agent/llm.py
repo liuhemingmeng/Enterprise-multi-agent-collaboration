@@ -9,6 +9,7 @@ import httpx
 from p2_agent.settings import (
     LLM_API_KEY,
     LLM_BASE_URL,
+    LLM_MAX_TOKENS,
     LLM_MODEL,
     LLM_TEMPERATURE,
     LLM_TIMEOUT,
@@ -59,6 +60,7 @@ class LLMClient:
         *,
         temperature: float | None = None,
         timeout: float | None = None,
+        max_tokens: int | None = None,
         max_retries: int = 3,
         backoff: float = 0.5,
         http_client: httpx.Client | None = None,
@@ -68,6 +70,7 @@ class LLMClient:
         self.model = model or LLM_MODEL
         self.temperature = temperature if temperature is not None else LLM_TEMPERATURE
         self.timeout = timeout or LLM_TIMEOUT
+        self.max_tokens = max_tokens if max_tokens is not None else LLM_MAX_TOKENS
         self.max_retries = max_retries
         self.backoff = backoff
         self._client = http_client
@@ -91,6 +94,8 @@ class LLMClient:
             ],
             "temperature": temperature if temperature is not None else self.temperature,
         }
+        if self.max_tokens:
+            body["max_tokens"] = self.max_tokens
         last_exc: Exception | None = None
         for attempt in range(self.max_retries + 1):
             try:

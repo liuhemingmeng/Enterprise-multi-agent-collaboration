@@ -129,6 +129,25 @@ def _normalize_decision(value: object) -> str:
     return _DECISION_SYNONYMS.get(value.strip().lower(), "human_review")
 
 
+def _fmt_evidence(evidence, *, limit: int = 8, max_chars: int = 600) -> str:
+    """Compact evidence block for LLM prompts.
+
+    Capping both the *number* of items and the *length* per item keeps the
+    prompt small and the generation fast — the live deepseek-v4-flash endpoint
+    is slow on long-context / long-output calls (a full 20-item proposal draft
+    regularly blows the request timeout). The retriever still fetches everything;
+    only what we send to the LLM is trimmed.
+    """
+    items = evidence[:limit]
+    lines = []
+    for e in items:
+        text = (e.text or "").strip().replace("\n", " ")
+        if len(text) > max_chars:
+            text = text[:max_chars] + "…"
+        lines.append(f"- [{e.evidence_id}, p.{e.page}] {e.doc_name}: {text}")
+    return "\n".join(lines)
+
+
 def planner_node(state: WorkflowState, llm: LLMClient | None = None) -> dict:
     goal = state.user_goal.strip()
     if not goal:
@@ -223,9 +242,7 @@ def analyst_node(state: WorkflowState, llm: LLMClient | None = None) -> dict:
 
 
 def _llm_analysis(state: WorkflowState, llm: LLMClient) -> Analysis:
-    evidence_block = "\n".join(
-        f"- [{e.evidence_id}] {e.doc_name} p.{e.page}: {e.text}" for e in state.evidence
-    )
+    evidence_block = _fmt_evidence(state.evidence)
     system = "你是严谨的方案分析师，基于证据做分析，不臆造。只输出 JSON。"
     user = (
         f"客户目标：{state.user_goal}\n\n检索到的证据：\n{evidence_block}\n\n"
@@ -254,17 +271,16 @@ def writer_node(state: WorkflowState, llm: LLMClient | None = None) -> dict:
 def _llm_draft(state: WorkflowState, llm: LLMClient) -> str:
     analysis = state.analysis
     facts = "; ".join(analysis.facts) if analysis else ""
-    evidence_block = "\n".join(
-        f"- [{e.evidence_id}, p.{e.page}] {e.doc_name}: {e.text}" for e in state.evidence
-    )
+    evidence_block = _fmt_evidence(state.evidence)
     system = (
         "你是企业方案撰写专家。用 Markdown 撰写方案初稿，"
         "凡引用证据必须标注 [evidence_id, p.x]，不要编造未提供的数据。"
+        "内容控制在 500 字以内，聚焦结论与可执行建议，避免冗长铺垫。"
     )
     user = (
         f"客户目标：{state.user_goal}\n\n关键事实：{facts}\n\n"
         f"可用证据：\n{evidence_block}\n\n请撰写方案初稿（含目标、事实依据、"
-        "实施建议、风险与待确认）。"
+        "实施建议、风险与待确认），务必简练。"
     )
     return llm.chat(system=system, user=user).strip()
 

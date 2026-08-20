@@ -55,7 +55,12 @@ def run_comparison(
     workdir.mkdir(parents=True, exist_ok=True)
 
     multi_store = SQLiteStateStore(workdir / "eval_state.sqlite3")
-    service = WorkflowService(multi_store)
+    # IMPORTANT: the evaluation is an *architecture* comparison (single-agent vs
+    # multi-agent) on a fixed, deterministic knowledge base. It must never touch
+    # the live LLM / P1 APIs — otherwise a single /eval/run would fire 400+
+    # paid LLM calls. Force the deterministic stubs regardless of the runtime
+    # switches so the benchmark stays free, fast and reproducible.
+    service = WorkflowService(multi_store, llm=None, use_p1=False)
     service.registry.budget.max_cost = 100.0
 
     single_registry = _build_single_registry(workdir)
