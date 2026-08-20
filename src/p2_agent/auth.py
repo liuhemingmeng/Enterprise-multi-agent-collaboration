@@ -37,6 +37,8 @@ api_key_query = APIKeyQuery(name="api_key", auto_error=False)
 _PUBLIC_EXACT = {
     "/",
     "/portal",
+    "/workbench",
+    "/insight",
     "/verify-key",
     "/health",
     "/docs",
