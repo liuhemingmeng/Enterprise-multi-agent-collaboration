@@ -65,6 +65,40 @@
     .tool { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed var(--border); }
     .empty { color: var(--muted); font-style: italic; }
     a { color: var(--brand); }
+
+    /* 语料范围说明 */
+    .info-note { border: 1px solid #bfdbfe; background: #eff6ff; border-radius: 10px; padding: 10px 12px; font-size: 12.5px; color: #374151; margin: 10px 0 2px; }
+    .info-note b { color: #1d4ed8; }
+
+    /* 控制节点标签（SSE/追踪中非 LLM 节点） */
+    .tagctrl { display: inline-block; background: #f1f5f9; color: #64748b; border-radius: 999px; padding: 0 8px; font-size: 11px; margin-left: 4px; }
+
+    /* 工作流节点图 */
+    .flowmap svg { width: 100%; height: auto; display: block; }
+    .fn rect { fill: #fff; stroke: #cbd5e1; stroke-width: 1.5; }
+    .fn text.lbl { font-size: 13px; font-weight: 600; fill: #94a3b8; }
+    .fn text.sub { font-size: 10.5px; fill: #b6c0cc; }
+    .fn.done rect { stroke: #16a34a; fill: #f0fdf4; }
+    .fn.done text.lbl { fill: #15803d; }
+    .fn.done text.sub { fill: #4ade80; }
+    .fn.active rect { stroke: #2563eb; stroke-width: 2.5; fill: #eff6ff; animation: fpulse 1.3s ease-in-out infinite; }
+    .fn.active text.lbl { fill: #1d4ed8; }
+    .fn.active text.sub { fill: #60a5fa; }
+    .fn.hold rect { stroke: #d97706; stroke-width: 2.5; fill: #fffbeb; }
+    .fn.hold text.lbl { fill: #b45309; }
+    .fn.hold text.sub { fill: #fbbf24; }
+    .fn.ctrl rect { stroke-dasharray: 5 4; }
+    .fe { stroke: #cbd5e1; stroke-width: 1.5; fill: none; }
+    .fe.on { stroke: #2563eb; stroke-width: 2.5; stroke-dasharray: 7 5; animation: dashmove .8s linear infinite; }
+    @keyframes dashmove { to { stroke-dashoffset: -12; } }
+    @keyframes fpulse { 0%, 100% { opacity: 1; } 50% { opacity: .7; } }
+    .legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: 11.5px; color: var(--muted); margin-top: 8px; }
+    .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 4px; vertical-align: -2px; }
+    .lg-agent { background: #fff; border: 1.5px solid #cbd5e1; }
+    .lg-done { background: #f0fdf4; border: 1.5px solid #16a34a; }
+    .lg-active { background: #eff6ff; border: 1.5px solid #2563eb; }
+    .lg-hold { background: #fffbeb; border: 1.5px solid #d97706; }
+    .lg-ctrl { background: #fff; border: 1.5px dashed #94a3b8; }
   </style>
 </head>
 <body>
@@ -76,13 +110,19 @@
   <div class="wrap">
     <div class="panel" id="main">
       <h2>新建任务</h2>
-      <textarea id="goal" placeholder="例如：为某制造企业设计一套零碳园区方案，重点突出投资回报与合规路径"></textarea>
+      <div class="info-note">
+        📋 <b>语料范围说明</b>：本系统当前仅内置少量论文级语料（检索增强生成 RAG、大模型评测、多模态等 AI 领域）。
+        若目标行业超出语料覆盖（如零碳园区、家电、金融等），评审意见中的「证据不足 / 适用性不足」多源于资料覆盖有限，
+        而非模型能力问题——<b>完整效果需接入大量真实行业资料</b>（研报、政策文件、企业文档等）。
+        建议先用语料覆盖内的主题（如「为企业设计 RAG 知识库问答方案」）观察效果。
+      </div>
+      <textarea id="goal" placeholder="例如：为某科技公司设计一套基于 RAG 的企业知识库问答方案，重点说明检索策略、引用溯源与评测方法"></textarea>
       <div class="row">
         <label class="chk"><input type="checkbox" id="needHuman" checked /> 需要人工确认（在评审通过后暂停，等待你批准导出）</label>
       </div>
       <div class="row">
         <button id="submitBtn" onclick="submitTask()">提交并运行</button>
-        <button class="ghost" id="evalBtn" onclick="runEval()">跑一次评测对照（单 vs 多 Agent）</button>
+        <button class="ghost" id="dbBtn" onclick="connectDb()">🗄️ 连接数据库（接入资料）</button>
         <span class="hint" id="hint"></span>
       </div>
 
@@ -104,17 +144,12 @@
         <strong>工具错误归档</strong>
         <div id="errors"><span class="empty">无</span></div>
       </div>
-      <div class="box">
-        <strong>评测</strong>
-        <div id="evalSummary" class="hint">点上方"跑评测"查看 100 条对照结论</div>
-      </div>
       <div class="box hint">
         后端 API：<br />
         <code>POST /tasks</code> · <code>GET /tasks/{id}</code><br />
         <code>POST /tasks/{id}/human-decision</code><br />
         <code>GET /tasks/{id}/trace</code> · <code>/stream</code> · <code>/guardrails</code><br />
-        <code>GET /tools</code> · <code>GET /tools/errors</code><br />
-        <code>POST /eval/run</code>
+        <code>GET /tools</code> · <code>GET /tools/errors</code>
       </div>
     </div>
   </div>
@@ -123,6 +158,89 @@
 const API = "";
 let pollTimer = null;
 
+/* 控制（非 LLM）节点：只做路由/计数/状态切换，耗时 ≈ 0ms 属正常 */
+const CONTROL_NODES = new Set([
+  "revise", "insufficient", "insufficient_fallback",
+  "human_queue", "human_approval", "export",
+]);
+
+/* ---------- 工作流节点图 ---------- */
+const FLOW_NODES = [
+  { key: "planner",     x: 50,  y: 40,  w: 100, label: "Planner",  sub: "规划" },
+  { key: "retriever",   x: 190, y: 40,  w: 100, label: "Retriever", sub: "检索" },
+  { key: "analyst",     x: 330, y: 40,  w: 100, label: "Analyst",  sub: "分析" },
+  { key: "writer",      x: 470, y: 40,  w: 100, label: "Writer",   sub: "撰写" },
+  { key: "reviewer",    x: 610, y: 40,  w: 100, label: "Reviewer", sub: "评审" },
+  { key: "human_approval", x: 750, y: 40, w: 100, label: "审批门",  sub: "HITL", ctrl: true },
+  { key: "export",      x: 870, y: 40,  w: 90,  label: "Export",   sub: "导出", ctrl: true },
+  { key: "insufficient_fallback", x: 185, y: 200, w: 120, label: "证据不足", sub: "回退补检", ctrl: true },
+  { key: "revise",      x: 535, y: 200, w: 100, label: "Revise",   sub: "修订回环", ctrl: true },
+  { key: "human_queue", x: 750, y: 200, w: 100, label: "人工队列",  sub: "等待确认", ctrl: true },
+];
+
+const FLOW_EDGES = [
+  { from: "planner",     to: "retriever",   d: "M 150 62 L 186 62" },
+  { from: "retriever",   to: "analyst",     d: "M 290 62 L 326 62" },
+  { from: "analyst",     to: "writer",      d: "M 430 62 L 466 62" },
+  { from: "writer",      to: "reviewer",    d: "M 570 62 L 606 62" },
+  { from: "reviewer",    to: "human_approval", d: "M 710 62 L 746 62" },
+  { from: "human_approval", to: "export",   d: "M 850 62 L 866 62" },
+  { from: "reviewer",    to: "revise",      d: "M 660 84 C 660 150, 585 140, 585 196" },
+  { from: "revise",      to: "writer",      d: "M 535 222 C 480 205, 520 140, 520 88" },
+  { from: "reviewer",    to: "insufficient_fallback", d: "M 640 84 C 640 180, 245 150, 245 196" },
+  { from: "insufficient_fallback", to: "retriever", d: "M 245 200 L 245 88" },
+  { from: "reviewer",    to: "human_queue", d: "M 680 84 C 680 160, 800 140, 800 196" },
+];
+
+function renderFlowMap(trace, status) {
+  const holder = document.getElementById("flowMap");
+  if (!holder) return;
+  trace = trace || [];
+  const running = ["queued", "running"].includes(status);
+  const last = trace[trace.length - 1];
+  const counts = {};
+  for (const t of trace) counts[t] = (counts[t] || 0) + 1;
+  const pairs = new Set();
+  for (let i = 0; i < trace.length - 1; i++) pairs.add(trace[i] + "->" + trace[i + 1]);
+
+  const nodesSvg = FLOW_NODES.map(n => {
+    const cnt = counts[n.key] || 0;
+    let cls = "fn";
+    if (cnt > 0 && n.key === last && running) cls += " active";
+    else if (cnt > 0 && n.key === last && status === "need_human") cls += " hold";
+    else if (cnt > 0) cls += " done";
+    if (n.ctrl) cls += " ctrl";
+    const cx = n.x + n.w / 2;
+    return `<g class="${cls}">
+      <rect x="${n.x}" y="${n.y}" width="${n.w}" height="44" rx="9"/>
+      <text class="lbl" x="${cx}" y="${n.y + 19}" text-anchor="middle">${n.label}</text>
+      <text class="sub" x="${cx}" y="${n.y + 35}" text-anchor="middle">${n.sub}${cnt > 1 ? " ×" + cnt : ""}</text>
+    </g>`;
+  }).join("");
+
+  const edgesSvg = FLOW_EDGES.map(e => {
+    const on = pairs.has(e.from + "->" + e.to);
+    return `<path class="fe${on ? " on" : ""}" d="${e.d}" marker-end="url(#${on ? "arrOn" : "arr"})"/>`;
+  }).join("");
+
+  holder.innerHTML = `<svg viewBox="0 0 960 260" role="img" aria-label="多智能体工作流节点图">
+    <defs>
+      <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#cbd5e1"/></marker>
+      <marker id="arrOn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/></marker>
+    </defs>
+    ${edgesSvg}${nodesSvg}
+  </svg>
+  <div class="legend">
+    <span><i class="lg-agent"></i>智能体节点</span>
+    <span><i class="lg-ctrl"></i>控制节点（非 LLM）</span>
+    <span><i class="lg-done"></i>已执行</span>
+    <span><i class="lg-active"></i>进行中</span>
+    <span><i class="lg-hold"></i>等待人工</span>
+    <span>蓝色流动边 = 当前信息流路径</span>
+  </div>`;
+}
+
+/* ---------- API 基础 ---------- */
 async function api(path, opts) {
   const res = await fetch(API + path, opts);
   if (!res.ok) throw new Error(`${res.status} ${await res.text()}`);
@@ -153,6 +271,14 @@ async function submitTask() {
   }
 }
 
+/* 演示按钮：不连接真实数据库，仅提示能力 */
+function connectDb() {
+  const btn = document.getElementById("dbBtn");
+  btn.textContent = "🗄️ 已连接（演示）";
+  btn.disabled = true;
+  setHint("演示功能：生产环境可在此接入您上传的资料库（PDF / Word / 研报 / 政策文件等）作为检索证据源，检索、评审与引用将基于您的私有数据。当前演示版未连接真实数据库。");
+}
+
 function startPolling(id) {
   if (pollTimer) clearInterval(pollTimer);
   pollTimer = setInterval(async () => {
@@ -173,6 +299,10 @@ function renderState(s) {
   if (!s) { v.innerHTML = ""; return; }
   const steps = (s.trace || []).concat(s.status === "need_human" ? ["⏸ 等待人工"] : []);
   let html = `
+    <div class="section">
+      <h3>🧭 工作流节点图</h3>
+      <div id="flowMap" class="flowmap"></div>
+    </div>
     <div class="section">
       <h3>状态</h3>
       <span class="badge ${s.status}">${esc(s.status)}</span>
@@ -235,6 +365,7 @@ function renderState(s) {
   loadTrace(s.task_id);
   loadGuardrails(s.task_id);
   v.innerHTML = html;
+  renderFlowMap(s.trace, s.status);
 }
 
 async function decide(id, decision) {
@@ -306,8 +437,12 @@ async function loadTrace(id) {
     } else {
       for (const s of r.spans) {
         const ok = s.status === "ok";
+        const ctrl = CONTROL_NODES.has(s.node);
+        const dur = ctrl
+          ? `<span class="tagctrl">控制节点</span>`
+          : `<span class="meta">${Number(s.duration_ms).toFixed(1)}ms</span>`;
         html += `<div class="evi" style="border-left:3px solid ${ok ? "var(--ok)" : "var(--bad)"}">
-          <b>${esc(s.node)}</b> <span class="meta">${esc(s.status)} · ${Number(s.duration_ms).toFixed(1)}ms</span>
+          <b>${esc(s.node)}</b> <span class="meta">${esc(s.status)} ·</span> ${dur}
           ${s.error ? `<div class="meta" style="color:var(--bad)">${esc(s.error).slice(0, 140)}</div>` : ""}
         </div>`;
       }
@@ -351,7 +486,11 @@ function startStream(id) {
         box.insertAdjacentHTML("afterbegin", `<div class="ev ${e.status || e.event}"><span class="t">${esc(e.timestamp)}</span> · ${esc(e.event)}</div>`);
       } else if (p.type === "span") {
         const s = p.data;
-        box.insertAdjacentHTML("afterbegin", `<div class="ev"><span class="t">trace</span> · <b>${esc(s.node)}</b> ${esc(s.status)} ${Number(s.duration_ms).toFixed(1)}ms</div>`);
+        const ctrl = CONTROL_NODES.has(s.node);
+        const dur = ctrl
+          ? `<span class="tagctrl">控制节点</span>`
+          : `${Number(s.duration_ms).toFixed(1)}ms`;
+        box.insertAdjacentHTML("afterbegin", `<div class="ev"><span class="t">trace</span> · <b>${esc(s.node)}</b> ${esc(s.status)} ${dur}</div>`);
       } else if (p.type === "guardrail") {
         const g = p.data;
         box.insertAdjacentHTML("afterbegin", `<div class="ev"><span class="t">guard</span> · [${esc(g.severity)}] ${esc(g.rule)}</div>`);
@@ -378,20 +517,6 @@ async function loadSide() {
       ? list.slice(0, 8).map(x => `<div class="evi"><div>${esc(x.tool)} · ${esc(x.error_type)}</div><div class="meta">${esc(x.message || "").slice(0,80)}</div></div>`).join("")
       : `<span class="empty">无</span>`;
   } catch (e) { /* ignore */ }
-}
-
-async function runEval() {
-  setHint("评测运行中（100 条对照，约数秒）…");
-  try {
-    const r = await api("/eval/run", { method: "POST" });
-    const ma = r.multi_agent, sa = r.single_agent;
-    document.getElementById("evalSummary").innerHTML =
-      `数据集 ${r.dataset_size} 条<br/>
-       引用覆盖率：多Agent <b>${ma.mean_citation_coverage.toFixed(2)}</b> vs 单Agent ${sa.mean_citation_coverage.toFixed(2)}<br/>
-       成本：¥${ma.mean_cost.toFixed(3)} vs ¥${sa.mean_cost.toFixed(3)}<br/>
-       自动完成率：${ma.auto_complete_rate.toFixed(2)} vs ${sa.auto_complete_rate.toFixed(2)}`;
-    setHint("评测完成 ✓");
-  } catch (e) { setHint("评测失败：" + e.message); }
 }
 
 loadSide();
