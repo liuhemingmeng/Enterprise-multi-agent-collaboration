@@ -1,8 +1,11 @@
 from __future__ import annotations
 
 import json
+import os
 import re
+import threading
 import time
+from dataclasses import dataclass
 
 import httpx
 
@@ -18,6 +21,140 @@ from p2_agent.settings import (
 
 class LLMError(RuntimeError):
     """Raised when the LLM cannot be reached or returns an unusable response."""
+
+
+# --------------------------------------------------------------------------
+# Token accounting
+# --------------------------------------------------------------------------
+# Unit prices are USD per 1M tokens and are *configuration, not measurement*.
+# The token counts in a Span are what the provider actually reported; the cost
+# is derived from these rates.  Providers move prices and many (including
+# subscription/coding-plan endpoints) do not bill per token at all, so the
+# rates stay overridable via environment variables and the README states the
+# conversion explicitly rather than implying a metered bill.
+
+MODEL_PRICING: dict[str, tuple[float, float]] = {
+    # model -> (input USD / 1M tokens, output USD / 1M tokens)
+    "deepseek-v4-flash": (0.27, 1.10),
+    "deepseek-v3": (0.27, 1.10),
+    "deepseek-r1": (0.55, 2.19),
+    "gpt-4o-mini": (0.15, 0.60),
+    "qwen-plus": (0.40, 1.20),
+    "glm-4-flash": (0.00, 0.00),
+}
+DEFAULT_PRICING = (0.30, 1.20)
+
+
+def _env_price(name: str, fallback: float) -> float:
+    raw = os.getenv(name)
+    if raw is None or raw.strip() == "":
+        return fallback
+    try:
+        return float(raw)
+    except ValueError:
+        return fallback
+
+
+def unit_prices(model: str) -> tuple[float, float]:
+    """Return (input, output) USD-per-1M-token rates for ``model``.
+
+    Environment overrides ``LLM_PRICE_IN_PER_M`` / ``LLM_PRICE_OUT_PER_M`` win
+    over the table, so a price change never requires a code deploy.
+    """
+    base_in, base_out = MODEL_PRICING.get(model, DEFAULT_PRICING)
+    return (
+        _env_price("LLM_PRICE_IN_PER_M", base_in),
+        _env_price("LLM_PRICE_OUT_PER_M", base_out),
+    )
+
+
+def compute_cost(model: str, prompt_tokens: int, completion_tokens: int) -> float:
+    """Convert a token count into USD using the configured unit prices."""
+    in_rate, out_rate = unit_prices(model)
+    return round(
+        (prompt_tokens / 1_000_000) * in_rate
+        + (completion_tokens / 1_000_000) * out_rate,
+        8,
+    )
+
+
+@dataclass
+class Usage:
+    """Token/cost totals for one or more LLM calls."""
+
+    prompt_tokens: int = 0
+    completion_tokens: int = 0
+    cost_usd: float = 0.0
+    calls: int = 0
+
+    @property
+    def total_tokens(self) -> int:
+        return self.prompt_tokens + self.completion_tokens
+
+
+class _UsageScope(threading.local):
+    """Per-thread accumulator so concurrent tasks never mix their usage.
+
+    Graph nodes run synchronously inside one thread, and ``instrumented``
+    resets/reads the scope around each node — so a Span always carries exactly
+    the tokens that node consumed, even when several tasks run in parallel.
+    """
+
+    def __init__(self) -> None:
+        self.usage = Usage()
+
+
+_scope = _UsageScope()
+
+
+def reset_usage_scope() -> None:
+    _scope.usage = Usage()
+
+
+def take_usage_scope() -> Usage:
+    current = _scope.usage
+    _scope.usage = Usage()
+    return current
+
+
+def peek_usage_scope() -> Usage:
+    return _scope.usage
+
+
+def _record_usage(model: str, prompt_tokens: int, completion_tokens: int) -> None:
+    u = _scope.usage
+    u.prompt_tokens += prompt_tokens
+    u.completion_tokens += completion_tokens
+    u.cost_usd = round(u.cost_usd + compute_cost(model, prompt_tokens, completion_tokens), 8)
+    u.calls += 1
+
+
+def parse_usage(payload: dict, model: str) -> Usage:
+    """Extract usage from an OpenAI-compatible chat response.
+
+    Providers differ on which fields they populate (some omit ``total_tokens``,
+    some nest under ``usage.completion_tokens_details``), so every field is
+    optional and falls back to whatever is available.
+    """
+    usage = payload.get("usage") or {}
+    prompt = int(usage.get("prompt_tokens") or 0)
+    completion = int(usage.get("completion_tokens") or 0)
+    if not completion:
+        details = usage.get("completion_tokens_details") or {}
+        completion = int(details.get("reasoning_tokens") or 0) + int(
+            details.get("accepted_prediction_tokens") or 0
+        )
+    if not prompt and not completion:
+        total = int(usage.get("total_tokens") or 0)
+        if total:
+            # Unknown split: attribute the whole total to completion.
+            completion = total
+    return Usage(
+        prompt_tokens=prompt,
+        completion_tokens=completion,
+        cost_usd=compute_cost(model, prompt, completion),
+        calls=1,
+    )
 
 
 def extract_json(text: str) -> dict:
@@ -116,6 +253,8 @@ class LLMClient:
                     f"LLM unexpected status {resp.status_code}: {resp.text[:200]}"
                 )
             data = resp.json()
+            parsed = parse_usage(data, self.model)
+            _record_usage(self.model, parsed.prompt_tokens, parsed.completion_tokens)
             return data["choices"][0]["message"]["content"]
 
         raise LLMError(f"LLM call failed: {last_exc}")

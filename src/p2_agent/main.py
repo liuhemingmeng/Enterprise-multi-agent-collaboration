@@ -12,6 +12,7 @@ from p2_agent.auth import _proxy_verify, verify_api_key
 from p2_agent.eval.dataset import build_evaluation_set, save_dataset
 from p2_agent.eval.runner import run_comparison
 from p2_agent.guardrails import guardrail_store
+from p2_agent.rate_limit import build_middleware
 from p2_agent.settings import (
     LLM_BASE_URL,
     LLM_ENABLED,
@@ -28,6 +29,11 @@ app = FastAPI(
     version="0.1.0",
     dependencies=[Depends(verify_api_key)],
 )
+
+# Rate limiting runs *before* authentication: an unauthenticated flood is
+# already consuming connections, and /verify-key is exactly the endpoint a
+# key-guessing script would hammer.
+app.middleware("http")(build_middleware())
 
 
 class TaskRequest(BaseModel):

@@ -49,6 +49,18 @@ LLM_TEMPERATURE: float = float(_get("LLM_TEMPERATURE", "0.3") or "0.3")
 LLM_TIMEOUT: float = float(_get("LLM_TIMEOUT", "120") or "120")
 LLM_MAX_TOKENS: int | None = int(_get("LLM_MAX_TOKENS", "1024") or 1024)
 
+# --- Rate limiting ---------------------------------------------------------
+# Applies to state-changing requests (task submission, human decisions).
+# Reads are unmetered: the SSE stream and polling endpoints are what a UI
+# hammers continuously, and throttling them would break the live view.
+RATE_LIMIT_ENABLED: bool = (
+    _get("RATE_LIMIT_ENABLED", "true") or "true"
+).strip().lower() in {"1", "true", "yes", "on"}
+RATE_LIMIT_PER_MINUTE: int = int(_get("RATE_LIMIT_PER_MINUTE", "30") or 30)
+RATE_LIMIT_WINDOW_SECONDS: float = float(
+    _get("RATE_LIMIT_WINDOW_SECONDS", "60") or 60
+)
+
 # --- Derived switches -------------------------------------------------------
 P1_ENABLED: bool = bool(RAG_API_KEY)
 LLM_ENABLED: bool = bool(LLM_API_KEY and LLM_BASE_URL and LLM_MODEL)

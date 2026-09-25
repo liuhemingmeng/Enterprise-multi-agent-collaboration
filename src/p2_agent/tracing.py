@@ -8,6 +8,8 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict
 
+from p2_agent.llm import reset_usage_scope, take_usage_scope
+
 
 class Span(BaseModel):
     """One executed graph node. The basis of the execution trace / timeline.
@@ -66,20 +68,37 @@ class TracingStore:
             cost = self._costs.get(str(task_id), 0.0)
         per_node: dict[str, dict[str, Any]] = {}
         total_ms = 0.0
+        total_tokens = 0
+        llm_cost = 0.0
         for s in spans:
             total_ms += s.duration_ms
+            total_tokens += s.tokens
+            llm_cost += s.cost_usd
             bucket = per_node.setdefault(
-                s.node, {"node": s.node, "count": 0, "total_ms": 0.0, "errors": 0}
+                s.node,
+                {
+                    "node": s.node,
+                    "count": 0,
+                    "total_ms": 0.0,
+                    "errors": 0,
+                    "tokens": 0,
+                    "cost_usd": 0.0,
+                },
             )
             bucket["count"] += 1
             bucket["total_ms"] = round(bucket["total_ms"] + s.duration_ms, 2)
+            bucket["tokens"] += s.tokens
+            bucket["cost_usd"] = round(bucket["cost_usd"] + s.cost_usd, 8)
             if s.status == "error":
                 bucket["errors"] += 1
         return {
             "task_id": str(task_id),
             "span_count": len(spans),
             "total_duration_ms": round(total_ms, 2),
-            "total_cost_usd": round(cost, 4),
+            "total_tokens": total_tokens,
+            "tool_cost_usd": round(cost, 6),
+            "llm_cost_usd": round(llm_cost, 6),
+            "total_cost_usd": round(cost + llm_cost, 6),
             "per_node": list(per_node.values()),
         }
 
@@ -104,10 +123,12 @@ def instrumented(node_name: str, fn: Callable) -> Callable:
     def wrapper(state: Any) -> dict:
         start = time.perf_counter()
         started = datetime.now(UTC).isoformat()
+        reset_usage_scope()
         try:
             out = fn(state)
         except Exception as exc:  # noqa: BLE001 - record then propagate
             ended = datetime.now(UTC).isoformat()
+            usage = take_usage_scope()
             tracing_store.add(
                 Span(
                     task_id=str(state.task_id),
@@ -116,11 +137,17 @@ def instrumented(node_name: str, fn: Callable) -> Callable:
                     started_at=started,
                     ended_at=ended,
                     duration_ms=round((time.perf_counter() - start) * 1000, 2),
+                    # Tokens already spent before the failure are real spend and
+                    # must stay visible — a node that burns budget then throws is
+                    # exactly the case a cost dashboard has to surface.
+                    tokens=usage.total_tokens,
+                    cost_usd=usage.cost_usd,
                     error=str(exc),
                 )
             )
             raise
         ended = datetime.now(UTC).isoformat()
+        usage = take_usage_scope()
         tracing_store.add(
             Span(
                 task_id=str(state.task_id),
@@ -129,6 +156,8 @@ def instrumented(node_name: str, fn: Callable) -> Callable:
                 started_at=started,
                 ended_at=ended,
                 duration_ms=round((time.perf_counter() - start) * 1000, 2),
+                tokens=usage.total_tokens,
+                cost_usd=usage.cost_usd,
             )
         )
         return out if isinstance(out, dict) else {}
