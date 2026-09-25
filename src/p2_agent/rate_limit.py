@@ -20,6 +20,7 @@ from p2_agent.settings import (  # noqa: E402
     RATE_LIMIT_ENABLED,
     RATE_LIMIT_PER_MINUTE,
     RATE_LIMIT_WINDOW_SECONDS,
+    TRUST_PROXY,
 )
 
 # Only requests that change state or kick off work are metered.  Polling and
@@ -95,13 +96,19 @@ limiter = SlidingWindowLimiter()
 
 
 def client_key(request) -> str:
-    """Identify a caller: forwarded-for header if behind a proxy, else peer IP."""
-    forwarded = request.headers.get("x-forwarded-for")
-    if forwarded:
-        return forwarded.split(",")[0].strip()
-    forwarded = request.headers.get("x-real-ip")
-    if forwarded:
-        return forwarded.strip()
+    """Identify a caller: peer IP, or the forwarded header behind a trusted proxy.
+
+    ``X-Forwarded-For`` is only consulted when ``TRUST_PROXY`` is on.  A
+    directly-exposed service must ignore it: the header is client-controlled, so
+    trusting it would let one caller mint unlimited quotas by rotating the value.
+    """
+    if TRUST_PROXY:
+        forwarded = request.headers.get("x-forwarded-for")
+        if forwarded:
+            return forwarded.split(",")[0].strip()
+        real_ip = request.headers.get("x-real-ip")
+        if real_ip:
+            return real_ip.strip()
     return request.client.host if request.client else "unknown"
 
 

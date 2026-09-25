@@ -60,6 +60,15 @@ RATE_LIMIT_PER_MINUTE: int = int(_get("RATE_LIMIT_PER_MINUTE", "30") or 30)
 RATE_LIMIT_WINDOW_SECONDS: float = float(
     _get("RATE_LIMIT_WINDOW_SECONDS", "60") or 60
 )
+# Only honour X-Forwarded-For when a *trusted* proxy is actually in front of
+# this service.  Directly exposed, any client can set that header and mint a
+# fresh quota per request, which would make the limiter decorative.
+TRUST_PROXY: bool = (_get("TRUST_PROXY", "false") or "false").strip().lower() in {
+    "1",
+    "true",
+    "yes",
+    "on",
+}
 
 # --- Derived switches -------------------------------------------------------
 P1_ENABLED: bool = bool(RAG_API_KEY)

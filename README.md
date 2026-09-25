@@ -119,6 +119,7 @@ docker run -p 8000:8000 --env-file .env agent-workbench
 | `LLM_PRICE_OUT_PER_M` | 按模型 | 输出单价（USD / 百万 token） |
 | `RATE_LIMIT_ENABLED` | `true` | 写接口限流开关（测试与 CI 自动关闭） |
 | `RATE_LIMIT_PER_MINUTE` | `30` | 单客户端每 `RATE_LIMIT_WINDOW_SECONDS` 秒可发起的写请求数 |
+| `TRUST_PROXY` | `false` | 是否信任 `X-Forwarded-For`。**仅在服务确实位于可信反向代理之后时才置 `true`**；直连暴露时必须保持 `false`，否则任何客户端都能靠伪造该头获得无限配额 |
 
 双开关逻辑：`RAG_API_KEY` 与 `LLM_API_KEY` 任一缺失，对应组件自动切换到确定性桩，
 其余链路（状态机 / 护栏 / 追踪 / 持久化 / 评测）行为完全一致。

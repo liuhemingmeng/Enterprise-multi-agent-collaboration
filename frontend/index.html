@@ -457,7 +457,12 @@ async function loadTrace(id) {
     const holder = document.getElementById("traceHolder");
     if (!holder) return;
     const sum = r.summary || {};
-    let html = `<div class="hint">总时长 ${Number(sum.total_duration_ms || 0).toFixed(1)}ms · 总成本 ¥${Number(sum.total_cost_usd || 0).toFixed(3)} · spans ${sum.span_count || 0}</div>`;
+    const llmCost = Number(sum.llm_cost_usd || 0);
+    const toolCost = Number(sum.tool_cost_usd || 0);
+    const tokens = Number(sum.total_tokens || 0);
+    let html = `<div class="hint">总时长 ${Number(sum.total_duration_ms || 0).toFixed(1)}ms · `
+      + `LLM $${llmCost.toFixed(4)}（${tokens} tokens） · 工具预算 ¥${toolCost.toFixed(3)} · `
+      + `spans ${sum.span_count || 0}</div>`;
     if (!r.spans || !r.spans.length) {
       html += `<div class="empty">暂无 span（任务可能尚未运行）</div>`;
     } else {

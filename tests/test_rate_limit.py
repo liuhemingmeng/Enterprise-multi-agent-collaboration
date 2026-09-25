@@ -130,6 +130,7 @@ def test_successful_response_carries_limit_headers(monkeypatch) -> None:
 
 def test_forwarded_for_header_separates_clients(monkeypatch) -> None:
     monkeypatch.setattr(rate_limit, "RATE_LIMIT_ENABLED", True)
+    monkeypatch.setattr(rate_limit, "TRUST_PROXY", True)
     monkeypatch.setattr(rate_limit, "limiter", SlidingWindowLimiter(limit=1, window=60))
     client = TestClient(_app())
     first = client.post("/write", headers={"X-Forwarded-For": "203.0.113.9"})
@@ -138,6 +139,21 @@ def test_forwarded_for_header_separates_clients(monkeypatch) -> None:
     assert first.status_code == 200
     assert second.status_code == 429
     assert other.status_code == 200
+
+
+def test_spoofed_forwarded_header_cannot_mint_new_quota(monkeypatch) -> None:
+    """Without a trusted proxy, rotating X-Forwarded-For must not reset the budget.
+
+    Otherwise a single client gets unlimited requests just by changing a header.
+    """
+    monkeypatch.setattr(rate_limit, "RATE_LIMIT_ENABLED", True)
+    monkeypatch.setattr(rate_limit, "TRUST_PROXY", False)
+    monkeypatch.setattr(rate_limit, "limiter", SlidingWindowLimiter(limit=2, window=60))
+    client = TestClient(_app())
+    assert client.post("/write", headers={"X-Forwarded-For": "1.1.1.1"}).status_code == 200
+    assert client.post("/write", headers={"X-Forwarded-For": "2.2.2.2"}).status_code == 200
+    spoofed = client.post("/write", headers={"X-Forwarded-For": "3.3.3.3"})
+    assert spoofed.status_code == 429
 
 
 def test_429_body_explains_the_limit(monkeypatch) -> None:
@@ -152,12 +168,28 @@ def test_429_body_explains_the_limit(monkeypatch) -> None:
 # --- helpers ---------------------------------------------------------------
 
 
-def test_client_key_prefers_forwarded_header() -> None:
+def test_client_key_prefers_forwarded_header_when_proxy_trusted(monkeypatch) -> None:
+    monkeypatch.setattr(rate_limit, "TRUST_PROXY", True)
+
     class _Req:
         headers = {"x-forwarded-for": "1.1.1.1, 2.2.2.2"}
         client = None
 
     assert client_key(_Req()) == "1.1.1.1"
+
+
+def test_client_key_ignores_forwarded_header_by_default(monkeypatch) -> None:
+    """Default posture: never trust a client-supplied identity header."""
+    monkeypatch.setattr(rate_limit, "TRUST_PROXY", False)
+
+    class _Client:
+        host = "10.0.0.5"
+
+    class _Req:
+        headers = {"x-forwarded-for": "1.1.1.1"}
+        client = _Client()
+
+    assert client_key(_Req()) == "10.0.0.5"
 
 
 def test_client_key_falls_back_to_peer_ip() -> None:
