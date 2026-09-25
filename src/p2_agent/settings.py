@@ -48,6 +48,12 @@ LLM_MODEL: str = _get("LLM_MODEL", "") or ""
 LLM_TEMPERATURE: float = float(_get("LLM_TEMPERATURE", "0.3") or "0.3")
 LLM_TIMEOUT: float = float(_get("LLM_TIMEOUT", "120") or "120")
 LLM_MAX_TOKENS: int | None = int(_get("LLM_MAX_TOKENS", "1024") or 1024)
+# Optional reasoning toggle for providers that expose one (DeepSeek:
+# {"thinking": {"type": "enabled"|"disabled"}}). Empty means "send nothing",
+# which keeps this client provider-neutral — an unknown field would be rejected
+# by stricter OpenAI-compatible endpoints.
+LLM_THINKING: str = (_get("LLM_THINKING", "") or "").strip().lower()
+LLM_REASONING_EFFORT: str = (_get("LLM_REASONING_EFFORT", "") or "").strip().lower()
 
 # --- Rate limiting ---------------------------------------------------------
 # Applies to state-changing requests (task submission, human decisions).

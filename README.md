@@ -111,10 +111,12 @@ docker run -p 8000:8000 --env-file .env agent-workbench
 | `P1_RAG_TIMEOUT` | `10` | 检索超时（秒） |
 | `LLM_BASE_URL` | 空 | OpenAI 兼容 LLM 端点；留空回退确定性桩 |
 | `LLM_API_KEY` | 空 | LLM 服务商 Key |
-| `LLM_MODEL` | 空 | 模型名（如 `deepseek-chat`） |
+| `LLM_MODEL` | 空 | 模型名（如 `deepseek-flash`） |
 | `LLM_TEMPERATURE` | `0.3` | 生成温度（方案写作取偏低值保稳定） |
 | `LLM_TIMEOUT` | `120` | 单次 LLM 调用超时（秒）；长文生成需给足 |
-| `LLM_MAX_TOKENS` | `2048` | 单次输出 token 上限，控制延迟与成本 |
+| `LLM_MAX_TOKENS` | `1024` | 单次输出 token 上限。**推理模型必须放大**：思维链会占用 completion 配额，太小会得到空内容 |
+| `LLM_THINKING` | 空 | 推理开关（DeepSeek 等支持的厂商）：`enabled` / `disabled`。留空表示不下发该字段，保持对其他 OpenAI 兼容端点的兼容 |
+| `LLM_REASONING_EFFORT` | 空 | 推理强度 `low` / `high` / `max`，仅在 `LLM_THINKING=enabled` 时下发 |
 | `LLM_PRICE_IN_PER_M` | 按模型 | 输入单价（USD / 百万 token），覆盖内置价目表 |
 | `LLM_PRICE_OUT_PER_M` | 按模型 | 输出单价（USD / 百万 token） |
 | `RATE_LIMIT_ENABLED` | `true` | 写接口限流开关（测试与 CI 自动关闭） |
@@ -201,6 +203,31 @@ docker run -p 8000:8000 --env-file .env agent-workbench
 **诚实结论**：简单任务单 Agent 更便宜更快；需要检索、审核、人工确认的任务，
 多 Agent 的引用覆盖率显著更高、失败处理更可控。多 Agent 的价值不在"更聪明"，
 而在**结构化的职责分离带来的可审计性与可控性**。
+
+## 💰 单次运行的真实成本（实测）
+
+上面那张表是**离线确定性桩**下的架构对照。下面这次是**真实链路**（DeepSeek 官方
+`deepseek-flash` + 真实 P1 检索）跑一个任务的实测账目，取自 `GET /tasks/{id}/trace`：
+
+| 节点 | 调用次数 | tokens | 成本 (USD) |
+| --- | --- | --- | --- |
+| planner | 1 | 416 | 0.000370 |
+| retriever | 1 | — | 走 P1 检索（见 tool 成本） |
+| analyst | 1 | 2,180 | 0.001378 |
+| writer | **4** | 9,190 | 0.004955 |
+| reviewer | **4** | 7,084 | 0.004460 |
+| revise / human_queue | 4 | — | 控制节点，不调用模型 |
+| **合计** | | **18,870** | **0.011162** |
+
+同一次任务：15 步 trace（含 3 次修订回环）、991 字方案、15 条真实检索证据。
+
+**账目里最值得看的是 `writer` 被调用 4 次**——首轮撰写加 3 次修订重写，
+单节点就占掉总成本的 44%。这正是上表"多 Agent 更贵"那 2 倍差价的具体来源，
+也说明**修订次数的上限（3 次）本质上是一个成本约束**：放宽它会同时推高延迟与花费。
+
+单价口径：DeepSeek 官方公示的**峰值**单价（输入 \$0.30 / 输出 \$1.20 每百万 token），
+非峰值时段为半价。用峰值是为了让报出的数字是**上界**；要改用非峰值或换厂商，
+覆盖 `LLM_PRICE_IN_PER_M` / `LLM_PRICE_OUT_PER_M` 即可，无需改代码。
 
 ## 🗂️ 项目结构
 

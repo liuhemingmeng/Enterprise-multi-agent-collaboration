@@ -14,7 +14,9 @@ from p2_agent.settings import (
     LLM_BASE_URL,
     LLM_MAX_TOKENS,
     LLM_MODEL,
+    LLM_REASONING_EFFORT,
     LLM_TEMPERATURE,
+    LLM_THINKING,
     LLM_TIMEOUT,
 )
 
@@ -35,14 +37,27 @@ class LLMError(RuntimeError):
 
 MODEL_PRICING: dict[str, tuple[float, float]] = {
     # model -> (input USD / 1M tokens, output USD / 1M tokens)
-    "deepseek-v4-flash": (0.27, 1.10),
-    "deepseek-v3": (0.27, 1.10),
-    "deepseek-r1": (0.55, 2.19),
+    #
+    # DeepSeek publishes peak and off-peak rates (off-peak is half price). The
+    # table deliberately holds the **peak** rate: it is the upper bound, so a
+    # reported cost never understates the bill. Set LLM_PRICE_IN_PER_M /
+    # LLM_PRICE_OUT_PER_M in .env to switch to off-peak or to another vendor.
+    "deepseek-flash": (0.30, 1.20),
+    "deepseek-v4-pro": (1.32, 3.96),
+    # Retired upstream (requests are served by V4.1-Flash) — kept so historical
+    # traces still price correctly.
+    "deepseek-v4-flash": (0.30, 1.20),
     "gpt-4o-mini": (0.15, 0.60),
     "qwen-plus": (0.40, 1.20),
     "glm-4-flash": (0.00, 0.00),
 }
 DEFAULT_PRICING = (0.30, 1.20)
+
+# Reasoning-effort levels accepted by DeepSeek's thinking mode; anything else
+# is dropped rather than forwarded, so a typo cannot turn into a 400.
+_EFFORT_LEVELS = frozenset(
+    {"minimal", "low", "medium", "high", "xhigh", "max", "ultra"}
+)
 
 
 def _env_price(name: str, fallback: float) -> float:
@@ -198,6 +213,8 @@ class LLMClient:
         temperature: float | None = None,
         timeout: float | None = None,
         max_tokens: int | None = None,
+        thinking: str | None = None,
+        reasoning_effort: str | None = None,
         max_retries: int = 3,
         backoff: float = 0.5,
         http_client: httpx.Client | None = None,
@@ -208,6 +225,10 @@ class LLMClient:
         self.temperature = temperature if temperature is not None else LLM_TEMPERATURE
         self.timeout = timeout or LLM_TIMEOUT
         self.max_tokens = max_tokens if max_tokens is not None else LLM_MAX_TOKENS
+        self.thinking = (thinking if thinking is not None else LLM_THINKING).strip().lower()
+        self.reasoning_effort = (
+            reasoning_effort if reasoning_effort is not None else LLM_REASONING_EFFORT
+        ).strip().lower()
         self.max_retries = max_retries
         self.backoff = backoff
         self._client = http_client
@@ -223,14 +244,25 @@ class LLMClient:
             "Authorization": f"Bearer {self.api_key}",
             "Content-Type": "application/json",
         }
-        body = {
+        body: dict = {
             "model": self.model,
             "messages": [
                 {"role": "system", "content": system},
                 {"role": "user", "content": user},
             ],
-            "temperature": temperature if temperature is not None else self.temperature,
         }
+        thinking_on = self.thinking == "enabled"
+        # Reasoning endpoints ignore and silently drop sampling controls, so
+        # sending temperature there would advertise a determinism that is not
+        # actually applied.  Only send it when it takes effect.
+        if not thinking_on:
+            body["temperature"] = (
+                temperature if temperature is not None else self.temperature
+            )
+        if self.thinking in {"enabled", "disabled"}:
+            body["thinking"] = {"type": self.thinking}
+        if thinking_on and self.reasoning_effort in _EFFORT_LEVELS:
+            body["reasoning_effort"] = self.reasoning_effort
         if self.max_tokens:
             body["max_tokens"] = self.max_tokens
         last_exc: Exception | None = None
